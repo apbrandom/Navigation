@@ -11,7 +11,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
@@ -21,13 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let profileVC = ProfileViewController()
         let tabBarController = UITabBarController()
         
-        //nav
         let feedNavgationController = UINavigationController(rootViewController: feedVC)
         let profileNavigationController = UINavigationController(rootViewController: profileVC)
-        tabBarController.setViewControllers([feedNavgationController, profileNavigationController], animated: true)
+        tabBarController.setViewControllers([feedNavgationController,
+                                             profileNavigationController],
+                                             animated: true)
         
         self.window?.rootViewController = tabBarController
-        
         self.window?.makeKeyAndVisible()
         
     }

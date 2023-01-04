@@ -11,9 +11,16 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Feed"
-        view.backgroundColor = UIColor.blue
         
+        self.navigationItem.title = "Feed"
+        self.view.backgroundColor = UIColor.green
+        var tabBarItem = UITabBarItem()
+
+        tabBarItem = UITabBarItem(title: "Feed",
+                                  image: UIImage(systemName: "folder.badge.person.crop"),
+                                  selectedImage: nil)
+
+        self.tabBarItem = tabBarItem
     }
 
 

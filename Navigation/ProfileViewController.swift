@@ -11,8 +11,16 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Profile"
-        view.backgroundColor = UIColor.green
+        
+        self.navigationItem.title = "Profile"
+        self.view.backgroundColor = UIColor.blue
+        var tabBarItem = UITabBarItem()
+
+        tabBarItem = UITabBarItem(title: "Profile",
+                                  image: UIImage(systemName: "person"),
+                                  selectedImage: nil)
+
+        self.tabBarItem = tabBarItem
     }
     
 
