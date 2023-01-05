@@ -22,7 +22,7 @@ class FeedViewController: UIViewController {
         
     }
     
-    //MARK: - methods
+    //MARK: - Methods
     
     fileprivate func tabBarItem() {
         
@@ -37,8 +37,9 @@ class FeedViewController: UIViewController {
     
     fileprivate func postButton() {
         var postButton = UIButton()
-        postButton = UIButton(type: .roundedRect)
+        postButton = UIButton(type: .system)
         postButton.frame = CGRect(x: 140, y: 600, width: 130, height: 45)
+        postButton.center = self.view.center
         postButton.layer.cornerRadius = 5
         postButton.setTitle("Post", for: .normal)
         postButton.backgroundColor = UIColor.orange
