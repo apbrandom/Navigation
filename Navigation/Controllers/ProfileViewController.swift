@@ -23,7 +23,6 @@ class ProfileViewController: UIViewController {
         self.tabBarItem = tabBarItem
     }
     
-
     /*
     // MARK: - Navigation
 
