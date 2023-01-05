@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = "Profile"
-        self.view.backgroundColor = UIColor.blue
+        self.view.backgroundColor = UIColor.systemBackground
         var tabBarItem = UITabBarItem()
 
         tabBarItem = UITabBarItem(title: "Profile",

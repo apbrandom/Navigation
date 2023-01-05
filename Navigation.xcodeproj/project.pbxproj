@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CB6AF31E2965B6BF008400F2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */; };
+		CB6AF3202965D98C008400F2 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF31F2965D98C008400F2 /* PostViewController.swift */; };
+		CB6AF3452966E320008400F2 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF3442966E320008400F2 /* Post.swift */; };
 		CB7AF3092959AE5E005C51F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF3082959AE5E005C51F3 /* AppDelegate.swift */; };
 		CB7AF30B2959AE5E005C51F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF30A2959AE5E005C51F3 /* SceneDelegate.swift */; };
 		CB7AF30D2959AE5E005C51F3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF30C2959AE5E005C51F3 /* FeedViewController.swift */; };
@@ -17,6 +19,8 @@
 
 /* Begin PBXFileReference section */
 		CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CB6AF31F2965D98C008400F2 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		CB6AF3442966E320008400F2 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		CB7AF3052959AE5E005C51F3 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB7AF3082959AE5E005C51F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB7AF30A2959AE5E005C51F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +41,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CB6AF3462966E32C008400F2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CB6AF3442966E320008400F2 /* Post.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CB6AF3472966E34E008400F2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CB7AF30C2959AE5E005C51F3 /* FeedViewController.swift */,
+				CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */,
+				CB6AF31F2965D98C008400F2 /* PostViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		CB7AF2FC2959AE5D005C51F3 = {
 			isa = PBXGroup;
 			children = (
@@ -58,8 +80,8 @@
 			children = (
 				CB7AF3082959AE5E005C51F3 /* AppDelegate.swift */,
 				CB7AF30A2959AE5E005C51F3 /* SceneDelegate.swift */,
-				CB7AF30C2959AE5E005C51F3 /* FeedViewController.swift */,
-				CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */,
+				CB6AF3462966E32C008400F2 /* Models */,
+				CB6AF3472966E34E008400F2 /* Controllers */,
 				CB7AF3112959AE5E005C51F3 /* Assets.xcassets */,
 				CB7AF3132959AE5E005C51F3 /* LaunchScreen.storyboard */,
 				CB7AF3162959AE5E005C51F3 /* Info.plist */,
@@ -140,7 +162,9 @@
 				CB7AF30D2959AE5E005C51F3 /* FeedViewController.swift in Sources */,
 				CB7AF3092959AE5E005C51F3 /* AppDelegate.swift in Sources */,
 				CB6AF31E2965B6BF008400F2 /* ProfileViewController.swift in Sources */,
+				CB6AF3452966E320008400F2 /* Post.swift in Sources */,
 				CB7AF30B2959AE5E005C51F3 /* SceneDelegate.swift in Sources */,
+				CB6AF3202965D98C008400F2 /* PostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
