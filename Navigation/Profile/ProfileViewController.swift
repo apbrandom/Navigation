@@ -15,7 +15,6 @@ class ProfileViewController: UIViewController {
         navigationItem.title = "Profile"
         view.backgroundColor = UIColor.lightGray
 
-        
     }
 
 }

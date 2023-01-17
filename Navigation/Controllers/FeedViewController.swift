@@ -11,30 +11,28 @@ class FeedViewController: UIViewController {
     
     var post = Post(title: "Post")
     
+    let postButton: UIButton = {
+        let postButton = UIButton(frame: CGRect(x: 140, y: 600, width: 130, height: 45))
+        postButton.setTitle("Post", for: .normal)
+        postButton.backgroundColor = UIColor.orange
+        postButton.layer.cornerRadius = 5
+        return postButton
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.title = "Feed"
         self.view.backgroundColor = UIColor.systemBackground
-        
-//        tabBarItem()
-        postButton()
-        
+        view.addSubview(postButton)
+        postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        postButton.center = view.center
     }
     
     //MARK: - Methods
-    
-    fileprivate func postButton() {
-        var postButton = UIButton()
-        postButton = UIButton(type: .system)
-        postButton.frame = CGRect(x: 140, y: 600, width: 130, height: 45)
-        postButton.center = self.view.center
-        postButton.layer.cornerRadius = 5
-        postButton.setTitle("Post", for: .normal)
-        postButton.backgroundColor = UIColor.orange
-        self.view.addSubview(postButton)
-        postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
-    }
     
     @objc func postButtonPressed() {
         let postVC = PostViewController()
