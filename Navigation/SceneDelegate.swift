@@ -16,18 +16,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = UIWindow(windowScene: windowScene)
         
-        let feedVC = FeedViewController()
-        let profileVC = ProfileViewController()
-        let tabBarController = UITabBarController()
+        let tabBarVC = UITabBarController()
+      
+        let feedVC = UINavigationController(rootViewController: FeedViewController())
+        let profileVC = UINavigationController(rootViewController: ProfileViewController())
         
-        let feedNavgationController = UINavigationController(rootViewController: feedVC)
-        let profileNavigationController = UINavigationController(rootViewController: profileVC)
+        feedVC.title = "Feed"
+        profileVC.title = "Profile"
         
-        tabBarController.setViewControllers([feedNavgationController,
-                                             profileNavigationController],
-                                             animated: true)
+        tabBarVC.setViewControllers([feedVC, profileVC], animated: true)
         
-        self.window?.rootViewController = tabBarController
+        guard let items = tabBarVC.tabBar.items else {
+            return
+        }
+        
+        let imeges = ["folder.badge.person.crop", "person" ]
+        
+        for i in 0..<items.count {
+            items[i].image = UIImage(systemName: imeges[i])
+        }
+        
+        self.window?.rootViewController = tabBarVC
         self.window?.makeKeyAndVisible()
         
     }

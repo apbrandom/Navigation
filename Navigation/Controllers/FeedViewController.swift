@@ -17,23 +17,12 @@ class FeedViewController: UIViewController {
         self.navigationItem.title = "Feed"
         self.view.backgroundColor = UIColor.systemBackground
         
-        tabBarItem()
+//        tabBarItem()
         postButton()
         
     }
     
     //MARK: - Methods
-    
-    fileprivate func tabBarItem() {
-        
-        var tabBarItem = UITabBarItem()
-        tabBarItem = UITabBarItem(title: "Feed",
-                                  image: UIImage(
-                                  systemName: "folder.badge.person.crop"),
-                                  selectedImage: nil)
-        self.tabBarItem = tabBarItem
-        
-    }
     
     fileprivate func postButton() {
         var postButton = UIButton()
