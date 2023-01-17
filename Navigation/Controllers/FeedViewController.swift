@@ -13,9 +13,9 @@ class FeedViewController: UIViewController {
     
     let postButton: UIButton = {
         let postButton = UIButton(frame: CGRect(x: 140, y: 600, width: 130, height: 45))
+        postButton.layer.cornerRadius = 5
         postButton.setTitle("Post", for: .normal)
         postButton.backgroundColor = UIColor.orange
-        postButton.layer.cornerRadius = 5
         return postButton
     }()
     
