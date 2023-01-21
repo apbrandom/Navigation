@@ -9,20 +9,25 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    var profileHeaderView = ProfileHeaderView()
+    private lazy var profileHeaderView: ProfileHeaderView = {
+        let profileHeaderView = ProfileHeaderView()
+        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        profileHeaderView.backgroundColor = .lightGray
+        return profileHeaderView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Profile"
         view.backgroundColor = UIColor.systemBackground
         view.addSubview(profileHeaderView)
-        profileHeaderView.addSubview(profileHeaderView.catView)
+        setupProfileHeaderView()        
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        print(profileHeaderView.frame)
         
-        setupProfileHeaderView()
 //        setupCatView()
      
     }
@@ -30,16 +35,12 @@ class ProfileViewController: UIViewController {
     //MARK: - Methods:
     
     func setupProfileHeaderView() {
-        profileHeaderView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        profileHeaderView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        profileHeaderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            profileHeaderView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            profileHeaderView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profileHeaderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+                                    ])
     }
     
-//    func setupCatView() {
-//        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
-//        profileHeaderView.catView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-//        profileHeaderView.catView.
-//    }
-
 }
