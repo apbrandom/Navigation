@@ -21,15 +21,13 @@ class ProfileViewController: UIViewController {
         navigationItem.title = "Profile"
         view.backgroundColor = UIColor.systemBackground
         view.addSubview(profileHeaderView)
-        setupProfileHeaderView()        
+        setupProfileHeaderView()
+        profileHeaderView.showStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         print(profileHeaderView.frame)
-        
-//        setupCatView()
-     
     }
     
     //MARK: - Methods:
@@ -41,6 +39,26 @@ class ProfileViewController: UIViewController {
             profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             profileHeaderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
                                     ])
+    }
+    
+    @objc func buttonPressed() {
+        
+            let alertController = UIAlertController(title: "Change status of cat", message: "Come up with a funny status for the cat", preferredStyle: .alert)
+            let action0 = UIAlertAction(title: "OK", style: .default) { (action0) in
+                let text = alertController.textFields?.first?.text
+//                print(text ?? "no text")
+                self.profileHeaderView.statusLabel.text = text ?? "No status"
+            }
+                alertController.addTextField { (textFiled) in
+                    textFiled.placeholder = "Enter the status"
+                    
+                }
+                
+                let action1 = UIAlertAction(title: "Cancel", style: .cancel)
+                alertController.addAction(action0)
+                alertController.addAction(action1)
+            
+        self.present(alertController, animated: true)
     }
     
 }
