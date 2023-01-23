@@ -22,12 +22,12 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = UIColor.systemBackground
         view.addSubview(profileHeaderView)
         setupProfileHeaderView()
-        profileHeaderView.showStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        profileHeaderView.setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        print(profileHeaderView.frame)
+
     }
     
     //MARK: - Methods:

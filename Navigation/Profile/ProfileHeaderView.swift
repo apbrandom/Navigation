@@ -21,7 +21,29 @@ class ProfileHeaderView: UIView {
         return imageView
     }()
     
-    lazy var showStatusButton: UIButton = {
+    private lazy var fullNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Cat Traveler"
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = UIColor.black
+        return label
+    }()
+    
+    lazy var statusLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Looking for a new location..."
+        label.textColor = UIColor.systemGray
+        return label
+    }()
+    
+    lazy var statusTextField: UITextField = {
+        let textField = UITextField()
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.black.cgColor
+        return textField
+    }()
+    
+    lazy var setStatusButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 4
         button.backgroundColor = .systemBlue
@@ -43,22 +65,6 @@ class ProfileHeaderView: UIView {
         return stackView
     }()
     
-    private lazy var nameLabel: UIView = {
-        let label = UILabel()
-        label.text = "Cat Traveler"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = UIColor.black
-        return label
-    }()
-    
-    lazy var statusLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Looking for a new location..."
-        label.textColor = UIColor.systemGray
-        
-        return label
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSelf()
@@ -77,9 +83,9 @@ class ProfileHeaderView: UIView {
     private func setupSelf() {
         
         addSubview(avatarImageView)
-        addSubview(showStatusButton)
+        addSubview(setStatusButton)
         addSubview(infoStackView)
-        infoStackView.addArrangedSubview(nameLabel)
+        infoStackView.addArrangedSubview(fullNameLabel)
         infoStackView.addArrangedSubview(statusLabel)
         
         NSLayoutConstraint.activate([
@@ -99,19 +105,19 @@ class ProfileHeaderView: UIView {
                 multiplier: 1.0
             ),
             
-            showStatusButton.topAnchor.constraint(
+            setStatusButton.topAnchor.constraint(
                 equalTo: avatarImageView.bottomAnchor,
                 constant: 16
             ),
-            showStatusButton.leadingAnchor.constraint(
+            setStatusButton.leadingAnchor.constraint(
                 equalTo: safeAreaLayoutGuide.leadingAnchor,
                 constant: 16
             ),
-            showStatusButton.trailingAnchor.constraint(
+            setStatusButton.trailingAnchor.constraint(
                 equalTo: safeAreaLayoutGuide.trailingAnchor,
                 constant: -16
             ),
-            showStatusButton.heightAnchor.constraint(
+            setStatusButton.heightAnchor.constraint(
                 equalToConstant: 50
             ),
             
@@ -120,7 +126,7 @@ class ProfileHeaderView: UIView {
                 constant: 27
             ),
             infoStackView.bottomAnchor.constraint(
-                equalTo: showStatusButton.topAnchor,
+                equalTo: setStatusButton.topAnchor,
                 constant: -34
             ),
             infoStackView.leftAnchor.constraint(
@@ -131,6 +137,7 @@ class ProfileHeaderView: UIView {
                 equalTo: safeAreaLayoutGuide.trailingAnchor,
                 constant: -16
             )
+            
             
                                     ])
     }
