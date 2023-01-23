@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ProfileViewController: UIViewController {
     
@@ -23,11 +24,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(profileHeaderView)
         setupProfileHeaderView()
         profileHeaderView.setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-
+//        profileHeaderView.statusTextField.delegate = self
     }
     
     //MARK: - Methods:
@@ -62,3 +59,5 @@ class ProfileViewController: UIViewController {
     }
     
 }
+
+
