@@ -11,41 +11,38 @@ class FeedViewController: UIViewController {
     
     var post = Post(title: "Post")
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.navigationItem.title = "Feed"
-        self.view.backgroundColor = UIColor.systemBackground
-        
-        tabBarItem()
-        postButton()
-        
-    }
+    let feedView = UIView(frame: CGRect(x: 50, y: 50, width: 200, height: 200))
     
-    //MARK: - Methods
-    
-    fileprivate func tabBarItem() {
-        
-        var tabBarItem = UITabBarItem()
-        tabBarItem = UITabBarItem(title: "Feed",
-                                  image: UIImage(
-                                  systemName: "folder.badge.person.crop"),
-                                  selectedImage: nil)
-        self.tabBarItem = tabBarItem
-        
-    }
-    
-    fileprivate func postButton() {
-        var postButton = UIButton()
-        postButton = UIButton(type: .system)
-        postButton.frame = CGRect(x: 140, y: 600, width: 130, height: 45)
-        postButton.center = self.view.center
+    let postButton: UIButton = {
+        let postButton = UIButton(frame: CGRect(x: 140, y: 600, width: 130, height: 45))
         postButton.layer.cornerRadius = 5
         postButton.setTitle("Post", for: .normal)
         postButton.backgroundColor = UIColor.orange
-        self.view.addSubview(postButton)
+        return postButton
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.title = "Feed"
+        view.backgroundColor = UIColor.systemBackground
         postButton.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+         view.addSubview(feedView)
+         view.addSubview(postButton)
+         setupFeedView()
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        postButton.center = view.center
+    }
+    
+    //MARK: - Methods
     
     @objc func postButtonPressed() {
         let postVC = PostViewController()
@@ -53,5 +50,16 @@ class FeedViewController: UIViewController {
         navigationController?.pushViewController(postVC, animated: true)
     }
     
+    func setupFeedView() {
+        feedView.backgroundColor = UIColor.lightGray
+        
+        feedView.translatesAutoresizingMaskIntoConstraints = false
+        feedView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        feedView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        feedView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        feedView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+
+    }
+
 }
 
