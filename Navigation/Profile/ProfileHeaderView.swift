@@ -13,12 +13,11 @@ class ProfileHeaderView: UIView {
     
     private lazy var avatarImageView: UIImageView = {
         var imageView = UIImageView()
-        imageView = UIImageView(frame: CGRect(x: 16, y: 16, width: 120, height: 120))
-        imageView.layer.contents = UIImage(named: "cat")?.cgImage
+        imageView.image = UIImage(named: "cat")
+        imageView.layer.cornerRadius = 60
         imageView.layer.masksToBounds = true
         imageView.layer.borderColor = UIColor.systemBackground.cgColor
         imageView.layer.borderWidth = 3
-        imageView.layer.cornerRadius = imageView.frame.width / 2
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -78,6 +77,8 @@ class ProfileHeaderView: UIView {
         super.init(frame: frame)
         setupSelf()
         statusTextField.delegate = self
+        statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        setStatusButton.addTarget(self, action: #selector(setButtonPressed), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -144,8 +145,17 @@ class ProfileHeaderView: UIView {
             ),
             
             statusTextField.heightAnchor.constraint(equalToConstant: 40)
-            
         ])
+    }
+    
+    @objc func statusTextChanged(_ textField: UITextField) {
+        if let text = statusTextField.text {
+            statusText = text
+        }
+    }
+    
+    @objc func setButtonPressed() {
+        statusLabel.text = statusText
     }
     
 }
@@ -167,4 +177,6 @@ extension ProfileHeaderView: UITextFieldDelegate {
     }
     
 }
+
+
 
