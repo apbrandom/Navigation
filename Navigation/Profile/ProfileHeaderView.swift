@@ -25,15 +25,15 @@ class ProfileHeaderView: UIView {
     private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Cat Traveler"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = UIColor.black
+        label.font = .boldSystemFont(ofSize: 18)
+        label.textColor = .black
         return label
     }()
     
     lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.text = "Looking for a new location..."
-        label.textColor = UIColor.systemGray
+        label.textColor = .systemGray
         return label
     }()
     
@@ -68,7 +68,6 @@ class ProfileHeaderView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
-        stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -86,7 +85,6 @@ class ProfileHeaderView: UIView {
     }
     
     private func setupSelf() {
-        
         addSubview(avatarImageView)
         addSubview(setStatusButton)
         addSubview(infoStackView)
@@ -115,12 +113,12 @@ class ProfileHeaderView: UIView {
                 equalTo: avatarImageView.bottomAnchor,
                 constant: 16
             ),
-            setStatusButton.leadingAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.leadingAnchor,
+            setStatusButton.leftAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.leftAnchor,
                 constant: 16
             ),
-            setStatusButton.trailingAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.trailingAnchor,
+            setStatusButton.rightAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.rightAnchor,
                 constant: -16
             ),
             setStatusButton.heightAnchor.constraint(

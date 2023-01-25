@@ -10,11 +10,11 @@ import UIKit
 class InfoViewController: UIViewController {
     
     let alertButton: UIButton = {
-        let alertButton = UIButton(frame: CGRect(x: 0, y: 0, width: 140, height: 45))
-        alertButton.layer.cornerRadius = 10
-        alertButton.backgroundColor = UIColor.blue
-        alertButton.setTitle("Press me!", for: .normal)
-        return alertButton
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 140, height: 45))
+        button.layer.cornerRadius = 10
+        button.backgroundColor = UIColor.blue
+        button.setTitle("Press me!", for: .normal)
+        return button
     }()
     
     override func viewDidLoad() {
