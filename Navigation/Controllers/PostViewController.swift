@@ -11,11 +11,13 @@ class PostViewController: UIViewController {
     
     var post = Post(title: "")
     
+    //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tuneView()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .done, target: self, action: #selector(infoBarButtonItemPressed))
+        addSubview()
     }
     
     //MARK: - Private
@@ -25,7 +27,11 @@ class PostViewController: UIViewController {
         view.backgroundColor = UIColor.darkGray
     }
     
-    //MARK: - Methods
+    private func addSubview() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .done, target: self, action: #selector(infoBarButtonItemPressed))
+    }
+    
+    //MARK: - Action
     
     @objc func infoBarButtonItemPressed() {
         let infoVC = InfoViewController()

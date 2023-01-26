@@ -24,6 +24,14 @@ class ProfileHeaderView: UIView {
         return imageView
     }()
     
+    private lazy var infoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Cat Traveler"
@@ -64,14 +72,6 @@ class ProfileHeaderView: UIView {
         button.layer.shadowRadius = 4
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-    }()
-    
-    private lazy var infoStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
     }()
     
     //MARK: - Lifecycle
@@ -156,7 +156,7 @@ class ProfileHeaderView: UIView {
         ])
     }
     
-    //MARK: - Methods
+    //MARK: - Action
     
     @objc func statusTextChanged(_ textField: UITextField) {
         if let text = statusTextField.text {

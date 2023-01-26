@@ -70,7 +70,6 @@ class FeedViewController: UIViewController {
         tuneView()
         addSubviews()
         setupConstrains()
-        
     }
     
     //MARK: - Private
@@ -87,13 +86,15 @@ class FeedViewController: UIViewController {
         postStackView.addArrangedSubview(secondButton)
     }
     
-    @objc private func firstButtonPressed(_ sender: UIResponder) {
+    //MARK: - Action
+    
+    @objc func firstButtonPressed(_ sender: UIResponder) {
         let postVC = PostViewController()
         postVC.post = post
         navigationController?.pushViewController(postVC, animated: true)
     }
     
-    @objc private func secondButtonPressed(_ sender: UIResponder) {
+    @objc func secondButtonPressed(_ sender: UIResponder) {
         let postVC = PostViewController()
         postVC.post = post
         navigationController?.pushViewController(postVC, animated: true)
