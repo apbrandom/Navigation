@@ -26,32 +26,50 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Profile"
-        view.backgroundColor = UIColor.systemBackground
-        view.addSubview(profileHeaderView)
-        view.addSubview(newButton)
-        setupProfileHeaderView()
+        
+        tuneView()
+        addSubviews()
+        setupConstrains()
     }
     
-    //MARK: - Methods:
+    //MARK: - Privte
     
-    func setupProfileHeaderView() {
+    private func tuneView() {
+        navigationItem.title = "Profile"
+        view.backgroundColor = UIColor.systemBackground
+    }
+    
+    private func addSubviews() {
+        view.addSubview(profileHeaderView)
+        view.addSubview(newButton)
+    }
+    
+     private func setupConstrains() {
         NSLayoutConstraint.activate([
             profileHeaderView.leftAnchor.constraint(
-                equalTo: view.leftAnchor),
+                equalTo: view.leftAnchor
+            ),
             profileHeaderView.rightAnchor.constraint(
-                equalTo: view.rightAnchor),
+                equalTo: view.rightAnchor
+            ),
             profileHeaderView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor),
+                equalTo: view.safeAreaLayoutGuide.topAnchor
+            ),
             profileHeaderView.heightAnchor.constraint(
-                equalToConstant: 220),
+                equalToConstant: 220
+            ),
 
             newButton.leftAnchor.constraint(
-                equalTo: view.leftAnchor),
+                equalTo: view.leftAnchor
+            ),
             newButton.rightAnchor.constraint(
-                equalTo: view.rightAnchor),
-            newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            newButton.heightAnchor.constraint(equalToConstant: 50),
+                equalTo: view.rightAnchor
+            ),
+            newButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor
+            ),
+            newButton.heightAnchor.constraint(
+                equalToConstant: 50),
         ])
     }
     

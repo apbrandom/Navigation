@@ -13,11 +13,16 @@ class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tuneView()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .done, target: self, action: #selector(infoBarButtonItemPressed))
+    }
+    
+    //MARK: - Private
+    
+    private func tuneView() {
         navigationItem.title = post.title
         view.backgroundColor = UIColor.darkGray
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .done, target: self, action: #selector(infoBarButtonItemPressed))
-
     }
     
     //MARK: - Methods

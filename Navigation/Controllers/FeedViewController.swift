@@ -27,7 +27,7 @@ class FeedViewController: UIViewController {
         return stackView
     }()
     
-    let firstButton: UIButton = {
+    private lazy var firstButton: UIButton = {
         let button = UIButton()
         button.setTitle("First Button", for: .normal)
         button.backgroundColor = .orange
@@ -36,11 +36,16 @@ class FeedViewController: UIViewController {
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 5
+        button.addTarget(
+            self,
+            action: #selector(firstButtonPressed(_:)),
+            for: .touchUpInside
+        )
         return button
     }()
     
-    let secondButton: UIButton = {
-        let button = UIButton()
+    private lazy var secondButton: UIButton = {
+        let button = UIButton(type: .system)
         button.setTitle("Second Button", for: .normal)
         button.backgroundColor = .brown
         button.layer.cornerRadius = 5
@@ -49,42 +54,52 @@ class FeedViewController: UIViewController {
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 5
+        button.addTarget(
+            self,
+            action: #selector(secondButtonPressed(_:)),
+            for: .touchUpInside
+        )
         return button
     }()
     
+    //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Feed"
-        view.backgroundColor = .systemBackground
+
+        tuneView()
+        addSubviews()
+        setupConstrains()
         
-        firstButton.addTarget(self, action: #selector(firstButtonPressed), for: .touchUpInside)
-        secondButton.addTarget(self, action: #selector(secondButtonPressed), for: .touchUpInside)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    //MARK: - Private
+    
+    private func tuneView() {
+        self.navigationItem.title = "Feed"
+        view.backgroundColor = .systemBackground
+    }
+    
+    private func addSubviews() {
         view.addSubview(feedView)
         feedView.addSubview(postStackView)
         postStackView.addArrangedSubview(firstButton)
         postStackView.addArrangedSubview(secondButton)
-        setupFeedView()
     }
     
-    //MARK: - Methods
-    
-    @objc func firstButtonPressed() {
+    @objc private func firstButtonPressed(_ sender: UIResponder) {
         let postVC = PostViewController()
         postVC.post = post
         navigationController?.pushViewController(postVC, animated: true)
     }
     
-    @objc func secondButtonPressed() {
+    @objc private func secondButtonPressed(_ sender: UIResponder) {
         let postVC = PostViewController()
         postVC.post = post
         navigationController?.pushViewController(postVC, animated: true)
     }
     
-    func setupFeedView() {
+    func setupConstrains() {
         
         NSLayoutConstraint.activate([
             feedView.leftAnchor.constraint(

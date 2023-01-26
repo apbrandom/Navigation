@@ -11,8 +11,10 @@ class ProfileHeaderView: UIView {
     
     private var statusText = ""
     
+    //MARK: - Subviews
+    
     private lazy var avatarImageView: UIImageView = {
-        var imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.image = UIImage(named: "cat")
         imageView.layer.cornerRadius = 60
         imageView.layer.masksToBounds = true
@@ -72,9 +74,13 @@ class ProfileHeaderView: UIView {
         return stackView
     }()
     
+    //MARK: - Lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupSelf()
+        
+        addSubviews()
+        setupConstarins()
         statusTextField.delegate = self
         statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         setStatusButton.addTarget(self, action: #selector(setButtonPressed), for: .touchUpInside)
@@ -84,14 +90,18 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupSelf() {
+    //MARK: - Private
+    
+    private func addSubviews() {
         addSubview(avatarImageView)
         addSubview(setStatusButton)
         addSubview(infoStackView)
         infoStackView.addArrangedSubview(fullNameLabel)
         infoStackView.addArrangedSubview(statusLabel)
         infoStackView.addArrangedSubview(statusTextField)
-        
+    }
+    
+    private func setupConstarins() {
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(
                 equalTo: safeAreaLayoutGuide.topAnchor,
@@ -146,6 +156,8 @@ class ProfileHeaderView: UIView {
         ])
     }
     
+    //MARK: - Methods
+    
     @objc func statusTextChanged(_ textField: UITextField) {
         if let text = statusTextField.text {
             statusText = text
@@ -158,7 +170,7 @@ class ProfileHeaderView: UIView {
     
 }
 
-// MARK: - UITextFieldDeligate
+//MARK: - UITextFieldDeligate
 
 extension ProfileHeaderView: UITextFieldDelegate {
     
