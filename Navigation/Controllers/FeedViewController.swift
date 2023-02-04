@@ -101,26 +101,16 @@ class FeedViewController: UIViewController {
     }
     
     func setupConstrains() {
-        
         NSLayoutConstraint.activate([
-            feedView.leftAnchor.constraint(
-                equalTo: view.leftAnchor),
-            feedView.rightAnchor.constraint(
-                equalTo: view.rightAnchor),
-            feedView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor),
-            feedView.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            feedView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            feedView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            feedView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            feedView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            postStackView.centerXAnchor.constraint(
-                equalTo: feedView.centerXAnchor),
-            postStackView.centerYAnchor.constraint(
-                equalTo: feedView.centerYAnchor),
-            postStackView.widthAnchor.constraint(
-                equalToConstant: 270),
-            postStackView.heightAnchor.constraint(
-                equalToConstant: 110),
-            
+            postStackView.centerXAnchor.constraint(equalTo: feedView.centerXAnchor),
+            postStackView.centerYAnchor.constraint(equalTo: feedView.centerYAnchor),
+            postStackView.widthAnchor.constraint(equalToConstant: 270),
+            postStackView.heightAnchor.constraint(equalToConstant: 110),
         ])
         
     }

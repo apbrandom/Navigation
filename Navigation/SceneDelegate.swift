@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBarVC = UITabBarController()
         let feedVC = UINavigationController(rootViewController: FeedViewController())
-        let profileVC = UINavigationController(rootViewController: ProfileViewController())
+        let profileVC = UINavigationController(rootViewController: LogInViewController())
         
         feedVC.title = "Feed"
         profileVC.title = "Profile"

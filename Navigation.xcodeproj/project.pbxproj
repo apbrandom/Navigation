@@ -12,6 +12,7 @@
 		CB6AF3202965D98C008400F2 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF31F2965D98C008400F2 /* PostViewController.swift */; };
 		CB6AF3452966E320008400F2 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF3442966E320008400F2 /* Post.swift */; };
 		CB6AF349296763C7008400F2 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF348296763C7008400F2 /* InfoViewController.swift */; };
+		CB71F61D298E7CA200DA584D /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71F61C298E7CA200DA584D /* LogInViewController.swift */; };
 		CB7AF3092959AE5E005C51F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF3082959AE5E005C51F3 /* AppDelegate.swift */; };
 		CB7AF30B2959AE5E005C51F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF30A2959AE5E005C51F3 /* SceneDelegate.swift */; };
 		CB7AF30D2959AE5E005C51F3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF30C2959AE5E005C51F3 /* FeedViewController.swift */; };
@@ -25,6 +26,7 @@
 		CB6AF31F2965D98C008400F2 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		CB6AF3442966E320008400F2 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		CB6AF348296763C7008400F2 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		CB71F61C298E7CA200DA584D /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		CB7AF3052959AE5E005C51F3 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB7AF3082959AE5E005C51F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB7AF30A2959AE5E005C51F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 			children = (
 				CB23E9102975996A0081B615 /* ProfileHeaderView.swift */,
 				CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */,
+				CB71F61C298E7CA200DA584D /* LogInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 			files = (
 				CB7AF30D2959AE5E005C51F3 /* FeedViewController.swift in Sources */,
 				CB23E9112975996A0081B615 /* ProfileHeaderView.swift in Sources */,
+				CB71F61D298E7CA200DA584D /* LogInViewController.swift in Sources */,
 				CB7AF3092959AE5E005C51F3 /* AppDelegate.swift in Sources */,
 				CB6AF31E2965B6BF008400F2 /* ProfileViewController.swift in Sources */,
 				CB6AF349296763C7008400F2 /* InfoViewController.swift in Sources */,
