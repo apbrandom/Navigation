@@ -20,6 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let feedVC = UINavigationController(rootViewController: FeedViewController())
         let profileVC = UINavigationController(rootViewController: LogInViewController())
         
+        tabBarVC.tabBar.backgroundColor = UIColor.secondarySystemBackground
         feedVC.title = "Feed"
         profileVC.title = "Profile"
         
@@ -29,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         
-        let imeges = ["folder.badge.person.crop", "person" ]
+        let imeges = ["house", "person" ]
         
         for i in 0..<items.count {
             items[i].image = UIImage(systemName: imeges[i])
@@ -37,7 +38,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window?.rootViewController = tabBarVC
         self.window?.makeKeyAndVisible()
-        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -68,6 +68,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
+    
 }
 

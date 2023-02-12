@@ -37,25 +37,12 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
         
-//    setupKeyboardObservers()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-//    removeKevboardobservers()
+
     }
-    
-    //MARK: - Action
-    
-//    @objc func willShowKeyboard(_ notification: NSNotification) {
-//    let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
-//    NSValue)?.cgRectValue.height
-//    profileHeaderView.contentInset.bottom += keyboardHeight ?? 0.0
-//    }
-//
-//    @objc func willhideKeyboard(_ notification: NSNotification) {
-//    profileHeaderView.contentInset.bottom
-//    }
     
     
     //MARK: - Privte
@@ -70,16 +57,6 @@ class ProfileViewController: UIViewController {
         view.addSubview(newButton)
     }
     
-//    private func setupKeyboardObservers() {
-//        let notificationCenter = NotificationCenter.default
-//        notificationCenter.addObserver(
-//            self,
-//            selector: #selector (self.willShowKeyboard(:)), name: UIResponder.keyboardWillShowNotification, object: nil
-//        )
-//        notificationCenter.addObserver(
-//            self, selector: #selector(self.willHideKeyboard(:)), name: UIResponder.keyboardwillHideNotification, object: nil
-//        )
-//    }
     private func removeKevboardObservers() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
@@ -88,30 +65,15 @@ class ProfileViewController: UIViewController {
 
      private func setupConstrains() {
         NSLayoutConstraint.activate([
-            profileHeaderView.leftAnchor.constraint(
-                equalTo: view.leftAnchor
-            ),
-            profileHeaderView.rightAnchor.constraint(
-                equalTo: view.rightAnchor
-            ),
-            profileHeaderView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor
-            ),
-            profileHeaderView.heightAnchor.constraint(
-                equalToConstant: 220
-            ),
+            profileHeaderView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            profileHeaderView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
 
-            newButton.leftAnchor.constraint(
-                equalTo: view.leftAnchor
-            ),
-            newButton.rightAnchor.constraint(
-                equalTo: view.rightAnchor
-            ),
-            newButton.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor
-            ),
-            newButton.heightAnchor.constraint(
-                equalToConstant: 50),
+            newButton.leftAnchor.constraint(equalTo: view.leftAnchor),
+            newButton.rightAnchor.constraint(equalTo: view.rightAnchor),
+            newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            newButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     

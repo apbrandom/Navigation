@@ -9,7 +9,7 @@ import UIKit
 
 class PostViewController: UIViewController {
     
-    var post = Post(title: "")
+    lazy var post = Post(title: "")
     
     //MARK: - Lifecycle
     
