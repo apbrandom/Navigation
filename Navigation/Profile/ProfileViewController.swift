@@ -44,7 +44,6 @@ class ProfileViewController: UIViewController {
 
     }
     
-    
     //MARK: - Privte
     
     private func tuneView() {
