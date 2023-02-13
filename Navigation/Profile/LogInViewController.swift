@@ -54,9 +54,11 @@ class LogInViewController: UIViewController {
         textField.placeholder = "Email or phone"
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
         textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.keyboardType = UIKeyboardType.default
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         textField.autocapitalizationType = .none
+        textField.delegate = self
         return textField
     }()
     
@@ -68,12 +70,13 @@ class LogInViewController: UIViewController {
         textField.placeholder = "Password"
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
         textField.autocorrectionType = UITextAutocorrectionType.no
-        textField.autocapitalizationType = .none
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        textField.autocapitalizationType = .none
         textField.isSecureTextEntry = true
+        textField.delegate = self
         return textField
     }()
     
