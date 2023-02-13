@@ -9,26 +9,42 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
-    let alertButton: UIButton = {
-        let alertButton = UIButton(frame: CGRect(x: 0, y: 0, width: 140, height: 45))
-        alertButton.layer.cornerRadius = 10
-        alertButton.backgroundColor = UIColor.blue
-        alertButton.setTitle("Press me!", for: .normal)
-        return alertButton
+    private lazy var alertButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 140, height: 45))
+        button.layer.cornerRadius = 10
+        button.backgroundColor = UIColor.blue
+        button.setTitle("Press me!", for: .normal)
+        button.addTarget(
+            self,
+            action: #selector(buttonAlertPressed),
+            for: .touchUpInside
+        )
+        return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.systemBackground
-        view.addSubview(alertButton)
-        alertButton.addTarget(self, action: #selector(buttonAlertPressed), for: .touchUpInside)
+        
+        tuneView()
+        addSubviews()
     }
     
     override func viewDidLayoutSubviews() {
         alertButton.center = view.center
     }
     
-    //MARK: - Methods:
+    
+    //MARK: - Private
+    
+    private func tuneView() {
+        view.backgroundColor = UIColor.systemBackground
+    }
+    
+    private func addSubviews() {
+        view.addSubview(alertButton)
+    }
+    
+    //MARK: - Action
 
     @objc func buttonAlertPressed() {
         let alertController = UIAlertController(title: "Error", message: "You are pressed the button now", preferredStyle: .alert)

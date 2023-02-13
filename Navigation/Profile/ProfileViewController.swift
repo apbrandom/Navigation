@@ -10,34 +10,71 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     private lazy var profileHeaderView: ProfileHeaderView = {
-        let profileHeaderView = ProfileHeaderView()
-        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        profileHeaderView.backgroundColor = .lightGray
-        return profileHeaderView
+        let view = ProfileHeaderView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .lightGray
+        return view
     }()
+    
+    private lazy var newButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("New Button", for: .normal)
+        button.backgroundColor = UIColor.red
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    //MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Profile"
-        view.backgroundColor = UIColor.systemBackground
-        view.addSubview(profileHeaderView)
-        setupProfileHeaderView()
+        
+        tuneView()
+        addSubviews()
+        setupConstrains()
     }
     
-    //MARK: - Methods:
-    
-    func setupProfileHeaderView() {
+    override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+
+    }
+    
+    
+    //MARK: - Privte
+    
+    private func tuneView() {
+        navigationItem.title = "Profile"
+        view.backgroundColor = UIColor.systemBackground
+    }
+    
+    private func addSubviews() {
+        view.addSubview(profileHeaderView)
+        view.addSubview(newButton)
+    }
+    
+    private func removeKevboardObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
+    
+
+     private func setupConstrains() {
         NSLayoutConstraint.activate([
-            profileHeaderView.leftAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            profileHeaderView.rightAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            profileHeaderView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor),
-            profileHeaderView.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-                                    ])
+            profileHeaderView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            profileHeaderView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
+
+            newButton.leftAnchor.constraint(equalTo: view.leftAnchor),
+            newButton.rightAnchor.constraint(equalTo: view.rightAnchor),
+            newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            newButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
     
 }

@@ -9,18 +9,29 @@ import UIKit
 
 class PostViewController: UIViewController {
     
-    var post = Post(title: "")
+    lazy var post = Post(title: "")
+    
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = post.title
-        view.backgroundColor = UIColor.darkGray
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .done, target: self, action: #selector(infoBarButtonItemPressed))
-
+        tuneView()
+        addSubview()
     }
     
-    //MARK: - Methods
+    //MARK: - Private
+    
+    private func tuneView() {
+        navigationItem.title = post.title
+        view.backgroundColor = UIColor.darkGray
+    }
+    
+    private func addSubview() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .done, target: self, action: #selector(infoBarButtonItemPressed))
+    }
+    
+    //MARK: - Action
     
     @objc func infoBarButtonItemPressed() {
         let infoVC = InfoViewController()

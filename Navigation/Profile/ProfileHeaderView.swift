@@ -11,8 +11,10 @@ class ProfileHeaderView: UIView {
     
     private var statusText = ""
     
+    //MARK: - Subviews
+    
     private lazy var avatarImageView: UIImageView = {
-        var imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.image = UIImage(named: "cat")
         imageView.layer.cornerRadius = 60
         imageView.layer.masksToBounds = true
@@ -22,18 +24,26 @@ class ProfileHeaderView: UIView {
         return imageView
     }()
     
+    private lazy var infoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Cat Traveler"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = UIColor.black
+        label.font = .boldSystemFont(ofSize: 18)
+        label.textColor = .black
         return label
     }()
     
     lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.text = "Looking for a new location..."
-        label.textColor = UIColor.systemGray
+        label.textColor = .systemGray
         return label
     }()
     
@@ -64,18 +74,13 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    private lazy var infoStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.spacing = 5
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
+    //MARK: - Lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupSelf()
+        
+        addSubviews()
+        setupConstarins()
         statusTextField.delegate = self
         statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         setStatusButton.addTarget(self, action: #selector(setButtonPressed), for: .touchUpInside)
@@ -85,15 +90,18 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupSelf() {
-        
+    //MARK: - Private
+    
+    private func addSubviews() {
         addSubview(avatarImageView)
         addSubview(setStatusButton)
         addSubview(infoStackView)
         infoStackView.addArrangedSubview(fullNameLabel)
         infoStackView.addArrangedSubview(statusLabel)
         infoStackView.addArrangedSubview(statusTextField)
-        
+    }
+    
+    private func setupConstarins() {
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(
                 equalTo: safeAreaLayoutGuide.topAnchor,
@@ -115,12 +123,12 @@ class ProfileHeaderView: UIView {
                 equalTo: avatarImageView.bottomAnchor,
                 constant: 16
             ),
-            setStatusButton.leadingAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.leadingAnchor,
+            setStatusButton.leftAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.leftAnchor,
                 constant: 16
             ),
-            setStatusButton.trailingAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.trailingAnchor,
+            setStatusButton.rightAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.rightAnchor,
                 constant: -16
             ),
             setStatusButton.heightAnchor.constraint(
@@ -148,6 +156,8 @@ class ProfileHeaderView: UIView {
         ])
     }
     
+    //MARK: - Action
+    
     @objc func statusTextChanged(_ textField: UITextField) {
         if let text = statusTextField.text {
             statusText = text
@@ -160,7 +170,7 @@ class ProfileHeaderView: UIView {
     
 }
 
-// MARK: - UITextFieldDeligate
+//MARK: - UITextFieldDeligate
 
 extension ProfileHeaderView: UITextFieldDelegate {
     
