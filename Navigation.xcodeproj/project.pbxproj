@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CB23E9112975996A0081B615 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB23E9102975996A0081B615 /* ProfileHeaderView.swift */; };
+		CB08A492299F7A3200AF49D7 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A491299F7A3200AF49D7 /* PostTableViewCell.swift */; };
+		CB08A49429A0C6BA00AF49D7 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49329A0C6BA00AF49D7 /* UITableView+Extension.swift */; };
+		CB23E9112975996A0081B615 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB23E9102975996A0081B615 /* ProfileTableHeaderView.swift */; };
 		CB6AF31E2965B6BF008400F2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */; };
 		CB6AF3202965D98C008400F2 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF31F2965D98C008400F2 /* PostViewController.swift */; };
 		CB6AF3452966E320008400F2 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF3442966E320008400F2 /* Post.swift */; };
@@ -22,7 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CB23E9102975996A0081B615 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		CB08A491299F7A3200AF49D7 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		CB08A49329A0C6BA00AF49D7 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		CB23E9102975996A0081B615 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CB6AF31F2965D98C008400F2 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		CB6AF3442966E320008400F2 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -52,9 +56,11 @@
 		CB23E90D297598D80081B615 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				CB23E9102975996A0081B615 /* ProfileHeaderView.swift */,
-				CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */,
 				CB71F61C298E7CA200DA584D /* LogInViewController.swift */,
+				CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */,
+				CB23E9102975996A0081B615 /* ProfileTableHeaderView.swift */,
+				CB08A491299F7A3200AF49D7 /* PostTableViewCell.swift */,
+				CB08A49329A0C6BA00AF49D7 /* UITableView+Extension.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -180,8 +186,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB7AF30D2959AE5E005C51F3 /* FeedViewController.swift in Sources */,
-				CB23E9112975996A0081B615 /* ProfileHeaderView.swift in Sources */,
+				CB23E9112975996A0081B615 /* ProfileTableHeaderView.swift in Sources */,
 				CB71F61D298E7CA200DA584D /* LogInViewController.swift in Sources */,
+				CB08A492299F7A3200AF49D7 /* PostTableViewCell.swift in Sources */,
 				CB7AF3092959AE5E005C51F3 /* AppDelegate.swift in Sources */,
 				CB6AF31E2965B6BF008400F2 /* ProfileViewController.swift in Sources */,
 				CB6AF349296763C7008400F2 /* InfoViewController.swift in Sources */,
@@ -189,6 +196,7 @@
 				CB6AF3452966E320008400F2 /* Post.swift in Sources */,
 				CB7AF30B2959AE5E005C51F3 /* SceneDelegate.swift in Sources */,
 				CB6AF3202965D98C008400F2 /* PostViewController.swift in Sources */,
+				CB08A49429A0C6BA00AF49D7 /* UITableView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

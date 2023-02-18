@@ -75,7 +75,7 @@ class FeedViewController: UIViewController {
     //MARK: - Private
     
     private func tuneView() {
-        self.navigationItem.title = "Feed"
+        navigationItem.title = "Feed"
         view.backgroundColor = .systemBackground
     }
     
@@ -90,13 +90,13 @@ class FeedViewController: UIViewController {
     
     @objc func firstButtonPressed(_ sender: UIResponder) {
         let postVC = PostViewController()
-        postVC.post = post
+//        postVC.post = post
         navigationController?.pushViewController(postVC, animated: true)
     }
     
     @objc func secondButtonPressed(_ sender: UIResponder) {
         let postVC = PostViewController()
-        postVC.post = post
+//        postVC.post = post
         navigationController?.pushViewController(postVC, animated: true)
     }
     

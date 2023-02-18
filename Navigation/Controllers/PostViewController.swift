@@ -9,7 +9,7 @@ import UIKit
 
 class PostViewController: UIViewController {
     
-    lazy var post = Post(title: "")
+//    lazy var post = Post(title: "")
     
     //MARK: - Lifecycle
     
@@ -23,7 +23,7 @@ class PostViewController: UIViewController {
     //MARK: - Private
     
     private func tuneView() {
-        navigationItem.title = post.title
+//        navigationItem.title = post.title
         view.backgroundColor = UIColor.darkGray
     }
     

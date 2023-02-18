@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileTableHeaderView: UIView {
     
     private var statusText = ""
     
@@ -58,6 +58,10 @@ class ProfileHeaderView: UIView {
         textField.layer.cornerRadius = 12
         textField.layer.backgroundColor = UIColor.systemBackground.cgColor
         textField.placeholder = "Write your status"
+        textField.addTarget(
+            self,
+            action: #selector(statusTextChanged),
+            for: .editingChanged)
         return textField
     }()
     
@@ -70,6 +74,10 @@ class ProfileHeaderView: UIView {
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 4
+        button.addTarget(
+            self,
+            action: #selector(setButtonPressed),
+            for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -82,14 +90,15 @@ class ProfileHeaderView: UIView {
         addSubviews()
         setupConstarins()
         statusTextField.delegate = self
-        statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        setStatusButton.addTarget(self, action: #selector(setButtonPressed), for: .touchUpInside)
+//        statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+//        setStatusButton.
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+
     //MARK: - Private
     
     private func addSubviews() {
@@ -100,6 +109,16 @@ class ProfileHeaderView: UIView {
         infoStackView.addArrangedSubview(statusLabel)
         infoStackView.addArrangedSubview(statusTextField)
     }
+    
+    // MARK: - Layout
+    
+    override var intrinsicContentSize: CGSize {
+        CGSize(
+            width: UIView.noIntrinsicMetric,
+            height: 220.0
+        )
+    }
+    
     
     private func setupConstarins() {
         NSLayoutConstraint.activate([
@@ -116,9 +135,10 @@ class ProfileHeaderView: UIView {
             ),
             avatarImageView.heightAnchor.constraint(
                 equalTo: avatarImageView.widthAnchor,
-                multiplier: 1.0
-            ),
+                multiplier: 1.0)
+            ])
             
+            NSLayoutConstraint.activate([
             setStatusButton.topAnchor.constraint(
                 equalTo: avatarImageView.bottomAnchor,
                 constant: 16
@@ -132,26 +152,25 @@ class ProfileHeaderView: UIView {
                 constant: -16
             ),
             setStatusButton.heightAnchor.constraint(
-                equalToConstant: 50
-            ),
-            
+                equalToConstant: 50)
+            ])
+        
+            NSLayoutConstraint.activate([
             infoStackView.topAnchor.constraint(
                 equalTo: safeAreaLayoutGuide.topAnchor,
-                constant: 27
-            ),
+                constant: 27),
             infoStackView.bottomAnchor.constraint(
                 equalTo: setStatusButton.topAnchor,
-                constant: -16
-            ),
+                constant: -16),
             infoStackView.leftAnchor.constraint(
                 equalTo: avatarImageView.rightAnchor,
-                constant: 16
-            ),
+                constant: 16),
             infoStackView.trailingAnchor.constraint(
                 equalTo: safeAreaLayoutGuide.trailingAnchor,
-                constant: -16
-            ),
-            
+                constant: -16)
+            ])
+        
+            NSLayoutConstraint.activate([
             statusTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
@@ -164,7 +183,7 @@ class ProfileHeaderView: UIView {
         }
     }
     
-    @objc func setButtonPressed() {
+    @objc func setButtonPressed(_ textField: UITextField) {
         statusLabel.text = statusText
     }
     
@@ -172,7 +191,7 @@ class ProfileHeaderView: UIView {
 
 //MARK: - UITextFieldDeligate
 
-extension ProfileHeaderView: UITextFieldDelegate {
+extension ProfileTableHeaderView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         statusTextField.endEditing(true)
