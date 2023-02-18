@@ -11,9 +11,11 @@ class FeedViewController: UIViewController {
     
     var post = Post(title: "Post")
     
+    //MARK: - Subviews
+    
     let feedView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .systemBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -27,10 +29,10 @@ class FeedViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var firstButton: UIButton = {
-        let button = UIButton()
+    private lazy var firstButton: CustomButton = {
+        let button = CustomButton()
         button.setTitle("First Button", for: .normal)
-        button.backgroundColor = .orange
+        button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 5
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
@@ -44,10 +46,11 @@ class FeedViewController: UIViewController {
         return button
     }()
     
-    private lazy var secondButton: UIButton = {
-        let button = UIButton(type: .system)
+    private lazy var secondButton: CustomButton = {
+        let button = CustomButton()
         button.setTitle("Second Button", for: .normal)
-        button.backgroundColor = .brown
+        button.tintColor = .systemBackground
+        button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 5
         button.layer.cornerRadius = 5
         button.layer.shadowColor = UIColor.black.cgColor
@@ -66,7 +69,7 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tuneView()
         addSubviews()
         setupConstrains()
@@ -90,30 +93,31 @@ class FeedViewController: UIViewController {
     
     @objc func firstButtonPressed(_ sender: UIResponder) {
         let postVC = PostViewController()
-//        postVC.post = post
         navigationController?.pushViewController(postVC, animated: true)
     }
     
     @objc func secondButtonPressed(_ sender: UIResponder) {
         let postVC = PostViewController()
-//        postVC.post = post
         navigationController?.pushViewController(postVC, animated: true)
     }
+    
+    //MARK: - Layout
     
     func setupConstrains() {
         NSLayoutConstraint.activate([
             feedView.leftAnchor.constraint(equalTo: view.leftAnchor),
             feedView.rightAnchor.constraint(equalTo: view.rightAnchor),
             feedView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            feedView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
+            feedView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
             postStackView.centerXAnchor.constraint(equalTo: feedView.centerXAnchor),
             postStackView.centerYAnchor.constraint(equalTo: feedView.centerYAnchor),
             postStackView.widthAnchor.constraint(equalToConstant: 270),
             postStackView.heightAnchor.constraint(equalToConstant: 110),
         ])
-        
     }
-
+    
 }
 

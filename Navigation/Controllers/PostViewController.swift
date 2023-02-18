@@ -9,8 +9,6 @@ import UIKit
 
 class PostViewController: UIViewController {
     
-//    lazy var post = Post(title: "")
-    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -23,7 +21,6 @@ class PostViewController: UIViewController {
     //MARK: - Private
     
     private func tuneView() {
-//        navigationItem.title = post.title
         view.backgroundColor = UIColor.darkGray
     }
     

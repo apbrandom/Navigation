@@ -9,6 +9,8 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    //MARK: - Subviews
+    
     private lazy var logInScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -17,6 +19,10 @@ class LogInViewController: UIViewController {
         scrollView.showsHorizontalScrollIndicator = false
         return scrollView
     }()
+    
+//    private lazy var logInContentView: UIView {
+//        
+//    }()
     
     private lazy var logInView: UIView = {
         let view = UIView()
@@ -46,7 +52,7 @@ class LogInViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var emailTextField: UITextField = {
+    private lazy var emailTextField: UITextField = { [unowned self] in
         let textField = UITextField()
         textField.backgroundColor = UIColor.systemGray6
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -62,7 +68,7 @@ class LogInViewController: UIViewController {
         return textField
     }()
     
-    private lazy var passwordTextField: UITextField = {
+    private lazy var passwordTextField: UITextField = { [unowned self] in
         let textField = UITextField()
         textField.backgroundColor = UIColor.systemGray6
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -104,7 +110,6 @@ class LogInViewController: UIViewController {
         tuneView()
         addSubview()
         setupConstraint()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -174,6 +179,8 @@ class LogInViewController: UIViewController {
         notificationCenter.removeObserver(self)
     }
     
+    //MARK: - Layout
+    
     private func setupConstraint() {
         NSLayoutConstraint.activate([
             logInScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -212,9 +219,13 @@ class LogInViewController: UIViewController {
             logInButton.leadingAnchor.constraint(equalTo: logInView.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: logInView.trailingAnchor, constant: -16)
         ])
+        
+//        logInScrollView.subviews.last?.bottomAnchor.constraint(equalTo: logInScrollView.bottomAnchor).isActive = true
     }
     
 }
+
+//MARK: - Delegate
 
 extension LogInViewController: UITextFieldDelegate {
     

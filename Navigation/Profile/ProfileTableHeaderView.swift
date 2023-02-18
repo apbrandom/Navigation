@@ -62,11 +62,12 @@ class ProfileTableHeaderView: UIView {
             self,
             action: #selector(statusTextChanged),
             for: .editingChanged)
+        textField.delegate = self
         return textField
     }()
     
-    lazy var setStatusButton: UIButton = {
-        let button = UIButton()
+    lazy var setStatusButton: CustomButton = {
+        let button = CustomButton()
         button.layer.cornerRadius = 12
         button.backgroundColor = .systemBlue
         button.setTitle("Set Status", for: .normal)
@@ -89,16 +90,14 @@ class ProfileTableHeaderView: UIView {
         
         addSubviews()
         setupConstarins()
-        statusTextField.delegate = self
-//        statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-//        setStatusButton.
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-
+    
     //MARK: - Private
     
     private func addSubviews() {
@@ -119,58 +118,29 @@ class ProfileTableHeaderView: UIView {
         )
     }
     
-    
     private func setupConstarins() {
         NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.topAnchor,
-                constant: 16
-            ),
-            avatarImageView.leadingAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.leadingAnchor,
-                constant: 16
-            ),
-            avatarImageView.widthAnchor.constraint(
-                equalToConstant: 120
-            ),
-            avatarImageView.heightAnchor.constraint(
-                equalTo: avatarImageView.widthAnchor,
-                multiplier: 1.0)
-            ])
-            
-            NSLayoutConstraint.activate([
-            setStatusButton.topAnchor.constraint(
-                equalTo: avatarImageView.bottomAnchor,
-                constant: 16
-            ),
-            setStatusButton.leftAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.leftAnchor,
-                constant: 16
-            ),
-            setStatusButton.rightAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.rightAnchor,
-                constant: -16
-            ),
-            setStatusButton.heightAnchor.constraint(
-                equalToConstant: 50)
-            ])
+            avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 120),
+            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor, multiplier: 1.0)
+        ])
         
-            NSLayoutConstraint.activate([
-            infoStackView.topAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.topAnchor,
-                constant: 27),
-            infoStackView.bottomAnchor.constraint(
-                equalTo: setStatusButton.topAnchor,
-                constant: -16),
-            infoStackView.leftAnchor.constraint(
-                equalTo: avatarImageView.rightAnchor,
-                constant: 16),
-            infoStackView.trailingAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.trailingAnchor,
-                constant: -16)
-            ])
+        NSLayoutConstraint.activate([
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
+            setStatusButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
+            setStatusButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -16),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
         
-            NSLayoutConstraint.activate([
+        NSLayoutConstraint.activate([
+            infoStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+            infoStackView.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16),
+            infoStackView.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
+            infoStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16)
+        ])
+        
+        NSLayoutConstraint.activate([
             statusTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
