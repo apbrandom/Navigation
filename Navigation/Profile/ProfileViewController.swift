@@ -11,7 +11,9 @@ class ProfileViewController: UIViewController {
     
     //MARK: - Data
     
-    fileprivate let data = Post.make()
+    fileprivate let postData = Post.make()
+    fileprivate let photoData = Photo.make()
+    
     
     //MARK: - Subviews
     
@@ -60,6 +62,7 @@ class ProfileViewController: UIViewController {
         let headerView = ProfileTableHeaderView()
         profileTableView.setAndLayout(headerView: headerView)
         profileTableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.indentifire)
+        profileTableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.indentifire )
         
         profileTableView.dataSource = self
         profileTableView.delegate = self
@@ -84,20 +87,40 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return postData.count
+        default:
+            break
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.indentifire, for: indexPath) as? PostTableViewCell else {
-            fatalError("could not dequeueReusableCell")
+        if postData.count > 0 {
+            if indexPath.section == 0 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.indentifire, for: indexPath) as? PhotosTableViewCell else {
+                    fatalError("could not dequeueReusableCell")
+                }
+                
+                return cell
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.indentifire, for: indexPath) as? PostTableViewCell else {
+                    fatalError("could not dequeueReusableCell")
+                }
+                cell.update(postData[indexPath.row])
+                return cell
+            }
         }
-        
-        cell.update(data[indexPath.row])
-        
-        return cell
+        return UITableViewCell()
     }
     
 }
-
 extension ProfileViewController: UITableViewDelegate {}

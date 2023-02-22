@@ -64,8 +64,8 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        addSubview()
-        setupConstrant()
+        addSubviews()
+        setupConstrants()
     }
     
     required init? (coder: NSCoder) {
@@ -74,7 +74,7 @@ class PostTableViewCell: UITableViewCell {
     
     //MARK: - Private
     
-    private func addSubview() {
+    private func addSubviews() {
         contentView.addSubview(postTitleLabel)
         contentView.addSubview(postImageView)
         contentView.addSubview(postAuthorTextView)
@@ -84,44 +84,39 @@ class PostTableViewCell: UITableViewCell {
     
     //MARK: - Public
     
-    func update(_ model: Post) {
-        postTitleLabel.text = model.title
-        postAuthorTextView.text = model.author
-        postImageView.image = UIImage(named: model.image)
-        postLikesLabel.text = "Likes: \(model.likes)"
-        postViewsLabel.text = "Views: \(model.views)"
+    func update(_ model: Post?) {
+        guard let post = model else {
+            return
+        }
+        postTitleLabel.text = post.title
+        postAuthorTextView.text = post.author
+        postImageView.image = UIImage(named: post.image)
+        postLikesLabel.text = "Likes: \(post.likes)"
+        postViewsLabel.text = "Views: \(post.views)"
     }
     
     //MARK: - Layout
     
-    private func setupConstrant() {
+    private func setupConstrants() {
         NSLayoutConstraint.activate([
             postTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             postTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            postTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
-        ])
+            postTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
         
-        NSLayoutConstraint.activate([
             postImageView.topAnchor.constraint(equalTo: postTitleLabel.bottomAnchor),
             postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor),
-        ])
-        
-        NSLayoutConstraint.activate([
+
             postAuthorTextView.topAnchor.constraint(equalTo: postImageView.bottomAnchor),
             postAuthorTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             postAuthorTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-        ])
-        
-        NSLayoutConstraint.activate([
+
             postLikesLabel.topAnchor.constraint(equalTo: postAuthorTextView.bottomAnchor),
             postLikesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             postLikesLabel.trailingAnchor.constraint(equalTo: postViewsLabel.leadingAnchor),
             postLikesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-        ])
-        
-        NSLayoutConstraint.activate([
+
             postViewsLabel.topAnchor.constraint(equalTo: postAuthorTextView.bottomAnchor),
             postViewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             postViewsLabel.leadingAnchor.constraint(equalTo: postLikesLabel.trailingAnchor),
