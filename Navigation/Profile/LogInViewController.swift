@@ -103,8 +103,8 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tuneView()
-        addSubview()
+        setupView()
+        setupSubview()
         setupConstraint()
     }
     
@@ -138,11 +138,11 @@ class LogInViewController: UIViewController {
     
     //MARK: - Private
     
-    private func tuneView() {
+    private func setupView() {
         view.backgroundColor = .systemBackground
     }
     
-    private func addSubview() {
+    private func setupSubview() {
         view.addSubview(logInScrollView)
         logInScrollView.addSubview(contentView)
         contentView.addSubview(logoImageView)

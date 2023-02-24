@@ -8,32 +8,32 @@
 import Foundation
 
 struct Photo {
-    var name: String = ""
+    var image: String = ""
 }
 
 extension Photo {
     static func make() -> [Photo] {
         [
-            Photo(name: "photo_1647"),
-            Photo(name: "photo_2244"),
-            Photo(name: "photo_2259"),
-            Photo(name: "photo_2345"),
-            Photo(name: "photo_2457"),
-            Photo(name: "photo_3023"),
-            Photo(name: "photo_3827"),
-            Photo(name: "photo_5736"),
-            Photo(name: "photo_5760"),
-            Photo(name: "photo_6263"),
-            Photo(name: "photo_6316"),
-            Photo(name: "photo_6365"),
-            Photo(name: "photo_6386"),
-            Photo(name: "photo_6400"),
-            Photo(name: "photo_6684"),
-            Photo(name: "photo_7846"),
-            Photo(name: "photo_8914"),
-            Photo(name: "photo_8935"),
-            Photo(name: "photo_9008"),
-            Photo(name: "photo_9027"),
+            Photo(image: "photo_1647"),
+            Photo(image: "photo_2244"),
+            Photo(image: "photo_2259"),
+            Photo(image: "photo_2345"),
+            Photo(image: "photo_2457"),
+            Photo(image: "photo_3023"),
+            Photo(image: "photo_3827"),
+            Photo(image: "photo_5736"),
+            Photo(image: "photo_5760"),
+            Photo(image: "photo_6263"),
+            Photo(image: "photo_6316"),
+            Photo(image: "photo_6365"),
+            Photo(image: "photo_6386"),
+            Photo(image: "photo_6400"),
+            Photo(image: "photo_6684"),
+            Photo(image: "photo_7846"),
+            Photo(image: "photo_8914"),
+            Photo(image: "photo_8935"),
+            Photo(image: "photo_9008"),
+            Photo(image: "photo_9027"),
         ]
     }
 }

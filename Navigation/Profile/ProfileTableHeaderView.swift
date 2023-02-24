@@ -88,7 +88,7 @@ class ProfileTableHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubviews()
+        setupSubviews()
         setupConstarins()
     }
     
@@ -98,7 +98,7 @@ class ProfileTableHeaderView: UIView {
     
     //MARK: - Private
     
-    private func addSubviews() {
+    private func setupSubviews() {
         addSubview(avatarImageView)
         addSubview(setStatusButton)
         addSubview(infoStackView)

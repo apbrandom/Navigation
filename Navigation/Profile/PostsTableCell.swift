@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PostsTableViewCell: UITableViewCell {
+class PostsTableCell: UITableViewCell {
     
     static let indentifire = "CustomCell"
     
@@ -64,7 +64,7 @@ class PostsTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        addSubviews()
+        setupSubviews()
         setupConstrants()
     }
     
@@ -74,7 +74,7 @@ class PostsTableViewCell: UITableViewCell {
     
     //MARK: - Private
     
-    private func addSubviews() {
+    private func setupSubviews() {
         contentView.addSubview(postTitleLabel)
         contentView.addSubview(postImageView)
         contentView.addSubview(postAuthorTextView)
