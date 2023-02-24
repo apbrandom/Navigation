@@ -102,21 +102,21 @@ class PostsTableCell: UITableViewCell {
             postTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             postTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             postTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-        
+            
             postImageView.topAnchor.constraint(equalTo: postTitleLabel.bottomAnchor),
             postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor),
-
+            
             postAuthorTextView.topAnchor.constraint(equalTo: postImageView.bottomAnchor),
             postAuthorTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             postAuthorTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-
+            
             postLikesLabel.topAnchor.constraint(equalTo: postAuthorTextView.bottomAnchor),
             postLikesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             postLikesLabel.trailingAnchor.constraint(equalTo: postViewsLabel.leadingAnchor),
             postLikesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-
+            
             postViewsLabel.topAnchor.constraint(equalTo: postAuthorTextView.bottomAnchor),
             postViewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             postViewsLabel.leadingAnchor.constraint(equalTo: postLikesLabel.trailingAnchor),

@@ -78,7 +78,7 @@ class PhotosTableCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-            
+        
         setupSubviews()
         setupConstraints()
     }
@@ -118,10 +118,10 @@ class PhotosTableCell: UITableViewCell {
             photoLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             photoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             photoLabel.trailingAnchor.constraint(equalTo: arrowImage.leadingAnchor),
-
+            
             arrowImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             arrowImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-
+            
             photoStackView.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: 12),
             photoStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             photoStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
@@ -129,5 +129,5 @@ class PhotosTableCell: UITableViewCell {
             photoStackView.heightAnchor.constraint(equalToConstant: 70)
         ])
     }
-
+    
 }

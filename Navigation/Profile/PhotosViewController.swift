@@ -31,12 +31,8 @@ class PhotosViewController: UIViewController {
             frame: .zero,
             collectionViewLayout: viewLayout
         )
-        
         collectionView.backgroundColor = .systemBackground
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(
-            PhotosCollectionCell.self,
-            forCellWithReuseIdentifier: PhotosCollectionCell.identifier)
         return collectionView
     }()
     
@@ -64,6 +60,10 @@ class PhotosViewController: UIViewController {
     
     private func setupCollectionView() {
         view.addSubview(photoCollectionView)
+        
+        photoCollectionView.register(
+            PhotosCollectionCell.self,
+            forCellWithReuseIdentifier: PhotosCollectionCell.identifier)
         
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self

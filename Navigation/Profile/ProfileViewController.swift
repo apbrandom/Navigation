@@ -14,7 +14,6 @@ class ProfileViewController: UIViewController {
     fileprivate let postData = Post.make()
     fileprivate let photoData = Photo.make()
     
-    
     //MARK: - Subviews
     
     private lazy var profileTableView: UITableView = {
@@ -37,7 +36,26 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationController?.isNavigationBarHidden = true
+        setupKeyboardObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        removeKeyboardObservers()
+    }
+    
+    //MARK: - Action
+    
+    @objc func willShowKeyboard(_ notification: NSNotification) {
+        let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
+        profileTableView.contentInset.bottom += keyboardHeight ?? 0.0
+    }
+    
+    @objc func willHideKeyboard(_ notification: NSNotification) {
+        profileTableView.contentInset.bottom = 0.0
     }
     
     //MARK: - Privte
@@ -55,7 +73,6 @@ class ProfileViewController: UIViewController {
         profileTableView.rowHeight = UITableView.automaticDimension
         profileTableView.estimatedRowHeight = 500
         
-        
         let headerView = ProfileTableHeaderView()
         profileTableView.setAndLayout(headerView: headerView)
         profileTableView.register(PostsTableCell.self, forCellReuseIdentifier: PostsTableCell.indentifire)
@@ -72,6 +89,29 @@ class ProfileViewController: UIViewController {
             profileTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             profileTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+    }
+    
+    private func setupKeyboardObservers() {
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(self.willShowKeyboard(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(self.willHideKeyboard(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    private func removeKeyboardObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
     }
     
 }
@@ -127,3 +167,16 @@ extension ProfileViewController: UITableViewDataSource {
 }
 
 extension ProfileViewController: UITableViewDelegate {}
+
+
+extension ProfileViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(
+        _ textField: UITextField
+    ) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+}
+
