@@ -19,16 +19,9 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileTableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = UIColor.secondarySystemBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
-    }()
-    
-    private lazy var newButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("New Button", for: .normal)
-        button.backgroundColor = .systemRed
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
     }()
     
     //MARK: - Lifecycle
@@ -42,6 +35,11 @@ class ProfileViewController: UIViewController {
         tuneTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     //MARK: - Privte
     
     private func tuneView() {
@@ -51,17 +49,16 @@ class ProfileViewController: UIViewController {
     
     private func addSubviews() {
         view.addSubview(profileTableView)
-        view.addSubview(newButton)
     }
     
     private func tuneTableView() {
         profileTableView.rowHeight = UITableView.automaticDimension
         profileTableView.estimatedRowHeight = 500
-        profileTableView.backgroundColor = UIColor.secondarySystemBackground
+        
         
         let headerView = ProfileTableHeaderView()
         profileTableView.setAndLayout(headerView: headerView)
-        profileTableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.indentifire)
+        profileTableView.register(PostsTableViewCell.self, forCellReuseIdentifier: PostsTableViewCell.indentifire)
         profileTableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.indentifire )
         
         profileTableView.dataSource = self
@@ -73,18 +70,13 @@ class ProfileViewController: UIViewController {
             profileTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             profileTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             profileTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            profileTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            newButton.leftAnchor.constraint(equalTo: view.leftAnchor),
-            newButton.rightAnchor.constraint(equalTo: view.rightAnchor),
-            newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            newButton.heightAnchor.constraint(equalToConstant: 50)
+            profileTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
     
 }
+
+//MARK: - UITableViewDataSource
 
 extension ProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -109,18 +101,29 @@ extension ProfileViewController: UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.indentifire, for: indexPath) as? PhotosTableViewCell else {
                     fatalError("could not dequeueReusableCell")
                 }
-                
+                cell.update(photoData)
+                cell.selectionStyle = .none
+                cell.tintColor = .black
                 return cell
             } else {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.indentifire, for: indexPath) as? PostTableViewCell else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: PostsTableViewCell.indentifire, for: indexPath) as? PostsTableViewCell else {
                     fatalError("could not dequeueReusableCell")
                 }
                 cell.update(postData[indexPath.row])
+                cell.selectionStyle = .none
                 return cell
             }
         }
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            navigationController?.pushViewController(PhotosViewController(), animated: true)
+        }
+        
+    }
+    
 }
+
 extension ProfileViewController: UITableViewDelegate {}

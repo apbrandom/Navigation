@@ -90,13 +90,11 @@ class ProfileTableHeaderView: UIView {
         
         addSubviews()
         setupConstarins()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     //MARK: - Private
     
@@ -123,24 +121,18 @@ class ProfileTableHeaderView: UIView {
             avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
             avatarImageView.widthAnchor.constraint(equalToConstant: 120),
-            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor, multiplier: 1.0)
-        ])
-        
-        NSLayoutConstraint.activate([
+            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor, multiplier: 1.0),
+
             setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
             setStatusButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
             setStatusButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -16),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        NSLayoutConstraint.activate([
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+
             infoStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
             infoStackView.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16),
             infoStackView.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
-            infoStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16)
-        ])
-        
-        NSLayoutConstraint.activate([
+            infoStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+
             statusTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
@@ -162,7 +154,6 @@ class ProfileTableHeaderView: UIView {
 //MARK: - UITextFieldDeligate
 
 extension ProfileTableHeaderView: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         statusTextField.endEditing(true)
         return true

@@ -24,14 +24,13 @@ class PhotosTableViewCell: UITableViewCell {
     
     private lazy var arrowImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "arrow.right"))
-//        image.backgroundColor = UIColor.systemBlue
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private lazy var photoStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.backgroundColor = .systemBlue
+        stackView.backgroundColor = .systemBackground
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 8
@@ -102,14 +101,14 @@ class PhotosTableViewCell: UITableViewCell {
     
     //MARK: - Action
     
-    func update(_ model: Photo?) {
-        guard let photo = model else {
+    func update(_ models: [Photo]?) {
+        guard let photos = models else {
             return
         }
-        firstImageView.image = UIImage(named: photo.name)
-        secondImageView.image = UIImage(named: photo.name)
-        thirdImageView.image = UIImage(named: photo.name)
-        fourthImageView.image = UIImage(named: photo.name)
+        firstImageView.image = UIImage(named: photos[0].name)
+        secondImageView.image = UIImage(named: photos[1].name)
+        thirdImageView.image = UIImage(named: photos[2].name)
+        fourthImageView.image = UIImage(named: photos[3].name)
     }
     
     //MARK: - Layout

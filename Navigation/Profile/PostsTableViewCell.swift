@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PostTableViewCell: UITableViewCell {
+class PostsTableViewCell: UITableViewCell {
     
     static let indentifire = "CustomCell"
     
