@@ -9,6 +9,8 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    //MARK: - Subviews
+    
     private lazy var logInScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -18,7 +20,7 @@ class LogInViewController: UIViewController {
         return scrollView
     }()
     
-    private lazy var logInView: UIView = {
+    private lazy var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
@@ -46,7 +48,7 @@ class LogInViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var emailTextField: UITextField = {
+    private lazy var emailTextField: UITextField = { [unowned self] in
         let textField = UITextField()
         textField.backgroundColor = UIColor.systemGray6
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -62,7 +64,7 @@ class LogInViewController: UIViewController {
         return textField
     }()
     
-    private lazy var passwordTextField: UITextField = {
+    private lazy var passwordTextField: UITextField = { [unowned self] in
         let textField = UITextField()
         textField.backgroundColor = UIColor.systemGray6
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -104,7 +106,6 @@ class LogInViewController: UIViewController {
         tuneView()
         addSubview()
         setupConstraint()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -143,12 +144,12 @@ class LogInViewController: UIViewController {
     
     private func addSubview() {
         view.addSubview(logInScrollView)
-        logInScrollView.addSubview(logInView)
-        logInView.addSubview(logoImageView)
-        logInView.addSubview(logInStackView)
+        logInScrollView.addSubview(contentView)
+        contentView.addSubview(logoImageView)
+        contentView.addSubview(logInStackView)
         logInStackView.addArrangedSubview(emailTextField)
         logInStackView.addArrangedSubview(passwordTextField)
-        logInView.addSubview(logInButton)
+        contentView.addSubview(logInButton)
     }
     
     private func setupKeyboardObservers() {
@@ -174,47 +175,42 @@ class LogInViewController: UIViewController {
         notificationCenter.removeObserver(self)
     }
     
+    //MARK: - Layout
+    
     private func setupConstraint() {
         NSLayoutConstraint.activate([
             logInScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             logInScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            logInScrollView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            logInScrollView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            logInView.topAnchor.constraint(equalTo: logInScrollView.topAnchor),
-            logInView.bottomAnchor.constraint(equalTo: logInScrollView.bottomAnchor),
-            logInView.leftAnchor.constraint(equalTo: logInScrollView.leftAnchor),
-            logInView.rightAnchor.constraint(equalTo: logInScrollView.rightAnchor),
-            logInView.heightAnchor.constraint(equalTo: logInScrollView.heightAnchor),
-            logInView.widthAnchor.constraint(equalTo: logInScrollView.widthAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: logInView.topAnchor, constant: 120),
+            logInScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            logInScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+
+            contentView.topAnchor.constraint(equalTo: logInScrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: logInScrollView.bottomAnchor),
+            contentView.leftAnchor.constraint(equalTo: logInScrollView.leftAnchor),
+            contentView.rightAnchor.constraint(equalTo: logInScrollView.rightAnchor),
+            contentView.heightAnchor.constraint(equalTo: logInScrollView.heightAnchor),
+            contentView.widthAnchor.constraint(equalTo: logInScrollView.widthAnchor),
+
+            logoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             logoImageView.heightAnchor.constraint(equalToConstant: 100),
             logoImageView.widthAnchor.constraint(equalToConstant: 100),
-            logoImageView.centerXAnchor.constraint(equalTo: logInView.centerXAnchor)
-        ])
-        
-        
-        NSLayoutConstraint.activate([
+            logoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+
             logInStackView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120),
             logInStackView.heightAnchor.constraint(equalToConstant: 100),
-            logInStackView.leadingAnchor.constraint(equalTo: logInView.leadingAnchor, constant: 16),
-            logInStackView.trailingAnchor.constraint(equalTo: logInView.trailingAnchor, constant: -16),
-        ])
-        
-        NSLayoutConstraint.activate([
+            logInStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            logInStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+
             logInButton.topAnchor.constraint(equalTo: logInStackView.bottomAnchor, constant: 16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.leadingAnchor.constraint(equalTo: logInView.leadingAnchor, constant: 16),
-            logInButton.trailingAnchor.constraint(equalTo: logInView.trailingAnchor, constant: -16)
+            logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
         ])
     }
     
 }
+
+//MARK: - Delegate
 
 extension LogInViewController: UITextFieldDelegate {
     

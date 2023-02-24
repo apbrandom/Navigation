@@ -5,7 +5,6 @@
 //  Created by Вадим Виноградов on 11.02.2023.
 //
 
-import Foundation
 import UIKit
 
 class CustomButton: UIButton {

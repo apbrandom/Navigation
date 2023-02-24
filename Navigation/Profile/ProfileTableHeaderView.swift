@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileTableHeaderView: UIView {
     
     private var statusText = ""
     
@@ -58,11 +58,16 @@ class ProfileHeaderView: UIView {
         textField.layer.cornerRadius = 12
         textField.layer.backgroundColor = UIColor.systemBackground.cgColor
         textField.placeholder = "Write your status"
+        textField.addTarget(
+            self,
+            action: #selector(statusTextChanged),
+            for: .editingChanged)
+        textField.delegate = self
         return textField
     }()
     
-    lazy var setStatusButton: UIButton = {
-        let button = UIButton()
+    lazy var setStatusButton: CustomButton = {
+        let button = CustomButton()
         button.layer.cornerRadius = 12
         button.backgroundColor = .systemBlue
         button.setTitle("Set Status", for: .normal)
@@ -70,6 +75,10 @@ class ProfileHeaderView: UIView {
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 4
+        button.addTarget(
+            self,
+            action: #selector(setButtonPressed),
+            for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -81,9 +90,6 @@ class ProfileHeaderView: UIView {
         
         addSubviews()
         setupConstarins()
-        statusTextField.delegate = self
-        statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        setStatusButton.addTarget(self, action: #selector(setButtonPressed), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -101,57 +107,32 @@ class ProfileHeaderView: UIView {
         infoStackView.addArrangedSubview(statusTextField)
     }
     
+    // MARK: - Layout
+    
+    override var intrinsicContentSize: CGSize {
+        CGSize(
+            width: UIView.noIntrinsicMetric,
+            height: 220.0
+        )
+    }
+    
     private func setupConstarins() {
         NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.topAnchor,
-                constant: 16
-            ),
-            avatarImageView.leadingAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.leadingAnchor,
-                constant: 16
-            ),
-            avatarImageView.widthAnchor.constraint(
-                equalToConstant: 120
-            ),
-            avatarImageView.heightAnchor.constraint(
-                equalTo: avatarImageView.widthAnchor,
-                multiplier: 1.0
-            ),
-            
-            setStatusButton.topAnchor.constraint(
-                equalTo: avatarImageView.bottomAnchor,
-                constant: 16
-            ),
-            setStatusButton.leftAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.leftAnchor,
-                constant: 16
-            ),
-            setStatusButton.rightAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.rightAnchor,
-                constant: -16
-            ),
-            setStatusButton.heightAnchor.constraint(
-                equalToConstant: 50
-            ),
-            
-            infoStackView.topAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.topAnchor,
-                constant: 27
-            ),
-            infoStackView.bottomAnchor.constraint(
-                equalTo: setStatusButton.topAnchor,
-                constant: -16
-            ),
-            infoStackView.leftAnchor.constraint(
-                equalTo: avatarImageView.rightAnchor,
-                constant: 16
-            ),
-            infoStackView.trailingAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.trailingAnchor,
-                constant: -16
-            ),
-            
+            avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 120),
+            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor, multiplier: 1.0),
+
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
+            setStatusButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
+            setStatusButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -16),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+
+            infoStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+            infoStackView.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16),
+            infoStackView.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
+            infoStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+
             statusTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
@@ -164,7 +145,7 @@ class ProfileHeaderView: UIView {
         }
     }
     
-    @objc func setButtonPressed() {
+    @objc func setButtonPressed(_ textField: UITextField) {
         statusLabel.text = statusText
     }
     
@@ -172,8 +153,7 @@ class ProfileHeaderView: UIView {
 
 //MARK: - UITextFieldDeligate
 
-extension ProfileHeaderView: UITextFieldDelegate {
-    
+extension ProfileTableHeaderView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         statusTextField.endEditing(true)
         return true
