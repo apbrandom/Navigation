@@ -12,32 +12,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+        guard let scene = (scene as? UIWindowScene) else { return }
         
-        self.window = UIWindow(windowScene: windowScene)
+        let window = UIWindow(windowScene: scene)
+        
+        let controllers = [
+            FeedViewController(),
+            LogInViewController(),
+        ]
         
         let tabBarVC = UITabBarController()
-        let feedVC = UINavigationController(rootViewController: FeedViewController())
-        let profileVC = UINavigationController(rootViewController: LogInViewController())
+        tabBarVC.viewControllers = controllers.map {
+            let _ = $0.view
+            return UINavigationController(rootViewController: $0)
+        }
         
         tabBarVC.tabBar.backgroundColor = UIColor.secondarySystemBackground
-        feedVC.title = "Feed"
-        profileVC.title = "Profile"
-        
-        tabBarVC.setViewControllers([feedVC, profileVC], animated: true)
         
         guard let items = tabBarVC.tabBar.items else {
             return
         }
-        
         let imeges = ["house", "person" ]
-        
         for i in 0..<items.count {
             items[i].image = UIImage(systemName: imeges[i])
         }
         
-        self.window?.rootViewController = tabBarVC
-        self.window?.makeKeyAndVisible()
+        window.rootViewController = tabBarVC
+        window.makeKeyAndVisible()
+        
+        self.window = window
     }
     
 }
