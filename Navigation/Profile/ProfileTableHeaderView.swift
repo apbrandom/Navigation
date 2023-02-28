@@ -88,7 +88,7 @@ class ProfileTableHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubviews()
+        setupSubviews()
         setupConstarins()
     }
     
@@ -98,7 +98,7 @@ class ProfileTableHeaderView: UIView {
     
     //MARK: - Private
     
-    private func addSubviews() {
+    private func setupSubviews() {
         addSubview(avatarImageView)
         addSubview(setStatusButton)
         addSubview(infoStackView)
@@ -122,17 +122,17 @@ class ProfileTableHeaderView: UIView {
             avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
             avatarImageView.widthAnchor.constraint(equalToConstant: 120),
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor, multiplier: 1.0),
-
+            
             setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
             setStatusButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
             setStatusButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -16),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-
+            
             infoStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
             infoStackView.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16),
             infoStackView.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
             infoStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-
+            
             statusTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
     }

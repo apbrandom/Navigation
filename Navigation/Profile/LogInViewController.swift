@@ -103,8 +103,8 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tuneView()
-        addSubview()
+        setupView()
+        setupSubview()
         setupConstraint()
     }
     
@@ -138,11 +138,11 @@ class LogInViewController: UIViewController {
     
     //MARK: - Private
     
-    private func tuneView() {
+    private func setupView() {
         view.backgroundColor = .systemBackground
     }
     
-    private func addSubview() {
+    private func setupSubview() {
         view.addSubview(logInScrollView)
         logInScrollView.addSubview(contentView)
         contentView.addSubview(logoImageView)
@@ -183,24 +183,24 @@ class LogInViewController: UIViewController {
             logInScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             logInScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             logInScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-
+            
             contentView.topAnchor.constraint(equalTo: logInScrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: logInScrollView.bottomAnchor),
             contentView.leftAnchor.constraint(equalTo: logInScrollView.leftAnchor),
             contentView.rightAnchor.constraint(equalTo: logInScrollView.rightAnchor),
             contentView.heightAnchor.constraint(equalTo: logInScrollView.heightAnchor),
             contentView.widthAnchor.constraint(equalTo: logInScrollView.widthAnchor),
-
+            
             logoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             logoImageView.heightAnchor.constraint(equalToConstant: 100),
             logoImageView.widthAnchor.constraint(equalToConstant: 100),
             logoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-
+            
             logInStackView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120),
             logInStackView.heightAnchor.constraint(equalToConstant: 100),
             logInStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             logInStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-
+            
             logInButton.topAnchor.constraint(equalTo: logInStackView.bottomAnchor, constant: 16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),

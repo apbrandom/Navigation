@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PhotosTableViewCell: UITableViewCell {
+class PhotosTableCell: UITableViewCell {
     
     static let indentifire = "CustomCell2"
     
@@ -78,8 +78,8 @@ class PhotosTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-            
-        addSubviews()
+        
+        setupSubviews()
         setupConstraints()
     }
     
@@ -89,7 +89,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     //MARK: - Private
     
-    private func addSubviews() {
+    private func setupSubviews() {
         contentView.addSubview(photoLabel)
         contentView.addSubview(arrowImage)
         contentView.addSubview(photoStackView)
@@ -99,16 +99,16 @@ class PhotosTableViewCell: UITableViewCell {
         photoStackView.addArrangedSubview(fourthImageView)
     }
     
-    //MARK: - Action
+    //MARK: - Public
     
     func update(_ models: [Photo]?) {
         guard let photos = models else {
             return
         }
-        firstImageView.image = UIImage(named: photos[0].name)
-        secondImageView.image = UIImage(named: photos[1].name)
-        thirdImageView.image = UIImage(named: photos[2].name)
-        fourthImageView.image = UIImage(named: photos[3].name)
+        firstImageView.image = UIImage(named: photos[0].image)
+        secondImageView.image = UIImage(named: photos[1].image)
+        thirdImageView.image = UIImage(named: photos[2].image)
+        fourthImageView.image = UIImage(named: photos[3].image)
     }
     
     //MARK: - Layout
@@ -118,10 +118,10 @@ class PhotosTableViewCell: UITableViewCell {
             photoLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             photoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             photoLabel.trailingAnchor.constraint(equalTo: arrowImage.leadingAnchor),
-
+            
             arrowImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             arrowImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-
+            
             photoStackView.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: 12),
             photoStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             photoStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
@@ -129,5 +129,5 @@ class PhotosTableViewCell: UITableViewCell {
             photoStackView.heightAnchor.constraint(equalToConstant: 70)
         ])
     }
-
+    
 }

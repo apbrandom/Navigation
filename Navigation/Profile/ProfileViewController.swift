@@ -14,7 +14,6 @@ class ProfileViewController: UIViewController {
     fileprivate let postData = Post.make()
     fileprivate let photoData = Photo.make()
     
-    
     //MARK: - Subviews
     
     private lazy var profileTableView: UITableView = {
@@ -29,37 +28,55 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tuneView()
-        addSubviews()
+        setupView()
+        setupSubviews()
+        setupTableView()
         setupConstrains()
-        tuneTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationController?.isNavigationBarHidden = true
+        setupKeyboardObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        removeKeyboardObservers()
+    }
+    
+    //MARK: - Action
+    
+    @objc func willShowKeyboard(_ notification: NSNotification) {
+        let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
+        profileTableView.contentInset.bottom += keyboardHeight ?? 0.0
+    }
+    
+    @objc func willHideKeyboard(_ notification: NSNotification) {
+        profileTableView.contentInset.bottom = 0.0
     }
     
     //MARK: - Privte
     
-    private func tuneView() {
+    private func setupView() {
         navigationItem.title = "Profile"
         view.backgroundColor = .systemBackground
     }
     
-    private func addSubviews() {
+    private func setupSubviews() {
         view.addSubview(profileTableView)
     }
     
-    private func tuneTableView() {
+    private func setupTableView() {
         profileTableView.rowHeight = UITableView.automaticDimension
         profileTableView.estimatedRowHeight = 500
         
-        
         let headerView = ProfileTableHeaderView()
         profileTableView.setAndLayout(headerView: headerView)
-        profileTableView.register(PostsTableViewCell.self, forCellReuseIdentifier: PostsTableViewCell.indentifire)
-        profileTableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.indentifire )
+        profileTableView.register(PostsTableCell.self, forCellReuseIdentifier: PostsTableCell.indentifire)
+        profileTableView.register(PhotosTableCell.self, forCellReuseIdentifier: PhotosTableCell.indentifire )
         
         profileTableView.dataSource = self
         profileTableView.delegate = self
@@ -72,6 +89,29 @@ class ProfileViewController: UIViewController {
             profileTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             profileTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+    }
+    
+    private func setupKeyboardObservers() {
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(self.willShowKeyboard(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(self.willHideKeyboard(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    private func removeKeyboardObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
     }
     
 }
@@ -98,7 +138,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if postData.count > 0 {
             if indexPath.section == 0 {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.indentifire, for: indexPath) as? PhotosTableViewCell else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableCell.indentifire, for: indexPath) as? PhotosTableCell else {
                     fatalError("could not dequeueReusableCell")
                 }
                 cell.update(photoData)
@@ -106,7 +146,7 @@ extension ProfileViewController: UITableViewDataSource {
                 cell.tintColor = .black
                 return cell
             } else {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: PostsTableViewCell.indentifire, for: indexPath) as? PostsTableViewCell else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: PostsTableCell.indentifire, for: indexPath) as? PostsTableCell else {
                     fatalError("could not dequeueReusableCell")
                 }
                 cell.update(postData[indexPath.row])
@@ -127,3 +167,16 @@ extension ProfileViewController: UITableViewDataSource {
 }
 
 extension ProfileViewController: UITableViewDelegate {}
+
+
+extension ProfileViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(
+        _ textField: UITextField
+    ) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+}
+
