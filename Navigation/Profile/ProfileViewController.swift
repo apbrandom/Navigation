@@ -23,6 +23,16 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var semiTransparentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = true
+        view.isHidden = true
+        view.alpha = 0.5
+        return view
+    }()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -61,12 +71,23 @@ class ProfileViewController: UIViewController {
     //MARK: - Privte
     
     private func setupView() {
-        navigationItem.title = "Profile"
-        view.backgroundColor = .systemBackground
+        
+        let profileTableHeaderView = ProfileTableHeaderView()
+        profileTableHeaderView.delegate = self
+        
+        title = "Feed"
+        view.backgroundColor = .secondarySystemBackground
+        
+        tabBarItem = UITabBarItem(
+            title: "Feed",
+            image: UIImage(systemName: "person"),
+            tag: 0
+        )
     }
     
     private func setupSubviews() {
         view.addSubview(profileTableView)
+        view.addSubview(semiTransparentView)
     }
     
     private func setupTableView() {
@@ -88,6 +109,12 @@ class ProfileViewController: UIViewController {
             profileTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             profileTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             profileTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            semiTransparentView.topAnchor.constraint(equalTo: view.topAnchor),
+            semiTransparentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            semiTransparentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            semiTransparentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            
         ])
     }
     
@@ -113,7 +140,6 @@ class ProfileViewController: UIViewController {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
     }
-    
 }
 
 //MARK: - UITableViewDataSource
@@ -161,13 +187,11 @@ extension ProfileViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             navigationController?.pushViewController(PhotosViewController(), animated: true)
         }
-        
     }
-    
 }
+//MARK: - Delegates
 
 extension ProfileViewController: UITableViewDelegate {}
-
 
 extension ProfileViewController: UITextFieldDelegate {
     
@@ -180,3 +204,15 @@ extension ProfileViewController: UITextFieldDelegate {
     }
 }
 
+extension ProfileViewController: ProfileTableHeaderViewDelegate {
+    func showSemiTransparentView() {
+        semiTransparentView.isHidden = false
+        profileTableView.isScrollEnabled = false
+    }
+    
+    func hideSemiTransparentView() {
+        semiTransparentView.isHidden = true
+        profileTableView.isScrollEnabled = true
+    }
+
+}

@@ -10,18 +10,40 @@ import UIKit
 class ProfileTableHeaderView: UIView {
     
     private var statusText = ""
+    private var avatarCenterOrigin: CGPoint = .zero
+    weak var delegate: ProfileTableHeaderViewDelegate?
     
     //MARK: - Subviews
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "cat")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
         imageView.layer.cornerRadius = 60
         imageView.layer.masksToBounds = true
         imageView.layer.borderColor = UIColor.systemBackground.cgColor
         imageView.layer.borderWidth = 3
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let imageTap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(didAvatarImageTaped))
+        imageView.addGestureRecognizer(imageTap)
         return imageView
+    }()
+    
+    
+    private lazy var closeButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        button.tintColor = .white
+        button.alpha = 0
+        button.addTarget(
+            self,
+            action: #selector(didCloseButtonTapped),
+            for: .touchUpInside)
+        return button
     }()
     
     private lazy var infoStackView: UIStackView = {
@@ -77,7 +99,7 @@ class ProfileTableHeaderView: UIView {
         button.layer.shadowRadius = 4
         button.addTarget(
             self,
-            action: #selector(setButtonPressed),
+            action: #selector(didAvatarImageTaped),
             for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -87,9 +109,10 @@ class ProfileTableHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupSubviews()
         setupConstarins()
+        
+        showSemiTransparentView()
     }
     
     required init?(coder: NSCoder) {
@@ -99,12 +122,13 @@ class ProfileTableHeaderView: UIView {
     //MARK: - Private
     
     private func setupSubviews() {
-        addSubview(avatarImageView)
         addSubview(setStatusButton)
         addSubview(infoStackView)
         infoStackView.addArrangedSubview(fullNameLabel)
         infoStackView.addArrangedSubview(statusLabel)
         infoStackView.addArrangedSubview(statusTextField)
+        addSubview(avatarImageView)
+        addSubview(closeButton)
     }
     
     // MARK: - Layout
@@ -133,22 +157,90 @@ class ProfileTableHeaderView: UIView {
             infoStackView.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
             infoStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
-            statusTextField.heightAnchor.constraint(equalToConstant: 40)
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            closeButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
+        
     }
     
     //MARK: - Action
     
-    @objc func statusTextChanged(_ textField: UITextField) {
+    @objc private func statusTextChanged(_ textField: UITextField) {
         if let text = statusTextField.text {
             statusText = text
         }
     }
     
-    @objc func setButtonPressed(_ textField: UITextField) {
+    @objc private func setButtonPressed(_ textField: UITextField) {
         statusLabel.text = statusText
     }
     
+   private func showSemiTransparentView() {
+        delegate?.showSemiTransparentView()
+    }
+
+    private func hideSemiTransparentView() {
+        delegate?.hideSemiTransparentView()
+    }
+
+    
+    @objc private func didAvatarImageTaped() {
+        avatarCenterOrigin = avatarImageView.center
+        
+        let screenWidth = UIScreen.main.bounds.width
+        
+        UIView.animateKeyframes(
+            withDuration: 0.5,
+            delay: 0.0,
+            options: .calculationModeCubic,
+            animations: {
+                UIView.addKeyframe(
+                    withRelativeStartTime: 0.0,
+                    relativeDuration: 0.5
+                ) {
+                    self.avatarImageView.center = CGPoint(
+                        x: UIScreen.main.bounds.midX,
+                        y: UIScreen.main.bounds.midY / 1.2
+                    )
+                    self.avatarImageView.layer.cornerRadius = 0
+                    self.avatarImageView.layer.borderWidth = 0
+                }
+                UIView.addKeyframe(
+                    withRelativeStartTime: 0.5,
+                    relativeDuration: 0.5
+                ) {
+                    self.avatarImageView.transform = CGAffineTransform(
+                        scaleX: screenWidth/self.avatarImageView.frame.size.width,
+                        y: screenWidth/self.avatarImageView.frame.size.height
+                    )
+                    self.showSemiTransparentView()
+                    self.closeButton.alpha = 1.0
+                }
+
+            })
+    }
+    
+    @objc func didCloseButtonTapped(_ centerOrigin: CGPoint) {
+        UIView.animateKeyframes(
+            withDuration: 0.5,
+            delay: 0.0,
+            options: .calculationModeCubic,
+            animations: {
+                UIView.addKeyframe(
+                    withRelativeStartTime: 0.0,
+                    relativeDuration: 1.0
+                ) {
+                    self.avatarImageView.center = self.avatarCenterOrigin
+                    self.avatarImageView.transform = .identity
+                    self.avatarImageView.layer.cornerRadius = 60
+                    self.closeButton.alpha = 0
+                    self.avatarImageView.layer.borderWidth = 3
+                    self.hideSemiTransparentView()
+                }
+            })
+    }
 }
 
 //MARK: - UITextFieldDeligate
@@ -165,8 +257,4 @@ extension ProfileTableHeaderView: UITextFieldDelegate {
         }
         statusTextField.text = ""
     }
-    
 }
-
-
-
