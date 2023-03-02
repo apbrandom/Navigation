@@ -26,17 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let _ = $0.view
             return UINavigationController(rootViewController: $0)
         }
-        
-        tabBarVC.tabBar.backgroundColor = UIColor.secondarySystemBackground
-        
-        guard let items = tabBarVC.tabBar.items else {
-            return
-        }
-        let imeges = ["house", "person" ]
-        for i in 0..<items.count {
-            items[i].image = UIImage(systemName: imeges[i])
-        }
-        
+
         window.rootViewController = tabBarVC
         window.makeKeyAndVisible()
         
