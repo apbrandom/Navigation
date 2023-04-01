@@ -70,16 +70,23 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tuneView()
+        setupView()
         addSubviews()
         setupConstrains()
     }
     
     //MARK: - Private
     
-    private func tuneView() {
-        navigationItem.title = "Feed"
-        view.backgroundColor = .systemBackground
+    private func setupView() {
+        
+        title = "Feed"
+        view.backgroundColor = .secondarySystemBackground
+        
+        tabBarItem = UITabBarItem(
+            title: "Feed",
+            image: UIImage(systemName: "house"),
+            tag: 0
+        )
     }
     
     private func addSubviews() {

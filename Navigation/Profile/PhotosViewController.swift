@@ -84,7 +84,6 @@ class PhotosViewController: UIViewController {
             photoCollectionView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor)
         ])
     }
-    
 }
 
 extension PhotosViewController: UICollectionViewDataSource {
@@ -105,5 +104,4 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         let width = (collectionView.frame.width - 4 * LayoutConstant.spacing) / 3
         return CGSize(width: width, height: width)
     }
-    
 }

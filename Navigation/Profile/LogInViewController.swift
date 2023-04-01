@@ -139,7 +139,15 @@ class LogInViewController: UIViewController {
     //MARK: - Private
     
     private func setupView() {
-        view.backgroundColor = .systemBackground
+
+        title = "Profile"
+        view.backgroundColor = .secondarySystemBackground
+        
+        tabBarItem = UITabBarItem(
+            title: "Profile",
+            image: UIImage(systemName: "person"),
+            tag: 0
+        )
     }
     
     private func setupSubview() {
