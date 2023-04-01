@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
     
@@ -76,8 +77,13 @@ class ProfileViewController: UIViewController {
         profileTableHeaderView.delegate = self
         
         title = "Feed"
-        view.backgroundColor = .secondarySystemBackground
         
+        #if DEBUG
+        view.backgroundColor = .systemBlue
+        #else
+        view.backgroundColor = .secondarySystemBackground
+        #endif
+
         tabBarItem = UITabBarItem(
             title: "Feed",
             image: UIImage(systemName: "person"),
