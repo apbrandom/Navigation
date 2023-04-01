@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Post {
+public struct Post {
     var title: String = ""
     var author: String = ""
     var image: String = ""
