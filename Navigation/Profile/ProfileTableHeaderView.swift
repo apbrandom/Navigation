@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileTableHeaderView: UIView {
     
@@ -141,28 +142,35 @@ class ProfileTableHeaderView: UIView {
     }
     
     private func setupConstarins() {
-        NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 120),
-            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor, multiplier: 1.0),
-            
-            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
-            setStatusButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
-            setStatusButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -16),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            infoStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
-            infoStackView.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16),
-            infoStackView.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
-            infoStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            
-            statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            
-            closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            closeButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16)
-        ])
+        avatarImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(16)
+                    make.width.equalTo(120)
+                    make.height.equalTo(avatarImageView.snp.width)
+                }
         
+        setStatusButton.snp.makeConstraints { make in
+                    make.top.equalTo(avatarImageView.snp.bottom).offset(16)
+                    make.leading.equalToSuperview().offset(16)
+                    make.trailing.equalToSuperview().offset(-16)
+                    make.height.equalTo(50)
+                }
+        
+        infoStackView.snp.makeConstraints { make in
+                    make.top.equalToSuperview().offset(27)
+                    make.bottom.equalTo(setStatusButton.snp.top).offset(-16)
+                    make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
+                    make.trailing.equalToSuperview().offset(-16)
+                }
+        
+        statusTextField.snp.makeConstraints { make in
+                    make.height.equalTo(40)
+                }
+        
+        closeButton.snp.makeConstraints { make in
+                    make.top.equalToSuperview().offset(16)
+                    make.trailing.equalToSuperview().offset(-16)
+                }
     }
     
     //MARK: - Action
