@@ -143,34 +143,33 @@ class ProfileTableHeaderView: UIView {
     
     private func setupConstarins() {
         avatarImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().offset(16)
-                    make.width.equalTo(120)
-                    make.height.equalTo(avatarImageView.snp.width)
-                }
+            make.top.leading.equalToSuperview().offset(16)
+            make.width.height.equalTo(120)
+            
+        }
         
         setStatusButton.snp.makeConstraints { make in
-                    make.top.equalTo(avatarImageView.snp.bottom).offset(16)
-                    make.leading.equalToSuperview().offset(16)
-                    make.trailing.equalToSuperview().offset(-16)
-                    make.height.equalTo(50)
-                }
+            make.top.equalTo(avatarImageView.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(50)
+        }
         
         infoStackView.snp.makeConstraints { make in
-                    make.top.equalToSuperview().offset(27)
-                    make.bottom.equalTo(setStatusButton.snp.top).offset(-16)
-                    make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
-                    make.trailing.equalToSuperview().offset(-16)
-                }
+            make.top.equalToSuperview().offset(27)
+            make.bottom.equalTo(setStatusButton.snp.top).offset(-16)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
         
         statusTextField.snp.makeConstraints { make in
-                    make.height.equalTo(40)
-                }
+            make.height.equalTo(40)
+        }
         
         closeButton.snp.makeConstraints { make in
-                    make.top.equalToSuperview().offset(16)
-                    make.trailing.equalToSuperview().offset(-16)
-                }
+            make.top.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
     }
     
     //MARK: - Action
@@ -185,14 +184,14 @@ class ProfileTableHeaderView: UIView {
         statusLabel.text = statusText
     }
     
-   private func showSemiTransparentView() {
+    private func showSemiTransparentView() {
         delegate?.showSemiTransparentView()
     }
-
+    
     private func hideSemiTransparentView() {
         delegate?.hideSemiTransparentView()
     }
-
+    
     
     @objc private func didAvatarImageTaped() {
         avatarCenterOrigin = avatarImageView.center
@@ -226,7 +225,7 @@ class ProfileTableHeaderView: UIView {
                     self.showSemiTransparentView()
                     self.closeButton.alpha = 1.0
                 }
-
+                
             })
     }
     

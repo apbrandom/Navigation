@@ -30,6 +30,7 @@
 		CB8138F729D84D1A001FDD7D /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB8138F129D84D1A001FDD7D /* StorageService.framework */; };
 		CB8138F829D84D1A001FDD7D /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB8138F129D84D1A001FDD7D /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CB8138FD29D8578C001FDD7D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF3442966E320008400F2 /* Post.swift */; };
+		CBD7635629DDD32C00479179 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = CBD7635529DDD32C00479179 /* iOSIntPackage */; };
 		CBF621E929A8CE6400119FA8 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF621E829A8CE6400119FA8 /* Reusable.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBD7635629DDD32C00479179 /* iOSIntPackage in Frameworks */,
 				CB8138F729D84D1A001FDD7D /* StorageService.framework in Frameworks */,
 				86018677A1DB5431377FE4F9 /* Pods_Navigation.framework in Frameworks */,
 			);
@@ -113,7 +115,6 @@
 				4A81A2B242E1328083C5B174 /* Pods-Navigation.debug.xcconfig */,
 				DA3D581EA8EC0D674D2F1F06 /* Pods-Navigation.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -244,6 +245,9 @@
 				CB8138F629D84D1A001FDD7D /* PBXTargetDependency */,
 			);
 			name = Navigation;
+			packageProductDependencies = (
+				CBD7635529DDD32C00479179 /* iOSIntPackage */,
+			);
 			productName = Navigation;
 			productReference = CB7AF3052959AE5E005C51F3 /* Navigation.app */;
 			productType = "com.apple.product-type.application";
@@ -293,6 +297,9 @@
 				Base,
 			);
 			mainGroup = CB7AF2FC2959AE5D005C51F3;
+			packageReferences = (
+				CBD7635429DDD32C00479179 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+			);
 			productRefGroup = CB7AF3062959AE5E005C51F3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -682,6 +689,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CBD7635429DDD32C00479179 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CBD7635529DDD32C00479179 /* iOSIntPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBD7635429DDD32C00479179 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			productName = iOSIntPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CB7AF2FD2959AE5D005C51F3 /* Project object */;
 }
