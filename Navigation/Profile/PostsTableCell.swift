@@ -94,22 +94,14 @@ class PostsTableCell: UITableViewCell {
         postTitleLabel.text = post.title
         postAuthorTextView.text = post.author
         
-        if let originalImage = UIImage(named: post.image) {
-            let imageProcessor = ImageProcessor()
-            
-            // Приминение нужных фильтров к изображению
-            let filter: ColorFilter = .tonal
-            
-            imageProcessor.processImage(sourceImage: originalImage, filter: filter) { outputImage in
-                if let outputImage = outputImage {
-                    postImageView.image = outputImage
-                } else {
-                    postImageView.image = nil
-                }
-            }
-            
-        } else {
-            postImageView.image = nil
+        // Apply a filter to the posts image
+        let originalImage = UIImage(named: post.image) ?? UIImage()
+        let imageProcessor = ImageProcessor()
+        
+        let filter = ColorFilter.tonal
+        
+        imageProcessor.processImage(sourceImage: originalImage, filter: filter) { filtered in
+            postImageView.image = filtered
         }
         
         postLikesLabel.text = "Likes: \(post.likes)"
