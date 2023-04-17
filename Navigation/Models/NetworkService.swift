@@ -21,11 +21,11 @@ struct NetworkService {
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
-
+                
                 print("Error: \(error.localizedDescription)")
             } else {
                 if let data = data {
-
+                    
                     let dataString = String(data: data, encoding: .utf8)
                     print("Data: \(dataString ?? "No data")")
                 }
