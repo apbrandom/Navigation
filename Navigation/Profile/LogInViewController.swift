@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import StorageService
 
 class LogInViewController: UIViewController {
+    
+    
+    var currentUserService: UserService?
     
     //MARK: - Subviews
     
@@ -48,7 +52,7 @@ class LogInViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var emailTextField: UITextField = { [unowned self] in
+    private lazy var loginTextField: UITextField = { [unowned self] in
         let textField = UITextField()
         textField.backgroundColor = UIColor.systemGray6
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -123,8 +127,25 @@ class LogInViewController: UIViewController {
     //MARK: - Actions
     
     @objc func logInTapped() {
-        let profileVC = ProfileViewController()
-        navigationController?.pushViewController(profileVC, animated: true)
+        
+        guard let login = loginTextField.text, !login.isEmpty else {
+                // Show error if login is empty
+            printContent("No login")
+                return
+            }
+            
+            if let user = currentUserService?.getUser(login: login) {
+                // Found user, navigate to ProfileViewController
+                let profileVC = ProfileViewController()
+                profileVC.user = user
+                navigationController?.pushViewController(profileVC, animated: true)
+            } else {
+                // Show error if user not found
+                print("User no found")
+            }
+        
+//        let profileVC = ProfileViewController()
+//        navigationController?.pushViewController(profileVC, animated: true)
     }
     
     @objc func willShowKeyboard(_ notification: NSNotification) {
@@ -139,7 +160,6 @@ class LogInViewController: UIViewController {
     //MARK: - Private
     
     private func setupView() {
-
         title = "Profile"
         view.backgroundColor = .secondarySystemBackground
         
@@ -155,7 +175,7 @@ class LogInViewController: UIViewController {
         logInScrollView.addSubview(contentView)
         contentView.addSubview(logoImageView)
         contentView.addSubview(logInStackView)
-        logInStackView.addArrangedSubview(emailTextField)
+        logInStackView.addArrangedSubview(loginTextField)
         logInStackView.addArrangedSubview(passwordTextField)
         contentView.addSubview(logInButton)
     }

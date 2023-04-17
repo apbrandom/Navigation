@@ -15,6 +15,9 @@ class ProfileViewController: UIViewController {
     fileprivate let postData = Post.make()
     fileprivate let photoData = Photo.make()
     
+    var user: User?
+    
+    
     //MARK: - Subviews
     
     private lazy var profileTableView: UITableView = {
@@ -120,7 +123,6 @@ class ProfileViewController: UIViewController {
             semiTransparentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             semiTransparentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             semiTransparentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            
         ])
     }
     
