@@ -7,6 +7,7 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class PostsTableCell: UITableViewCell {
     
@@ -89,9 +90,20 @@ class PostsTableCell: UITableViewCell {
         guard let post = model else {
             return
         }
+        
         postTitleLabel.text = post.title
         postAuthorTextView.text = post.author
-        postImageView.image = UIImage(named: post.image)
+        
+        // Apply a filter to the posts image
+        let originalImage = UIImage(named: post.image) ?? UIImage()
+        let imageProcessor = ImageProcessor()
+        
+        let filter = ColorFilter.tonal
+        
+        imageProcessor.processImage(sourceImage: originalImage, filter: filter) { filtered in
+            postImageView.image = filtered
+        }
+        
         postLikesLabel.text = "Likes: \(post.likes)"
         postViewsLabel.text = "Views: \(post.views)"
     }
@@ -124,5 +136,4 @@ class PostsTableCell: UITableViewCell {
             postViewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
-    
 }
