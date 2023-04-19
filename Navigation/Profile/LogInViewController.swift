@@ -7,27 +7,36 @@
 
 import UIKit
 import StorageService
+import SnapKit
 
 class LogInViewController: UIViewController {
     
+    var currentUserService: UserService
     
-    var currentUserService: UserService?
+    init(currentUserService: UserService) {
+        self.currentUserService = currentUserService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - Subviews
     
     private lazy var logInScrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .systemBrown
+        scrollView.backgroundColor = .systemBackground
         scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
     
     private lazy var contentView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -65,6 +74,7 @@ class LogInViewController: UIViewController {
         textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         textField.autocapitalizationType = .none
         textField.delegate = self
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -83,6 +93,7 @@ class LogInViewController: UIViewController {
         textField.autocapitalizationType = .none
         textField.isSecureTextEntry = true
         textField.delegate = self
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -94,11 +105,11 @@ class LogInViewController: UIViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(
             self,
             action: #selector(logInTapped),
             for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -109,7 +120,7 @@ class LogInViewController: UIViewController {
         
         setupView()
         setupSubview()
-        setupConstraint()
+        setupConstraints()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,35 +138,60 @@ class LogInViewController: UIViewController {
     //MARK: - Actions
     
     @objc func logInTapped() {
-        
+        // Show error if login is empty
         guard let login = loginTextField.text, !login.isEmpty else {
-                // Show error if login is empty
-            printContent("No login")
-                return
-            }
+            let alertController = UIAlertController(
+                title: nil,
+                message: "Please, enter your login" ,
+                preferredStyle: .alert
+            )
             
-            if let user = currentUserService?.getUser(login: login) {
-                // Found user, navigate to ProfileViewController
-                let profileVC = ProfileViewController()
-                profileVC.user = user
-                navigationController?.pushViewController(profileVC, animated: true)
-            } else {
-                // Show error if user not found
-                print("User no found")
-            }
+            let action = UIAlertAction(title: "OK", style: .default)
+            alertController.addAction(action)
+            present(alertController, animated: true)
+            return
+        }
         
-//        let profileVC = ProfileViewController()
-//        navigationController?.pushViewController(profileVC, animated: true)
+        // Found user, navigate to ProfileViewController
+        if let user = currentUserService.getUser(login: login) {
+            let profileVC = ProfileViewController()
+            profileVC.user = user
+            
+            navigationController?.pushViewController(profileVC, animated: true)
+        } else {
+            
+            // Show error if user not found
+            let alertController = UIAlertController(
+                title: nil,
+                message: "User not found",
+                preferredStyle: .alert
+            )
+            let action = UIAlertAction(title: "OK", style: .default)
+            alertController.addAction(action)
+            present(alertController, animated: true)
+            print("User no found")
+        }
     }
+
     
     @objc func willShowKeyboard(_ notification: NSNotification) {
-        let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
-        logInScrollView.contentInset.bottom += keyboardHeight ?? 0.0
-    }
-    
-    @objc func willHideKeyboard(_ notification: NSNotification) {
-        logInScrollView.contentInset.bottom = 0.0
-    }
+            if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                let keyboardHeight = keyboardFrame.height
+                let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+
+                logInScrollView.contentInset = contentInsets
+                logInScrollView.scrollIndicatorInsets = contentInsets
+                logInScrollView.scrollRectToVisible(logInButton.frame, animated: true)
+            }
+        }
+
+        @objc func willHideKeyboard(_ notification: NSNotification) {
+            let contentInsets = UIEdgeInsets.zero
+
+            logInScrollView.contentInset = contentInsets
+            logInScrollView.scrollIndicatorInsets = contentInsets
+        }
+
     
     //MARK: - Private
     
@@ -205,46 +241,44 @@ class LogInViewController: UIViewController {
     
     //MARK: - Layout
     
-    private func setupConstraint() {
-        NSLayoutConstraint.activate([
-            logInScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            logInScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            logInScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            logInScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            
-            contentView.topAnchor.constraint(equalTo: logInScrollView.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: logInScrollView.bottomAnchor),
-            contentView.leftAnchor.constraint(equalTo: logInScrollView.leftAnchor),
-            contentView.rightAnchor.constraint(equalTo: logInScrollView.rightAnchor),
-            contentView.heightAnchor.constraint(equalTo: logInScrollView.heightAnchor),
-            contentView.widthAnchor.constraint(equalTo: logInScrollView.widthAnchor),
-            
-            logoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
-            logoImageView.heightAnchor.constraint(equalToConstant: 100),
-            logoImageView.widthAnchor.constraint(equalToConstant: 100),
-            logoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            
-            logInStackView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120),
-            logInStackView.heightAnchor.constraint(equalToConstant: 100),
-            logInStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            logInStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
-            logInButton.topAnchor.constraint(equalTo: logInStackView.bottomAnchor, constant: 16),
-            logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-        ])
+    private func setupConstraints() {
+        logInScrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(logInScrollView)
+            make.width.equalTo(logInScrollView)
+        }
+        
+        logoImageView.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(120)
+            make.height.width.equalTo(100)
+            make.centerX.equalTo(contentView.snp.centerX)
+        }
+        
+        logInStackView.snp.makeConstraints { make in
+            make.top.equalTo(logoImageView.snp.bottom).offset(120)
+            make.height.equalTo(100)
+            make.leading.trailing.equalTo(contentView).inset(16)
+        }
+        
+
+        logInButton.snp.makeConstraints { make in
+            make.top.equalTo(logInStackView.snp.bottom).offset(16)
+            make.leading.trailing.equalTo(contentView).inset(16)
+            make.height.equalTo(50)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-16)
+        }
+
     }
-    
 }
 
 //MARK: - Delegate
 
 extension LogInViewController: UITextFieldDelegate {
     
-    func textFieldShouldReturn(
-        _ textField: UITextField
-    ) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
         return true

@@ -98,7 +98,7 @@ class PostsTableCell: UITableViewCell {
         let originalImage = UIImage(named: post.image) ?? UIImage()
         let imageProcessor = ImageProcessor()
         
-        let filter = ColorFilter.tonal
+        let filter = ColorFilter.chrome
         
         imageProcessor.processImage(sourceImage: originalImage, filter: filter) { filtered in
             postImageView.image = filtered
