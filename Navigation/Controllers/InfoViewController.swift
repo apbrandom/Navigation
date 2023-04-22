@@ -45,24 +45,24 @@ class InfoViewController: UIViewController {
     }
     
     //MARK: - Action
-
+    
     @objc func buttonAlertPressed() {
         let alertController = UIAlertController(title: "Error", message: "You are pressed the button now", preferredStyle: .alert)
         let action0 = UIAlertAction(title: "OK", style: .default)  { (action0) in
             let text = alertController.textFields?.first?.text
             print(text ?? "no text")
         }
-            alertController.addTextField { (textFiled) in
-                textFiled.placeholder = "Enter your message"
-                
-            }
+        alertController.addTextField { (textFiled) in
+            textFiled.placeholder = "Enter your message"
             
-            let action1 = UIAlertAction(title: "Cancel", style: .cancel)
-            alertController.addAction(action0)
-            alertController.addAction(action1)
-        
-            self.present(alertController, animated: true)
         }
         
+        let action1 = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(action0)
+        alertController.addAction(action1)
+        
+        self.present(alertController, animated: true)
     }
+    
+}
 
