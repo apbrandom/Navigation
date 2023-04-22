@@ -10,11 +10,11 @@ import UIKit
 
 public class User {
     var login: String = ""
-    var fullName: String = ""
-    var avatar: UIImage
-    var status: String = ""
+    public var fullName: String = ""
+    public var avatar: UIImage
+    public var status: String = ""
     
-    init(login: String, fullName: String, avatar: UIImage, status: String) {
+    public init(login: String, fullName: String, avatar: UIImage, status: String) {
         self.login = login
         self.fullName = fullName
         self.avatar = avatar
@@ -22,5 +22,21 @@ public class User {
     }
 }
 
-let currentUser = User(login: "current_user", fullName: "Current User", avatar: UIImage(named: "current_avatar")!, status: "Active")
-let currentUserService = CurrentUserService(user: currentUser)
+extension User {
+    public static func createTestUser() -> User {
+        return User(
+            login: "test",
+            fullName: "Cat Tester",
+            avatar: UIImage(named: "cat")!,
+            status: "Hello, world!"
+        )
+    }
+    
+    public static func createCurrentuser() -> User {
+        return User(
+            login: "user",
+            fullName: "Cat Traveler",
+            avatar: UIImage(named: "cat")!,
+            status: "In an active search for a place")
+    }
+}

@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import StorageService
 
 class ProfileTableHeaderView: UIView {
     
@@ -18,7 +19,6 @@ class ProfileTableHeaderView: UIView {
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "cat")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isUserInteractionEnabled = true
         imageView.layer.cornerRadius = 60
@@ -32,7 +32,6 @@ class ProfileTableHeaderView: UIView {
         imageView.addGestureRecognizer(imageTap)
         return imageView
     }()
-    
     
     private lazy var closeButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -57,7 +56,6 @@ class ProfileTableHeaderView: UIView {
     
     private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Cat Traveler"
         label.font = .boldSystemFont(ofSize: 18)
         label.textColor = .black
         return label
@@ -65,7 +63,6 @@ class ProfileTableHeaderView: UIView {
     
     lazy var statusLabel: UILabel = {
         let label = UILabel()
-        label.text = "Looking for a new location..."
         label.textColor = .systemGray
         return label
     }()
@@ -110,9 +107,9 @@ class ProfileTableHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setupSubviews()
         setupConstarins()
-        
         showSemiTransparentView()
     }
     
@@ -145,7 +142,6 @@ class ProfileTableHeaderView: UIView {
         avatarImageView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().offset(16)
             make.width.height.equalTo(120)
-            
         }
         
         setStatusButton.snp.makeConstraints { make in
@@ -174,6 +170,12 @@ class ProfileTableHeaderView: UIView {
     
     //MARK: - Action
     
+    func updateUser(_ user: User) {
+        avatarImageView.image = user.avatar
+        fullNameLabel.text = user.fullName
+        statusLabel.text = user.status
+    }
+    
     @objc private func statusTextChanged(_ textField: UITextField) {
         if let text = statusTextField.text {
             statusText = text
@@ -191,7 +193,6 @@ class ProfileTableHeaderView: UIView {
     private func hideSemiTransparentView() {
         delegate?.hideSemiTransparentView()
     }
-    
     
     @objc private func didAvatarImageTaped() {
         avatarCenterOrigin = avatarImageView.center

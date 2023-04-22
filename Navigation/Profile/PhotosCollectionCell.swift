@@ -44,6 +44,7 @@ class PhotosCollectionCell: UICollectionViewCell {
         guard let photos = models else {
             return
         }
+        
         photoImageView.image = UIImage(named: photos.image)
     }
     

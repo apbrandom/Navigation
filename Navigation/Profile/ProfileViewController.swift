@@ -7,6 +7,7 @@
 
 import UIKit
 import StorageService
+import SnapKit
 
 class ProfileViewController: UIViewController {
     
@@ -15,10 +16,21 @@ class ProfileViewController: UIViewController {
     fileprivate let postData = Post.make()
     fileprivate let photoData = Photo.make()
     
-    var user: User?
-    
-    
+    var user: User? {
+         didSet {
+             if let user = user {
+                 profileTableHeaderView.updateUser(user)
+             }
+         }
+     }
+
     //MARK: - Subviews
+    
+    private lazy var profileTableHeaderView: ProfileTableHeaderView = {
+            let headerView = ProfileTableHeaderView()
+            headerView.translatesAutoresizingMaskIntoConstraints = false
+            return headerView
+        }()
     
     private lazy var profileTableView: UITableView = {
         let tableView = UITableView()
@@ -76,11 +88,6 @@ class ProfileViewController: UIViewController {
     
     private func setupView() {
         
-        let profileTableHeaderView = ProfileTableHeaderView()
-        profileTableHeaderView.delegate = self
-        
-        title = "Feed"
-        
         #if DEBUG
         view.backgroundColor = .systemBlue
         #else
@@ -103,8 +110,10 @@ class ProfileViewController: UIViewController {
         profileTableView.rowHeight = UITableView.automaticDimension
         profileTableView.estimatedRowHeight = 500
         
-        let headerView = ProfileTableHeaderView()
-        profileTableView.setAndLayout(headerView: headerView)
+
+        profileTableView.setAndLayout(headerView: profileTableHeaderView)
+        profileTableHeaderView.delegate = self
+        
         profileTableView.register(PostsTableCell.self, forCellReuseIdentifier: PostsTableCell.indentifire)
         profileTableView.register(PhotosTableCell.self, forCellReuseIdentifier: PhotosTableCell.indentifire )
         
@@ -113,17 +122,13 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupConstrains() {
-        NSLayoutConstraint.activate([
-            profileTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            profileTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            profileTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            profileTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
-            semiTransparentView.topAnchor.constraint(equalTo: view.topAnchor),
-            semiTransparentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            semiTransparentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            semiTransparentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        profileTableView.snp.makeConstraints { make in
+          make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
+        }
+        
+        semiTransparentView.snp.makeConstraints { make in
+          make.edges.equalToSuperview()
+        }
     }
     
     private func setupKeyboardObservers() {
@@ -222,5 +227,4 @@ extension ProfileViewController: ProfileTableHeaderViewDelegate {
         semiTransparentView.isHidden = true
         profileTableView.isScrollEnabled = true
     }
-
 }

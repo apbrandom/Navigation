@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -14,27 +15,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var appConfiguration: AppConfiguration?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
-        guard let scene = (scene as? UIWindowScene) else { return }
-        
-        
-        let window = UIWindow(windowScene: scene)
-        
-        let controllers = [
-            FeedViewController(),
-            LogInViewController()
-        ]
-        
-        let tabBarVC = UITabBarController()
-        tabBarVC.viewControllers = controllers.map {
-            let _ = $0.view
-            return UINavigationController(rootViewController: $0)
-        }
-        
-        window.rootViewController = tabBarVC
-        window.makeKeyAndVisible()
-        
-        self.window = window
         
         // random url appConfiguration
         let randomValue = Int.random(in: 0..<3)
@@ -52,7 +32,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let appConfig = appConfiguration {
             NetworkService.request(configuration: appConfig)
-                }
-        print("scene(_:willConnectTo:options:) called")
+        }
+        
+        guard let scene = (scene as? UIWindowScene) else { return }
+        
+        
+        let window = UIWindow(windowScene: scene)
+        
+#if DEBUG
+        let user = User.createTestUser()
+        let userService: UserService = TestUserService(user: user)
+#else
+        let user = User.createCurrentuser()
+        let userService: UserService = CurrentUserService(user: user)
+#endif
+    
+        let controllers = [
+            FeedViewController(),
+            LogInViewController(currentUserService: userService)
+        ]
+        
+        let tabBarVC = UITabBarController()
+        tabBarVC.viewControllers = controllers.map {
+            let _ = $0.view
+            return UINavigationController(rootViewController: $0)
+        }
+        
+        window.rootViewController = tabBarVC
+        window.makeKeyAndVisible()
+        
+        self.window = window
+        
     }
 }

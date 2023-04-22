@@ -13,9 +13,7 @@
 		CB08A49829A4B58C00AF49D7 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49729A4B58C00AF49D7 /* PhotosViewController.swift */; };
 		CB08A49A29A4FAAF00AF49D7 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49929A4FAAF00AF49D7 /* Photo.swift */; };
 		CB08A49E29A67E6F00AF49D7 /* PhotosCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49D29A67E6F00AF49D7 /* PhotosCollectionCell.swift */; };
-		CB0A7C8B29E34984002EA335 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0A7C8A29E34984002EA335 /* CurrentUserService.swift */; };
 		CB0A7C8D29E49A7A002EA335 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0A7C8C29E49A7A002EA335 /* UserService.swift */; };
-		CB12ACD829EB32E000A1E0FF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA858A829E9966800AC37B2 /* NetworkService.swift */; };
 		CB23E9112975996A0081B615 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB23E9102975996A0081B615 /* ProfileTableHeaderView.swift */; };
 		CB47082029B0BE8200F416F2 /* ProfileTableHeaderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47081F29B0BE8200F416F2 /* ProfileTableHeaderViewDelegate.swift */; };
 		CB6AF31E2965B6BF008400F2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */; };
@@ -32,6 +30,7 @@
 		CB8138F729D84D1A001FDD7D /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB8138F129D84D1A001FDD7D /* StorageService.framework */; };
 		CB8138F829D84D1A001FDD7D /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB8138F129D84D1A001FDD7D /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CB8138FD29D8578C001FDD7D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF3442966E320008400F2 /* Post.swift */; };
+		CB9F059029EDBC11000E626D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA858A829E9966800AC37B2 /* NetworkService.swift */; };
 		CBA858A929E9966800AC37B2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA858A829E9966800AC37B2 /* NetworkService.swift */; };
 		CBA9547A29E30E2F004E45EB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CBA9547929E30E2F004E45EB /* SnapKit */; };
 		CBA9547C29E3107A004E45EB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA9547B29E3107A004E45EB /* User.swift */; };
@@ -70,7 +69,6 @@
 		CB08A49729A4B58C00AF49D7 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		CB08A49929A4FAAF00AF49D7 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		CB08A49D29A67E6F00AF49D7 /* PhotosCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionCell.swift; sourceTree = "<group>"; };
-		CB0A7C8A29E34984002EA335 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		CB0A7C8C29E49A7A002EA335 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		CB23E9102975996A0081B615 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		CB47081F29B0BE8200F416F2 /* ProfileTableHeaderViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderViewDelegate.swift; sourceTree = "<group>"; };
@@ -121,12 +119,11 @@
 				CBF621E729A8CE3E00119FA8 /* Сommon */,
 				CB71F61C298E7CA200DA584D /* LogInViewController.swift */,
 				CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */,
-				CB08A49729A4B58C00AF49D7 /* PhotosViewController.swift */,
 				CB23E9102975996A0081B615 /* ProfileTableHeaderView.swift */,
+				CB08A49729A4B58C00AF49D7 /* PhotosViewController.swift */,
 				CB08A491299F7A3200AF49D7 /* PostsTableCell.swift */,
 				CB08A49529A4B3AA00AF49D7 /* PhotosTableCell.swift */,
 				CB08A49D29A67E6F00AF49D7 /* PhotosCollectionCell.swift */,
-				CB08A49329A0C6BA00AF49D7 /* UITableView+Extension.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -188,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				CB0A7C8C29E49A7A002EA335 /* UserService.swift */,
-				CB0A7C8A29E34984002EA335 /* CurrentUserService.swift */,
 				CBA9547B29E3107A004E45EB /* User.swift */,
 				CB6AF3442966E320008400F2 /* Post.swift */,
 				CB8138F329D84D1A001FDD7D /* StorageService.h */,
@@ -200,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				CBF621E829A8CE6400119FA8 /* Reusable.swift */,
+				CB08A49329A0C6BA00AF49D7 /* UITableView+Extension.swift */,
 				CB47081F29B0BE8200F416F2 /* ProfileTableHeaderViewDelegate.swift */,
 			);
 			path = "Сommon";
@@ -350,11 +347,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB12ACD829EB32E000A1E0FF /* NetworkService.swift in Sources */,
+				CB9F059029EDBC11000E626D /* NetworkService.swift in Sources */,
 				CB0A7C8D29E49A7A002EA335 /* UserService.swift in Sources */,
 				CBA9547C29E3107A004E45EB /* User.swift in Sources */,
 				CB8138FD29D8578C001FDD7D /* Post.swift in Sources */,
-				CB0A7C8B29E34984002EA335 /* CurrentUserService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
