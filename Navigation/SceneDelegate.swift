@@ -24,18 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         let window = UIWindow(windowScene: scene)
-        
-#if DEBUG
-        let user = User.createTestUser()
-        let userService: UserService = TestUserService(user: user)
-#else
-        let user = User.createCurrentuser()
-        let userService: UserService = CurrentUserService(user: user)
-#endif
     
         let controllers = [
             FeedViewController(),
-            LogInViewController(currentUserService: userService)
+            LogInViewController()
         ]
         
         let tabBarVC = UITabBarController()

@@ -16,14 +16,17 @@ class ProfileViewController: UIViewController {
     fileprivate let postData = Post.make()
     fileprivate let photoData = Photo.make()
     
-    var user: User? {
-         didSet {
-             if let user = user {
-                 profileTableHeaderView.updateUser(user)
-             }
-         }
-     }
+    var user: User
 
+        init(user: User) {
+            self.user = user
+            super.init(nibName: nil, bundle: nil)
+        }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - Subviews
     
     private lazy var profileTableHeaderView: ProfileTableHeaderView = {

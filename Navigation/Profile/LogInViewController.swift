@@ -6,15 +6,18 @@
 //
 
 import UIKit
-import StorageService
 import SnapKit
 
 class LogInViewController: UIViewController {
     
-    var currentUserService: UserService
+    var userService: UserService
     
-    init(currentUserService: UserService) {
-        self.currentUserService = currentUserService
+    init() {
+#if DEBUG
+        userService = TestUserService()
+#else
+        userService = CurrentUserService()
+#endif
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -61,7 +64,7 @@ class LogInViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var loginTextField: UITextField = { [unowned self] in
+    private lazy var loginField: UITextField = { [unowned self] in
         let textField = UITextField()
         textField.backgroundColor = UIColor.systemGray6
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -78,7 +81,7 @@ class LogInViewController: UIViewController {
         return textField
     }()
     
-    private lazy var passwordTextField: UITextField = { [unowned self] in
+    private lazy var passwordField: UITextField = { [unowned self] in
         let textField = UITextField()
         textField.backgroundColor = UIColor.systemGray6
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -138,60 +141,69 @@ class LogInViewController: UIViewController {
     //MARK: - Actions
     
     @objc func logInTapped() {
-        // Show error if login is empty
-        guard let login = loginTextField.text, !login.isEmpty else {
-            let alertController = UIAlertController(
-                title: nil,
-                message: "Please, enter your login" ,
-                preferredStyle: .alert
-            )
-            
-            let action = UIAlertAction(title: "OK", style: .default)
-            alertController.addAction(action)
-            present(alertController, animated: true)
-            return
-        }
-        
-        // Found user, navigate to ProfileViewController
-        if let user = currentUserService.getUser(login: login) {
-            let profileVC = ProfileViewController()
-            profileVC.user = user
-            
-            navigationController?.pushViewController(profileVC, animated: true)
+        if let user = userService.checkLogin(login: loginField.text ?? "", password: passwordField.text ?? "") {
+            let profileVC = ProfileViewController(user: user)
+            navigationController?.setViewControllers([profileVC], animated: true)
         } else {
-            
-            // Show error if user not found
-            let alertController = UIAlertController(
-                title: nil,
-                message: "User not found",
-                preferredStyle: .alert
-            )
-            let action = UIAlertAction(title: "OK", style: .default)
-            alertController.addAction(action)
-            present(alertController, animated: true)
-            print("User no found")
+            let alert = UIAlertController(title: "Unknown login", message: "Please, enter correct user login and password", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            self.present(alert, animated: true)
         }
     }
-
+    // Show error if login is empty
+    //        guard let login = loginTextField.text, !login.isEmpty else {
+    //            let alertController = UIAlertController(
+    //                title: nil,
+    //                message: "Please, enter your login" ,
+    //                preferredStyle: .alert
+    //            )
+    //
+    //            let action = UIAlertAction(title: "OK", style: .default)
+    //            alertController.addAction(action)
+    //            present(alertController, animated: true)
+    //            return
+    //        }
+    //
+    //        // Found user, navigate to ProfileViewController
+    //        if let user = currentUserService.getUser(login: login) {
+    //            let profileVC = ProfileViewController()
+    //            profileVC.user = user
+    //
+    //            navigationController?.pushViewController(profileVC, animated: true)
+    //        } else {
+    //
+    //            // Show error if user not found
+    //            let alertController = UIAlertController(
+    //                title: nil,
+    //                message: "User not found",
+    //                preferredStyle: .alert
+    //            )
+    //            let action = UIAlertAction(title: "OK", style: .default)
+    //            alertController.addAction(action)
+    //            present(alertController, animated: true)
+    //            print("User no found")
+    //        }
+    //}
+    
     
     @objc func willShowKeyboard(_ notification: NSNotification) {
-            if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                let keyboardHeight = keyboardFrame.height
-                let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
-
-                logInScrollView.contentInset = contentInsets
-                logInScrollView.scrollIndicatorInsets = contentInsets
-                logInScrollView.scrollRectToVisible(logInButton.frame, animated: true)
-            }
-        }
-
-        @objc func willHideKeyboard(_ notification: NSNotification) {
-            let contentInsets = UIEdgeInsets.zero
-
+        if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardFrame.height
+            let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+            
             logInScrollView.contentInset = contentInsets
             logInScrollView.scrollIndicatorInsets = contentInsets
+            logInScrollView.scrollRectToVisible(logInButton.frame, animated: true)
         }
-
+    }
+    
+    @objc func willHideKeyboard(_ notification: NSNotification) {
+        let contentInsets = UIEdgeInsets.zero
+        
+        logInScrollView.contentInset = contentInsets
+        logInScrollView.scrollIndicatorInsets = contentInsets
+    }
+    
     
     //MARK: - Private
     
@@ -211,8 +223,8 @@ class LogInViewController: UIViewController {
         logInScrollView.addSubview(contentView)
         contentView.addSubview(logoImageView)
         contentView.addSubview(logInStackView)
-        logInStackView.addArrangedSubview(loginTextField)
-        logInStackView.addArrangedSubview(passwordTextField)
+        logInStackView.addArrangedSubview(loginField)
+        logInStackView.addArrangedSubview(passwordField)
         contentView.addSubview(logInButton)
     }
     
@@ -263,14 +275,14 @@ class LogInViewController: UIViewController {
             make.leading.trailing.equalTo(contentView).inset(16)
         }
         
-
+        
         logInButton.snp.makeConstraints { make in
             make.top.equalTo(logInStackView.snp.bottom).offset(16)
             make.leading.trailing.equalTo(contentView).inset(16)
             make.height.equalTo(50)
             make.bottom.equalTo(contentView.snp.bottom).offset(-16)
         }
-
+        
     }
 }
 

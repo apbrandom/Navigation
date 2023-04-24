@@ -8,30 +8,15 @@
 import Foundation
 
 public protocol UserService {
-    func getUser(login: String) -> User?
+    var user: User { get }
+    var password: String { get }
+    
+    func checkLogin(login: String, password: String) -> User?
 }
 
-public class CurrentUserService: UserService {
-    
-    private let currentUser: User
-    
-    public init(user: User) {
-        self.currentUser = user
-    }
-    
-    public func getUser(login: String) -> User? {
-        return currentUser.login == login ? currentUser : nil
+extension UserService {
+    func checkLogin(login: String, password: String) -> User? {
+        return login == user.login && password == password ? user : nil
     }
 }
-
-public class TestUserService: UserService {
-    private let testUser: User
     
-    public init(user: User) {
-        self.testUser = user
-    }
-    
-    public func getUser(login: String) -> User? {
-        return testUser.login == login ? testUser : nil
-    }
-}

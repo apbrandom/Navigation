@@ -34,6 +34,10 @@
 		CBA858A929E9966800AC37B2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA858A829E9966800AC37B2 /* NetworkService.swift */; };
 		CBA9547A29E30E2F004E45EB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CBA9547929E30E2F004E45EB /* SnapKit */; };
 		CBA9547C29E3107A004E45EB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA9547B29E3107A004E45EB /* User.swift */; };
+		CBC6ED8929F725C1000D509F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB7AF3162959AE5E005C51F3 /* Info.plist */; };
+		CBC6ED8A29F725C2000D509F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB7AF3162959AE5E005C51F3 /* Info.plist */; };
+		CBC6ED8C29F727CC000D509F /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71F61C298E7CA200DA584D /* LogInViewController.swift */; };
+		CBC6ED8D29F727D8000D509F /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71F6202997883D00DA584D /* CustomButton.swift */; };
 		CBD7635629DDD32C00479179 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = CBD7635529DDD32C00479179 /* iOSIntPackage */; };
 		CBF621E929A8CE6400119FA8 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF621E829A8CE6400119FA8 /* Reusable.swift */; };
 /* End PBXBuildFile section */
@@ -305,6 +309,7 @@
 			files = (
 				CB7AF3152959AE5E005C51F3 /* LaunchScreen.storyboard in Resources */,
 				CB7AF3122959AE5E005C51F3 /* Assets.xcassets in Resources */,
+				CBC6ED8A29F725C2000D509F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +317,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBC6ED8929F725C1000D509F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,7 +355,9 @@
 			files = (
 				CB9F059029EDBC11000E626D /* NetworkService.swift in Sources */,
 				CB0A7C8D29E49A7A002EA335 /* UserService.swift in Sources */,
+				CBC6ED8D29F727D8000D509F /* CustomButton.swift in Sources */,
 				CBA9547C29E3107A004E45EB /* User.swift in Sources */,
+				CBC6ED8C29F727CC000D509F /* LogInViewController.swift in Sources */,
 				CB8138FD29D8578C001FDD7D /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
