@@ -9,11 +9,18 @@ import UIKit
 import SnapKit
 import StorageService
 
-class LogInViewController: UIViewController {
+protocol loginViewControllerDelegate: AnyObject {
+    func check(login: String, password: String) -> Bool
+}
+
+class LoginViewController: UIViewController {
+    
+    weak var loginDelegate: loginViewControllerDelegate?
     
     var userService: UserService
     
     init() {
+        
 #if DEBUG
         userService = TestUserService()
 #else
@@ -65,7 +72,7 @@ class LogInViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var loginField: UITextField = { [unowned self] in
+    private lazy var loginTextField: UITextField = { [unowned self] in
         let textField = UITextField()
         textField.backgroundColor = UIColor.systemGray6
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -82,7 +89,7 @@ class LogInViewController: UIViewController {
         return textField
     }()
     
-    private lazy var passwordField: UITextField = { [unowned self] in
+    private lazy var passwordTextField: UITextField = { [unowned self] in
         let textField = UITextField()
         textField.backgroundColor = UIColor.systemGray6
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -110,7 +117,7 @@ class LogInViewController: UIViewController {
         button.layer.masksToBounds = true
         button.addTarget(
             self,
-            action: #selector(logInTapped),
+            action: #selector(loginButtonTapped),
             for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -140,17 +147,30 @@ class LogInViewController: UIViewController {
     
     //MARK: - Actions
     
-    @objc func logInTapped() {
-        if let user = userService.checkLogin(login: loginField.text ?? "", password: passwordField.text ?? "") {
+    @objc private func loginButtonTapped() {
+            guard let login = loginTextField.text,
+                  let password = passwordTextField.text,
+                  let delegate = loginDelegate else { return }
             
-            let profileVC = ProfileViewController(user: user)
-            navigationController?.setViewControllers([profileVC], animated: true)
-        } else {
-            let alert = UIAlertController(title: "Unknown login", message: "Please, enter correct login and password", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            self.present(alert, animated: true)
+            let isCorrect = delegate.check(login: login, password: password)
+            if isCorrect {
+
+            } else {
+                // Показывайте ошибку или предупреждение о неверных учетных данных
+            }
         }
-    }
+        
+        
+//        if let user = userService.checkLogin(login: loginField.text ?? "", password: passwordField.text ?? "") {
+//
+//            let profileVC = ProfileViewController(user: user)
+//            navigationController?.setViewControllers([profileVC], animated: true)
+//        } else {
+//            let alert = UIAlertController(title: "Unknown login", message: "Please, enter correct login and password", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+//            self.present(alert, animated: true)
+//        }
+//    }
     
     @objc func willShowKeyboard(_ notification: NSNotification) {
         if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -188,8 +208,8 @@ class LogInViewController: UIViewController {
         logInScrollView.addSubview(contentView)
         contentView.addSubview(logoImageView)
         contentView.addSubview(logInStackView)
-        logInStackView.addArrangedSubview(loginField)
-        logInStackView.addArrangedSubview(passwordField)
+        logInStackView.addArrangedSubview(loginTextField)
+        logInStackView.addArrangedSubview(passwordTextField)
         contentView.addSubview(logInButton)
     }
     
@@ -253,7 +273,7 @@ class LogInViewController: UIViewController {
 
 //MARK: - Delegate
 
-extension LogInViewController: UITextFieldDelegate {
+extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
