@@ -21,6 +21,7 @@ class ProfileViewController: UIViewController {
         init(user: User) {
             self.user = user
             super.init(nibName: nil, bundle: nil)
+            profileTableHeaderView.updateUser(user)
         }
     
     required init?(coder: NSCoder) {

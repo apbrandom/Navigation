@@ -15,8 +15,9 @@ public protocol UserService {
 }
 
 extension UserService {
-    func checkLogin(login: String, password: String) -> User? {
-        return login == user.login && password == password ? user : nil
+    public func checkLogin(login: String, password: String) -> User? {
+        return login == user.login && password == self.password ? user : nil
     }
 }
+
     

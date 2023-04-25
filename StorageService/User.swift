@@ -22,31 +22,15 @@ public class User {
     }
 }
 
-class CurrentUserService: UserService {
-    var password: String = "password"
-    var user = User(login: "user", fullName: "Cat Traveler", avatar: UIImage(named: "cat_image")!, status: "In an active search for a relaxing place")
+public class CurrentUserService: UserService {
+    public var password: String = "password"
+    public var user = User(login: "user", fullName: "Cat Traveler", avatar: UIImage(named: "cat")!, status: "In an active search for a relaxing place")
+    public init() {}
 }
 
-class TestUserService: UserService {
-    var password: String = "password"
-    var user = User(login: "test", fullName: "Cat Tester", avatar: UIImage(named: "cat_image")!, status: "Hello, world!")
+public class TestUserService: UserService {
+    public var password: String = "password"
+    public var user = User(login: "test", fullName: "Cat Tester", avatar: UIImage(named: "cat")!, status: "Hello, world!")
+    
+    public init() {}
 }
-
-//extension User {
-//    public static func createTestUser() -> User {
-//        return User(
-//            login: "test",
-//            fullName: "Cat Tester",
-//            avatar: UIImage(named: "cat")!,
-//            status: "Hello, world!"
-//        )
-//    }
-//
-//    public static func createCurrentuser() -> User {
-//        return User(
-//            login: "user",
-//            fullName: "Cat Traveler",
-//            avatar: UIImage(named: "cat")!,
-//            status: "In an active search for a place")
-//    }
-//}

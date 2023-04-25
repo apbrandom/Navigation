@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import StorageService
 
 class LogInViewController: UIViewController {
     
@@ -85,7 +86,6 @@ class LogInViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = UIColor.systemGray6
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        textField.textColor = .black
         textField.placeholder = "Password"
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
         textField.autocorrectionType = UITextAutocorrectionType.no
@@ -142,49 +142,15 @@ class LogInViewController: UIViewController {
     
     @objc func logInTapped() {
         if let user = userService.checkLogin(login: loginField.text ?? "", password: passwordField.text ?? "") {
+            
             let profileVC = ProfileViewController(user: user)
             navigationController?.setViewControllers([profileVC], animated: true)
         } else {
-            let alert = UIAlertController(title: "Unknown login", message: "Please, enter correct user login and password", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Unknown login", message: "Please, enter correct login and password", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             self.present(alert, animated: true)
         }
     }
-    // Show error if login is empty
-    //        guard let login = loginTextField.text, !login.isEmpty else {
-    //            let alertController = UIAlertController(
-    //                title: nil,
-    //                message: "Please, enter your login" ,
-    //                preferredStyle: .alert
-    //            )
-    //
-    //            let action = UIAlertAction(title: "OK", style: .default)
-    //            alertController.addAction(action)
-    //            present(alertController, animated: true)
-    //            return
-    //        }
-    //
-    //        // Found user, navigate to ProfileViewController
-    //        if let user = currentUserService.getUser(login: login) {
-    //            let profileVC = ProfileViewController()
-    //            profileVC.user = user
-    //
-    //            navigationController?.pushViewController(profileVC, animated: true)
-    //        } else {
-    //
-    //            // Show error if user not found
-    //            let alertController = UIAlertController(
-    //                title: nil,
-    //                message: "User not found",
-    //                preferredStyle: .alert
-    //            )
-    //            let action = UIAlertAction(title: "OK", style: .default)
-    //            alertController.addAction(action)
-    //            present(alertController, animated: true)
-    //            print("User no found")
-    //        }
-    //}
-    
     
     @objc func willShowKeyboard(_ notification: NSNotification) {
         if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -203,7 +169,6 @@ class LogInViewController: UIViewController {
         logInScrollView.contentInset = contentInsets
         logInScrollView.scrollIndicatorInsets = contentInsets
     }
-    
     
     //MARK: - Private
     
@@ -289,10 +254,8 @@ class LogInViewController: UIViewController {
 //MARK: - Delegate
 
 extension LogInViewController: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
         return true
     }
 }

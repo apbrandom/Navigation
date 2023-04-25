@@ -15,6 +15,7 @@ class ProfileTableHeaderView: UIView {
     private var avatarCenterOrigin: CGPoint = .zero
     weak var delegate: ProfileTableHeaderViewDelegate?
     
+    
     //MARK: - Subviews
     
     private lazy var avatarImageView: UIImageView = {
