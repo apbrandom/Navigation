@@ -6,18 +6,32 @@
 //
 
 import Foundation
+import UIKit
 
 public protocol UserService {
     var user: User { get }
-    var password: String { get }
-    
-    func checkLogin(login: String, password: String) -> User?
 }
 
-extension UserService {
-    public func checkLogin(login: String, password: String) -> User? {
-        return login == user.login && password == self.password ? user : nil
+public class User {
+    var login: String = ""
+    public var fullName: String = ""
+    public var avatar: UIImage
+    public var status: String = ""
+    
+    public init(login: String, fullName: String, avatar: UIImage, status: String) {
+        self.login = login
+        self.fullName = fullName
+        self.avatar = avatar
+        self.status = status
     }
 }
 
-    
+public class CurrentUserService: UserService {
+    public var user = User(login: "user", fullName: "Cat Traveler", avatar: UIImage(named: "cat")!, status: "In an active search for a relaxing place")
+    public init() {}
+}
+
+public class TestUserService: UserService {
+    public var user = User(login: "test", fullName: "Cat Tester", avatar: UIImage(named: "cat")!, status: "Hello, world!")
+    public init() {}
+}

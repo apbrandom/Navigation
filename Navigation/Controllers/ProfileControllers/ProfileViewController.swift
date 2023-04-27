@@ -16,25 +16,15 @@ class ProfileViewController: UIViewController {
     fileprivate let postData = Post.make()
     fileprivate let photoData = Photo.make()
     
-    var user: User
-
-        init(user: User) {
-            self.user = user
-            super.init(nibName: nil, bundle: nil)
-            profileTableHeaderView.updateUser(user)
-        }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     //MARK: - Subviews
     
     private lazy var profileTableHeaderView: ProfileTableHeaderView = {
-            let headerView = ProfileTableHeaderView()
-            headerView.translatesAutoresizingMaskIntoConstraints = false
-            return headerView
-        }()
+        let headerView = ProfileTableHeaderView()
+        
+        
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        return headerView
+    }()
     
     private lazy var profileTableView: UITableView = {
         let tableView = UITableView()
@@ -79,6 +69,10 @@ class ProfileViewController: UIViewController {
     
     //MARK: - Action
     
+    func updateUser(_ user: User) {
+            profileTableHeaderView.updateUser(user)
+        }
+    
     @objc func willShowKeyboard(_ notification: NSNotification) {
         let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
         profileTableView.contentInset.bottom += keyboardHeight ?? 0.0
@@ -92,12 +86,12 @@ class ProfileViewController: UIViewController {
     
     private func setupView() {
         
-        #if DEBUG
+#if DEBUG
         view.backgroundColor = .systemBlue
-        #else
+#else
         view.backgroundColor = .secondarySystemBackground
-        #endif
-
+#endif
+        
         tabBarItem = UITabBarItem(
             title: "Feed",
             image: UIImage(systemName: "person"),
@@ -114,7 +108,7 @@ class ProfileViewController: UIViewController {
         profileTableView.rowHeight = UITableView.automaticDimension
         profileTableView.estimatedRowHeight = 500
         
-
+        
         profileTableView.setAndLayout(headerView: profileTableHeaderView)
         profileTableHeaderView.delegate = self
         
@@ -127,11 +121,11 @@ class ProfileViewController: UIViewController {
     
     private func setupConstrains() {
         profileTableView.snp.makeConstraints { make in
-          make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
+            make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
         }
         
         semiTransparentView.snp.makeConstraints { make in
-          make.edges.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
     
