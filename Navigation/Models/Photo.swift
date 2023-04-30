@@ -6,34 +6,36 @@
 //
 
 import Foundation
+import UIKit
 
 struct Photo {
-    var image: String = ""
+    var image = UIImage(named: "")
 }
 
 extension Photo {
-    static func make() -> [Photo] {
-        [
-            Photo(image: "photo_1647"),
-            Photo(image: "photo_2244"),
-            Photo(image: "photo_2259"),
-            Photo(image: "photo_2345"),
-            Photo(image: "photo_2457"),
-            Photo(image: "photo_3023"),
-            Photo(image: "photo_3827"),
-            Photo(image: "photo_5736"),
-            Photo(image: "photo_5760"),
-            Photo(image: "photo_6263"),
-            Photo(image: "photo_6316"),
-            Photo(image: "photo_6365"),
-            Photo(image: "photo_6386"),
-            Photo(image: "photo_6400"),
-            Photo(image: "photo_6684"),
-            Photo(image: "photo_7846"),
-            Photo(image: "photo_8914"),
-            Photo(image: "photo_8935"),
-            Photo(image: "photo_9008"),
-            Photo(image: "photo_9027"),
+    static func make() -> [UIImage] {
+        let imageNames = [
+            "photo_1647",
+            "photo_2244",
+            "photo_2259",
+            "photo_2345",
+            "photo_2457",
+            "photo_3023",
+            "photo_3827",
+            "photo_5736",
+            "photo_5760",
+            "photo_6263",
+            "photo_6316",
+            "photo_6365",
+            "photo_6386",
+            "photo_6400",
+            "photo_6684",
+            "photo_7846",
+            "photo_8914",
+            "photo_8935",
+            "photo_9008",
+            "photo_9027",
         ]
+        return imageNames.compactMap { UIImage(named: $0) }
     }
 }

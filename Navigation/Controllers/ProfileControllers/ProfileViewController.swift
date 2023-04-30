@@ -20,8 +20,6 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileTableHeaderView: ProfileTableHeaderView = {
         let headerView = ProfileTableHeaderView()
-        
-        
         headerView.translatesAutoresizingMaskIntoConstraints = false
         return headerView
     }()

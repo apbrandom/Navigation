@@ -7,6 +7,7 @@
 
 import UIKit
 import StorageService
+//import IQKeyboardManager
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -19,7 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
-    
+        
+        //Create random URL
         if let url = NetworkService.randomURL() {
             NetworkService.request(url: url)
         } else {
@@ -28,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let loginViewController = LoginViewController()
         loginViewController.loginDelegate = loginFactory.makeLoginInspector()
-    
+        
         let controllers = [
             FeedViewController(),
             loginViewController
@@ -44,6 +46,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         
         self.window = window
-        
     }
 }
