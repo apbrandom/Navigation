@@ -102,9 +102,7 @@ class PhotosTableCell: UITableViewCell {
     //MARK: - Public
     
     func update(_ models: [Photo]?) {
-        guard let photos = models else {
-            return
-        }
+        guard let photos = models else { return }
         firstImageView.image = UIImage(named: photos[0].image)
         secondImageView.image = UIImage(named: photos[1].image)
         thirdImageView.image = UIImage(named: photos[2].image)
