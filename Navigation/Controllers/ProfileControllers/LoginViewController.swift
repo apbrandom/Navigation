@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import StorageService
 
 protocol LoginViewControllerDelegate {
     func check(login: String, password: String) -> Bool
