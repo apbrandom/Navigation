@@ -25,7 +25,7 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tuneView()
+        setupView()
         addSubviews()
     }
     
@@ -36,7 +36,7 @@ class InfoViewController: UIViewController {
     
     //MARK: - Private
     
-    private func tuneView() {
+    private func setupView() {
         view.backgroundColor = UIColor.systemBackground
     }
     
@@ -48,10 +48,12 @@ class InfoViewController: UIViewController {
     
     @objc func buttonAlertPressed() {
         let alertController = UIAlertController(title: "Error", message: "You are pressed the button now", preferredStyle: .alert)
+        
         let action0 = UIAlertAction(title: "OK", style: .default)  { (action0) in
             let text = alertController.textFields?.first?.text
             print(text ?? "no text")
         }
+        
         alertController.addTextField { (textFiled) in
             textFiled.placeholder = "Enter your message"
             
@@ -63,6 +65,5 @@ class InfoViewController: UIViewController {
         
         self.present(alertController, animated: true)
     }
-    
 }
 

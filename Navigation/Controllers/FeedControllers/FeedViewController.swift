@@ -9,18 +9,25 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var post = Post?.self
+    let feedModel = FeedModel()
     
     //MARK: - Subviews
     
-    let feedView: UIView = {
+    private lazy var feedView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let postStackView: UIStackView = {
+    private lazy var indicationLabel: UILabel = {
+        let label = CircularLabel()
+        label.backgroundColor = .systemGray2
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var itemsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -29,39 +36,45 @@ class FeedViewController: UIViewController {
         return stackView
     }()
     
+    private lazy var newTextFiled: UITextField = {
+        let textField = UITextField()
+        textField.text = "secret"
+        textField.autocapitalizationType = .none
+        textField.backgroundColor = .systemGray5
+        return textField
+    }()
+    
+    private lazy var checkGuessButton: UIButton = {
+        let button = CustomButton()
+        button.setTitle("Check", for: .normal)
+        
+        button.pressed = {
+            guard let text = self.newTextFiled.text, !text.isEmpty else {return}
+            let isCorect = self.feedModel.check(word: text)
+            self.indicationLabel.backgroundColor = isCorect ? .green : .red
+        }
+        return button
+    }()
+    
     private lazy var firstButton: CustomButton = {
         let button = CustomButton()
         button.setTitle("First Button", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 5
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowRadius = 5
-        button.addTarget(
-            self,
-            action: #selector(firstButtonPressed(_:)),
-            for: .touchUpInside
-        )
+
+        button.pressed = {
+            let postVC = PostViewController()
+            self.navigationController?.pushViewController(postVC, animated: true)
+        }
         return button
     }()
     
     private lazy var secondButton: CustomButton = {
         let button = CustomButton()
         button.setTitle("Second Button", for: .normal)
-        button.tintColor = .systemBackground
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 5
-        button.layer.cornerRadius = 5
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowRadius = 5
-        button.addTarget(
-            self,
-            action: #selector(secondButtonPressed(_:)),
-            for: .touchUpInside
-        )
+
+        button.pressed = {
+            let postVC = PostViewController()
+            self.navigationController?.pushViewController(postVC, animated: true)
+        }
         return button
     }()
     
@@ -78,7 +91,6 @@ class FeedViewController: UIViewController {
     //MARK: - Private
     
     private func setupView() {
-        
         title = "Feed"
         view.backgroundColor = .secondarySystemBackground
         
@@ -91,40 +103,34 @@ class FeedViewController: UIViewController {
     
     private func addSubviews() {
         view.addSubview(feedView)
-        feedView.addSubview(postStackView)
-        postStackView.addArrangedSubview(firstButton)
-        postStackView.addArrangedSubview(secondButton)
-    }
-    
-    //MARK: - Action
-    
-    @objc func firstButtonPressed(_ sender: UIResponder) {
-        let postVC = PostViewController()
-        navigationController?.pushViewController(postVC, animated: true)
-    }
-    
-    @objc func secondButtonPressed(_ sender: UIResponder) {
-        let postVC = PostViewController()
-        navigationController?.pushViewController(postVC, animated: true)
+        feedView.addSubview(itemsStackView)
+        feedView.addSubview(indicationLabel)
+        itemsStackView.addArrangedSubview(newTextFiled)
+        itemsStackView.addArrangedSubview(checkGuessButton)
+        itemsStackView.addArrangedSubview(firstButton)
+        itemsStackView.addArrangedSubview(secondButton)
     }
     
     //MARK: - Layout
     
     func setupConstrains() {
-        NSLayoutConstraint.activate([
-            feedView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            feedView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            feedView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            feedView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+        feedView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
         
-        NSLayoutConstraint.activate([
-            postStackView.centerXAnchor.constraint(equalTo: feedView.centerXAnchor),
-            postStackView.centerYAnchor.constraint(equalTo: feedView.centerYAnchor),
-            postStackView.widthAnchor.constraint(equalToConstant: 270),
-            postStackView.heightAnchor.constraint(equalToConstant: 110),
-        ])
+        indicationLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(feedView.snp.centerX)
+            make.width.height.equalTo(50)
+            make.bottom.equalTo(itemsStackView.snp.top).offset(-90)
+            
+        }
+        
+        itemsStackView.snp.makeConstraints { make in
+            make.centerX.equalTo(feedView.snp.centerX)
+            make.centerY.equalTo(feedView.snp.centerY)
+            make.width.equalTo(270)
+            make.height.equalTo(220)
+        }
     }
-    
 }
 

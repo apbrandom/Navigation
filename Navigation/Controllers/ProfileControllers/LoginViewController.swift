@@ -255,14 +255,12 @@ class LoginViewController: UIViewController {
             make.leading.trailing.equalTo(contentView).inset(16)
         }
         
-        
         logInButton.snp.makeConstraints { make in
             make.top.equalTo(loginStackView.snp.bottom).offset(16)
             make.leading.trailing.equalTo(contentView).inset(16)
             make.height.equalTo(50)
             make.bottom.equalTo(contentView.snp.bottom).offset(-16)
         }
-        
     }
 }
 

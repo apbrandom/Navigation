@@ -9,6 +9,8 @@ import UIKit
 
 class CustomButton: UIButton {
     
+    var pressed: (() -> Void)?
+    
     override var isHighlighted: Bool {
         didSet {
             if (isHighlighted) {
@@ -28,4 +30,37 @@ class CustomButton: UIButton {
             }
         }
     }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setupButton()
+        addTarget(
+            self,
+            action: #selector(buttonPressed),
+            for: .touchUpInside
+        )
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupButton() {
+        tintColor = .systemBackground
+        backgroundColor = .systemBlue
+        layer.cornerRadius = 5
+        layer.cornerRadius = 5
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 4, height: 4)
+        layer.shadowOpacity = 0.7
+        layer.shadowRadius = 5
+    }
+    
+    @objc func buttonPressed() {
+        pressed?()
+    }
+    
+    
 }
