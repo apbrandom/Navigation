@@ -77,6 +77,7 @@ class LoginViewController: UIViewController {
         textField.backgroundColor = UIColor.systemGray6
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         textField.textColor = .black
+        textField.text = "user"
         textField.placeholder = "Email or phone"
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
         textField.autocorrectionType = UITextAutocorrectionType.no
@@ -95,6 +96,7 @@ class LoginViewController: UIViewController {
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         textField.placeholder = "Password"
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
+        textField.text = "password"
         textField.autocorrectionType = UITextAutocorrectionType.no
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done

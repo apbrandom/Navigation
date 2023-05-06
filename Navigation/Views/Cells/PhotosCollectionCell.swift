@@ -40,12 +40,12 @@ class PhotosCollectionCell: UICollectionViewCell {
     
     //MARK: - Public
     
-    func update(_ models: Photo?) {
-        guard let photos = models else {
+    func update(_ model: UIImage?) {
+        guard let photo = model else {
             return
         }
         
-        photoImageView.image = UIImage(named: photos.image)
+        photoImageView.image = photo
     }
     
     //MARK: - Layout

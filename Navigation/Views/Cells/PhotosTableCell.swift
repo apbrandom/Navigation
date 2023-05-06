@@ -101,12 +101,19 @@ class PhotosTableCell: UITableViewCell {
     
     //MARK: - Public
     
-    func update(_ models: [Photo]?) {
-        guard let photos = models else { return }
-        firstImageView.image = UIImage(named: photos[0].image)
-        secondImageView.image = UIImage(named: photos[1].image)
-        thirdImageView.image = UIImage(named: photos[2].image)
-        fourthImageView.image = UIImage(named: photos[3].image)
+    func update(_ models: [UIImage?]) {
+        if let firstImage = models[0] {
+            firstImageView.image = firstImage
+        }
+        if let secondImage = models[1] {
+            secondImageView.image = secondImage
+        }
+        if let thirdImage = models[2] {
+            thirdImageView.image = thirdImage
+        }
+        if let fourthImage = models[3] {
+            fourthImageView.image = fourthImage
+        }
     }
     
     //MARK: - Layout
