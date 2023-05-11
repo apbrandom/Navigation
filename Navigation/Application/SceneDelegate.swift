@@ -11,6 +11,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
+    var applicationCoordinator: ApplicationCoordinator?
+    
     private let loginFactory = MyLoginFactory()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -18,6 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
+        let applicationCoordinator = ApplicationCoordinator(window: window)
+        applicationCoordinator.start()
+            
+        self.window = window
+        self.applicationCoordinator = applicationCoordinator
         
         //Create random URL
         if let url = NetworkService.randomURL() {
@@ -25,24 +32,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             print("Failed to generate random URL")
         }
-        
-        let loginViewController = LoginViewController()
-        loginViewController.loginDelegate = loginFactory.makeLoginInspector()
-        
-        let controllers = [
-            FeedViewController(),
-            loginViewController
-        ]
-        
-        let tabBarVC = UITabBarController()
-        tabBarVC.viewControllers = controllers.map {
-            let _ = $0.view
-            return UINavigationController(rootViewController: $0)
-        }
-        
-        window.rootViewController = tabBarVC
-        window.makeKeyAndVisible()
-        
-        self.window = window
     }
 }

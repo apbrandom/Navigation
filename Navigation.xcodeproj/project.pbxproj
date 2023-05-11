@@ -31,6 +31,9 @@
 		CBB4E7432A06C30400D42679 /* CircularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4E7422A06C30400D42679 /* CircularLabel.swift */; };
 		CBC6EDA029F95995000D509F /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC6ED9D29F88459000D509F /* LoginInspector.swift */; };
 		CBC6EDA229F9D770000D509F /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC6EDA129F9D770000D509F /* LoginFactory.swift */; };
+		CBCABD012A0CC6C30084FDE3 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD002A0CC6C30084FDE3 /* Coordinator.swift */; };
+		CBCABD032A0CD0A90084FDE3 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD022A0CD0A90084FDE3 /* ApplicationCoordinator.swift */; };
+		CBCABD052A0CD5ED0084FDE3 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD042A0CD5ED0084FDE3 /* MainCoordinator.swift */; };
 		CBF33F4729FBF788009FC759 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF3442966E320008400F2 /* Post.swift */; };
 		CBF33F4A29FD9CA1009FC759 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = CBF33F4929FD9CA1009FC759 /* iOSIntPackage */; };
 		CBF621E929A8CE6400119FA8 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF621E829A8CE6400119FA8 /* Reusable.swift */; };
@@ -76,6 +79,9 @@
 		CBB4E7422A06C30400D42679 /* CircularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularLabel.swift; sourceTree = "<group>"; };
 		CBC6ED9D29F88459000D509F /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		CBC6EDA129F9D770000D509F /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
+		CBCABD002A0CC6C30084FDE3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		CBCABD022A0CD0A90084FDE3 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
+		CBCABD042A0CD5ED0084FDE3 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		CBF621E829A8CE6400119FA8 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +143,7 @@
 				CBC6ED9529F87196000D509F /* Views */,
 				CB6AF3472966E34E008400F2 /* Controllers */,
 				CBC6ED9229F86D92000D509F /* Services */,
+				CBCABCFF2A0CC6970084FDE3 /* Protocols */,
 				CBC6ED9429F86EEE000D509F /* Extensions */,
 			);
 			path = Navigation;
@@ -158,6 +165,8 @@
 			children = (
 				CB7AF3082959AE5E005C51F3 /* AppDelegate.swift */,
 				CB7AF30A2959AE5E005C51F3 /* SceneDelegate.swift */,
+				CBCABD022A0CD0A90084FDE3 /* ApplicationCoordinator.swift */,
+				CBCABD042A0CD5ED0084FDE3 /* MainCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -219,6 +228,14 @@
 				CB6AF31F2965D98C008400F2 /* PostViewController.swift */,
 			);
 			path = ProfileControllers;
+			sourceTree = "<group>";
+		};
+		CBCABCFF2A0CC6970084FDE3 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CBCABD002A0CC6C30084FDE3 /* Coordinator.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,6 +331,7 @@
 				CB6AF349296763C7008400F2 /* InfoViewController.swift in Sources */,
 				CB71F6212997883D00DA584D /* CustomButton.swift in Sources */,
 				CB08A49A29A4FAAF00AF49D7 /* Photo.swift in Sources */,
+				CBCABD032A0CD0A90084FDE3 /* ApplicationCoordinator.swift in Sources */,
 				CBF33F4729FBF788009FC759 /* Post.swift in Sources */,
 				CB08A49629A4B3AA00AF49D7 /* PhotosTableCell.swift in Sources */,
 				CBF621E929A8CE6400119FA8 /* Reusable.swift in Sources */,
@@ -321,7 +339,9 @@
 				CB7AF30B2959AE5E005C51F3 /* SceneDelegate.swift in Sources */,
 				CB08A49829A4B58C00AF49D7 /* PhotosViewController.swift in Sources */,
 				CB6AF3202965D98C008400F2 /* PostViewController.swift in Sources */,
+				CBCABD012A0CC6C30084FDE3 /* Coordinator.swift in Sources */,
 				CB08A49429A0C6BA00AF49D7 /* UITableView+Extension.swift in Sources */,
+				CBCABD052A0CD5ED0084FDE3 /* MainCoordinator.swift in Sources */,
 				CB47082029B0BE8200F416F2 /* ProfileTableHeaderViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
