@@ -24,8 +24,11 @@
 		CB7AF30B2959AE5E005C51F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF30A2959AE5E005C51F3 /* SceneDelegate.swift */; };
 		CB7AF30D2959AE5E005C51F3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF30C2959AE5E005C51F3 /* FeedViewController.swift */; };
 		CB7AF3122959AE5E005C51F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB7AF3112959AE5E005C51F3 /* Assets.xcassets */; };
+		CBA56D662A000E5D00947FBF /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0A7C8C29E49A7A002EA335 /* UserService.swift */; };
 		CBA858A929E9966800AC37B2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA858A829E9966800AC37B2 /* NetworkService.swift */; };
 		CBA9547A29E30E2F004E45EB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CBA9547929E30E2F004E45EB /* SnapKit */; };
+		CBB4E7412A06A4BA00D42679 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4E7402A06A4BA00D42679 /* FeedModel.swift */; };
+		CBB4E7432A06C30400D42679 /* CircularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4E7422A06C30400D42679 /* CircularLabel.swift */; };
 		CBC6EDA029F95995000D509F /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC6ED9D29F88459000D509F /* LoginInspector.swift */; };
 		CBC6EDA229F9D770000D509F /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC6EDA129F9D770000D509F /* LoginFactory.swift */; };
 		CBF33F4729FBF788009FC759 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF3442966E320008400F2 /* Post.swift */; };
@@ -69,6 +72,8 @@
 		CB7AF3112959AE5E005C51F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB7AF3162959AE5E005C51F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBA858A829E9966800AC37B2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		CBB4E7402A06A4BA00D42679 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
+		CBB4E7422A06C30400D42679 /* CircularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularLabel.swift; sourceTree = "<group>"; };
 		CBC6ED9D29F88459000D509F /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		CBC6EDA129F9D770000D509F /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		CBF621E829A8CE6400119FA8 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
@@ -92,6 +97,7 @@
 			children = (
 				CB6AF3442966E320008400F2 /* Post.swift */,
 				CB08A49929A4FAAF00AF49D7 /* Photo.swift */,
+				CBB4E7402A06A4BA00D42679 /* FeedModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -189,6 +195,7 @@
 		CBC6ED9729F8722A000D509F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				CBB4E7422A06C30400D42679 /* CircularLabel.swift */,
 				CB71F6202997883D00DA584D /* CustomButton.swift */,
 			);
 			path = Components;
@@ -197,8 +204,8 @@
 		CBC6ED9929F873A1000D509F /* FeedControllers */ = {
 			isa = PBXGroup;
 			children = (
-				CB6AF348296763C7008400F2 /* InfoViewController.swift */,
 				CB7AF30C2959AE5E005C51F3 /* FeedViewController.swift */,
+				CB6AF348296763C7008400F2 /* InfoViewController.swift */,
 			);
 			path = FeedControllers;
 			sourceTree = "<group>";
@@ -296,11 +303,14 @@
 				CB23E9112975996A0081B615 /* ProfileTableHeaderView.swift in Sources */,
 				CB71F61D298E7CA200DA584D /* LoginViewController.swift in Sources */,
 				CB08A492299F7A3200AF49D7 /* PostsTableCell.swift in Sources */,
+				CBB4E7412A06A4BA00D42679 /* FeedModel.swift in Sources */,
 				CBA858A929E9966800AC37B2 /* NetworkService.swift in Sources */,
 				CB08A49E29A67E6F00AF49D7 /* PhotosCollectionCell.swift in Sources */,
+				CBA56D662A000E5D00947FBF /* UserService.swift in Sources */,
 				CBC6EDA029F95995000D509F /* LoginInspector.swift in Sources */,
 				CB7AF3092959AE5E005C51F3 /* AppDelegate.swift in Sources */,
 				CB6AF31E2965B6BF008400F2 /* ProfileViewController.swift in Sources */,
+				CBB4E7432A06C30400D42679 /* CircularLabel.swift in Sources */,
 				CB6AF349296763C7008400F2 /* InfoViewController.swift in Sources */,
 				CB71F6212997883D00DA584D /* CustomButton.swift in Sources */,
 				CB08A49A29A4FAAF00AF49D7 /* Photo.swift in Sources */,

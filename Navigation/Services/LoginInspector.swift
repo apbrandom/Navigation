@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import StorageService
 
 struct LoginInspector: LoginViewControllerDelegate {
     private let checker = Checker.shared

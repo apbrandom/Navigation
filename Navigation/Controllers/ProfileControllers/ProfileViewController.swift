@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import StorageService
 import SnapKit
 
 class ProfileViewController: UIViewController {
@@ -106,7 +105,6 @@ class ProfileViewController: UIViewController {
         profileTableView.rowHeight = UITableView.automaticDimension
         profileTableView.estimatedRowHeight = 500
         
-        
         profileTableView.setAndLayout(headerView: profileTableHeaderView)
         profileTableHeaderView.delegate = self
         
@@ -198,6 +196,7 @@ extension ProfileViewController: UITableViewDataSource {
         }
     }
 }
+
 //MARK: - Delegates
 
 extension ProfileViewController: UITableViewDelegate {}

@@ -34,5 +34,4 @@ class PostViewController: UIViewController {
         let infoVC = InfoViewController()
         navigationController?.pushViewController(infoVC, animated: true)
     }
-    
 }
