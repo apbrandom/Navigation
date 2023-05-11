@@ -46,14 +46,18 @@ class FeedCoordinator: Coordinator {
 class ProfileCoordinator: Coordinator {
     var navigationController: UINavigationController
     var loginInspector: LoginInspector?
+    var userService: UserService
     
-    init(navigationController: UINavigationController = UINavigationController()) {
+    init(navigationController: UINavigationController = UINavigationController(),
+         userService: UserService = CurrentUserService()) {
         self.navigationController = navigationController
+        self.userService = userService
     }
     
     func start() {
-        let loginViewController = LoginViewController()
+        let loginViewController = LoginViewController(userService: userService)
         loginViewController.loginDelegate = loginInspector
         navigationController.pushViewController(loginViewController, animated: false)
     }
 }
+

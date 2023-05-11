@@ -18,12 +18,11 @@ class LoginViewController: UIViewController {
     
     var userService: UserService
     
-    init() {
-        
+    init(userService: UserService) {
 #if DEBUG
-        userService = TestUserService()
+        self.userService = TestUserService()
 #else
-        userService = CurrentUserService()
+        self.userService = CurrentUserService()
 #endif
         super.init(nibName: nil, bundle: nil)
     }
