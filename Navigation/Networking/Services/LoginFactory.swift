@@ -5,7 +5,7 @@
 //  Created by Вадим Виноградов on 27.04.2023.
 //
 
-struct MyLoginFactory {
+struct LoginFactory {
     func makeLoginInspector() -> LoginInspector {
         let checker = Checker()
         return LoginInspector(checker: checker)

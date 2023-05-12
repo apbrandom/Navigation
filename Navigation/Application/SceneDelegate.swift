@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var applicationCoordinator: ApplicationCoordinator?
     
-    private let loginFactory = MyLoginFactory()
+    private let loginFactory = LoginFactory()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         

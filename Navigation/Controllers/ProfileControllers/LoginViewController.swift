@@ -15,15 +15,16 @@ protocol LoginViewControllerDelegate {
 class LoginViewController: UIViewController {
     
     var loginDelegate: LoginViewControllerDelegate?
-    
     var userService: UserService
+
     
-    init(userService: UserService) {
+    init(userService: UserService, loginInspector: LoginInspector) {
 #if DEBUG
         self.userService = TestUserService()
 #else
         self.userService = CurrentUserService()
 #endif
+        self.loginDelegate = loginInspector
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -164,6 +165,7 @@ class LoginViewController: UIViewController {
         let profileVC = ProfileViewController()
         profileVC.updateUser(user)
         navigationController?.pushViewController(profileVC, animated: true)
+     
     }
     
     @objc func willShowKeyboard(_ notification: NSNotification) {

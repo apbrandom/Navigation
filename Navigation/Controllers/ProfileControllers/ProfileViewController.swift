@@ -12,8 +12,7 @@ class ProfileViewController: UIViewController {
     
     //MARK: - Data
     
-    fileprivate let postData = Post.make()
-    fileprivate let photoData = Photo.make()
+    var ViewModel: ProfileViewModel = ProfileViewModel()
     
     //MARK: - Subviews
     
@@ -23,7 +22,7 @@ class ProfileViewController: UIViewController {
         return headerView
     }()
     
-    private lazy var profileTableView: UITableView = {
+    lazy var profileTableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = UIColor.secondarySystemBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,55 +44,44 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupView()
+        configView()
         setupSubviews()
-        setupTableView()
         setupConstrains()
+        keyboardSetup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = true
-        setupKeyboardObservers()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        removeKeyboardObservers()
+        ViewModel.keyboardWillShow = nil
+        ViewModel.keyboardWillHide = nil
     }
     
     //MARK: - Action
     
     func updateUser(_ user: User) {
-            profileTableHeaderView.updateUser(user)
-        }
-    
-    @objc func willShowKeyboard(_ notification: NSNotification) {
-        let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
-        profileTableView.contentInset.bottom += keyboardHeight ?? 0.0
-    }
-    
-    @objc func willHideKeyboard(_ notification: NSNotification) {
-        profileTableView.contentInset.bottom = 0.0
+        profileTableHeaderView.updateUser(user)
     }
     
     //MARK: - Privte
     
-    private func setupView() {
-        
-#if DEBUG
+    private func configView() {
         view.backgroundColor = .systemBlue
-#else
         view.backgroundColor = .secondarySystemBackground
-#endif
-        
-        tabBarItem = UITabBarItem(
-            title: "Feed",
-            image: UIImage(systemName: "person"),
-            tag: 0
-        )
+
+        setupTableView()
+        setupHeaderView()
+    }
+    
+    func setupHeaderView() {
+        profileTableView.setAndLayout(headerView: profileTableHeaderView)
+        profileTableHeaderView.delegate = self
     }
     
     private func setupSubviews() {
@@ -101,19 +89,6 @@ class ProfileViewController: UIViewController {
         view.addSubview(semiTransparentView)
     }
     
-    private func setupTableView() {
-        profileTableView.rowHeight = UITableView.automaticDimension
-        profileTableView.estimatedRowHeight = 500
-        
-        profileTableView.setAndLayout(headerView: profileTableHeaderView)
-        profileTableHeaderView.delegate = self
-        
-        profileTableView.register(PostsTableCell.self, forCellReuseIdentifier: PostsTableCell.indentifire)
-        profileTableView.register(PhotosTableCell.self, forCellReuseIdentifier: PhotosTableCell.indentifire )
-        
-        profileTableView.dataSource = self
-        profileTableView.delegate = self
-    }
     
     private func setupConstrains() {
         profileTableView.snp.makeConstraints { make in
@@ -125,81 +100,21 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    private func setupKeyboardObservers() {
-        let notificationCenter = NotificationCenter.default
-        
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(self.willShowKeyboard(_:)),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(self.willHideKeyboard(_:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-    }
-    
     private func removeKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
     }
-}
-
-//MARK: - UITableViewDataSource
-
-extension ProfileViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        2
-    }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        case 1:
-            return postData.count
-        default:
-            break
+    func keyboardSetup() {
+        ViewModel.keyboardWillShow = { [weak self] keyboardHeight in
+            self?.profileTableView.contentInset.bottom += keyboardHeight
         }
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if postData.count > 0 {
-            if indexPath.section == 0 {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableCell.indentifire, for: indexPath) as? PhotosTableCell else {
-                    fatalError("could not dequeueReusableCell")
-                }
-                cell.update(photoData)
-                cell.selectionStyle = .none
-                cell.tintColor = .black
-                return cell
-            } else {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: PostsTableCell.indentifire, for: indexPath) as? PostsTableCell else {
-                    fatalError("could not dequeueReusableCell")
-                }
-                cell.update(postData[indexPath.row])
-                cell.selectionStyle = .none
-                return cell
-            }
-        }
-        return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            navigationController?.pushViewController(PhotosViewController(), animated: true)
+        
+        ViewModel.keyboardWillHide = { [weak self] in
+            self?.profileTableView.contentInset.bottom = 0.0
         }
     }
 }
-
-//MARK: - Delegates
-
-extension ProfileViewController: UITableViewDelegate {}
 
 extension ProfileViewController: UITextFieldDelegate {
     

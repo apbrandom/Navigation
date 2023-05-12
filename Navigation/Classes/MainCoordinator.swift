@@ -19,7 +19,6 @@ class MainCoordinator: Coordinator {
         feedCoordinator?.start()
         
         profileCoordinator = ProfileCoordinator()
-        profileCoordinator?.loginInspector = loginInspector
         profileCoordinator?.start()
         
         rootViewController.viewControllers = [
@@ -45,19 +44,31 @@ class FeedCoordinator: Coordinator {
 
 class ProfileCoordinator: Coordinator {
     var navigationController: UINavigationController
-    var loginInspector: LoginInspector?
     var userService: UserService
+    var loginFactory: LoginFactory
     
     init(navigationController: UINavigationController = UINavigationController(),
-         userService: UserService = CurrentUserService()) {
+         userService: UserService = CurrentUserService(),
+         loginFactory: LoginFactory = LoginFactory()) {
         self.navigationController = navigationController
         self.userService = userService
+        self.loginFactory = loginFactory
     }
     
     func start() {
-        let loginViewController = LoginViewController(userService: userService)
-        loginViewController.loginDelegate = loginInspector
+        let loginViewController = LoginViewController(
+            userService: userService,
+            loginInspector: loginFactory.makeLoginInspector()
+        )
+        
+        loginViewController.tabBarItem = UITabBarItem(
+                    title: "Feed",
+                    image: UIImage(systemName: "person"),
+                    tag: 0
+                )
+        
         navigationController.pushViewController(loginViewController, animated: false)
     }
 }
+
 

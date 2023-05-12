@@ -34,6 +34,8 @@
 		CBCABD012A0CC6C30084FDE3 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD002A0CC6C30084FDE3 /* Coordinator.swift */; };
 		CBCABD032A0CD0A90084FDE3 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD022A0CD0A90084FDE3 /* ApplicationCoordinator.swift */; };
 		CBCABD052A0CD5ED0084FDE3 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD042A0CD5ED0084FDE3 /* MainCoordinator.swift */; };
+		CBCABD0B2A0E92650084FDE3 /* ProfileViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD0A2A0E92650084FDE3 /* ProfileViewController+TableView.swift */; };
+		CBCABD0D2A0E97D90084FDE3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD0C2A0E97D90084FDE3 /* ProfileViewModel.swift */; };
 		CBF33F4729FBF788009FC759 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF3442966E320008400F2 /* Post.swift */; };
 		CBF33F4A29FD9CA1009FC759 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = CBF33F4929FD9CA1009FC759 /* iOSIntPackage */; };
 		CBF621E929A8CE6400119FA8 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF621E829A8CE6400119FA8 /* Reusable.swift */; };
@@ -82,6 +84,8 @@
 		CBCABD002A0CC6C30084FDE3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		CBCABD022A0CD0A90084FDE3 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		CBCABD042A0CD5ED0084FDE3 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		CBCABD0A2A0E92650084FDE3 /* ProfileViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController+TableView.swift"; sourceTree = "<group>"; };
+		CBCABD0C2A0E97D90084FDE3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CBF621E829A8CE6400119FA8 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,14 +141,16 @@
 			isa = PBXGroup;
 			children = (
 				CBC6ED9329F86E52000D509F /* Application */,
-				CB7AF3112959AE5E005C51F3 /* Assets.xcassets */,
-				CB7AF3162959AE5E005C51F3 /* Info.plist */,
-				CB6AF3462966E32C008400F2 /* Models */,
-				CBC6ED9529F87196000D509F /* Views */,
-				CB6AF3472966E34E008400F2 /* Controllers */,
-				CBC6ED9229F86D92000D509F /* Services */,
+				CBCABD062A0E845B0084FDE3 /* Networking */,
+				CBCABD092A0E85720084FDE3 /* Classes */,
 				CBCABCFF2A0CC6970084FDE3 /* Protocols */,
 				CBC6ED9429F86EEE000D509F /* Extensions */,
+				CBCABD082A0E852D0084FDE3 /* ViewModel */,
+				CB6AF3472966E34E008400F2 /* Controllers */,
+				CBC6ED9529F87196000D509F /* Views */,
+				CB6AF3462966E32C008400F2 /* Models */,
+				CBCABD072A0E84B70084FDE3 /* Resources */,
+				CB7AF3162959AE5E005C51F3 /* Info.plist */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -153,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				CB0A7C8C29E49A7A002EA335 /* UserService.swift */,
-				CBA858A829E9966800AC37B2 /* NetworkService.swift */,
 				CBC6ED9D29F88459000D509F /* LoginInspector.swift */,
 				CBC6EDA129F9D770000D509F /* LoginFactory.swift */,
 			);
@@ -165,8 +170,6 @@
 			children = (
 				CB7AF3082959AE5E005C51F3 /* AppDelegate.swift */,
 				CB7AF30A2959AE5E005C51F3 /* SceneDelegate.swift */,
-				CBCABD022A0CD0A90084FDE3 /* ApplicationCoordinator.swift */,
-				CBCABD042A0CD5ED0084FDE3 /* MainCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -184,7 +187,6 @@
 		CBC6ED9529F87196000D509F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CB23E9102975996A0081B615 /* ProfileTableHeaderView.swift */,
 				CBC6ED9729F8722A000D509F /* Components */,
 				CBC6ED9629F871BA000D509F /* Cells */,
 			);
@@ -224,6 +226,8 @@
 			children = (
 				CB71F61C298E7CA200DA584D /* LoginViewController.swift */,
 				CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */,
+				CBCABD0A2A0E92650084FDE3 /* ProfileViewController+TableView.swift */,
+				CB23E9102975996A0081B615 /* ProfileTableHeaderView.swift */,
 				CB08A49729A4B58C00AF49D7 /* PhotosViewController.swift */,
 				CB6AF31F2965D98C008400F2 /* PostViewController.swift */,
 			);
@@ -236,6 +240,40 @@
 				CBCABD002A0CC6C30084FDE3 /* Coordinator.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CBCABD062A0E845B0084FDE3 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				CBA858A829E9966800AC37B2 /* NetworkService.swift */,
+				CBC6ED9229F86D92000D509F /* Services */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		CBCABD072A0E84B70084FDE3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CB7AF3112959AE5E005C51F3 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CBCABD082A0E852D0084FDE3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CBCABD0C2A0E97D90084FDE3 /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CBCABD092A0E85720084FDE3 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CBCABD022A0CD0A90084FDE3 /* ApplicationCoordinator.swift */,
+				CBCABD042A0CD5ED0084FDE3 /* MainCoordinator.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,6 +356,7 @@
 			files = (
 				CB7AF30D2959AE5E005C51F3 /* FeedViewController.swift in Sources */,
 				CB23E9112975996A0081B615 /* ProfileTableHeaderView.swift in Sources */,
+				CBCABD0D2A0E97D90084FDE3 /* ProfileViewModel.swift in Sources */,
 				CB71F61D298E7CA200DA584D /* LoginViewController.swift in Sources */,
 				CB08A492299F7A3200AF49D7 /* PostsTableCell.swift in Sources */,
 				CBB4E7412A06A4BA00D42679 /* FeedModel.swift in Sources */,
@@ -342,6 +381,7 @@
 				CBCABD012A0CC6C30084FDE3 /* Coordinator.swift in Sources */,
 				CB08A49429A0C6BA00AF49D7 /* UITableView+Extension.swift in Sources */,
 				CBCABD052A0CD5ED0084FDE3 /* MainCoordinator.swift in Sources */,
+				CBCABD0B2A0E92650084FDE3 /* ProfileViewController+TableView.swift in Sources */,
 				CB47082029B0BE8200F416F2 /* ProfileTableHeaderViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

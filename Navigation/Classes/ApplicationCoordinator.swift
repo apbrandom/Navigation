@@ -15,7 +15,7 @@ class ApplicationCoordinator: Coordinator {
     init(window: UIWindow) {
             self.window = window
             self.mainCoordinator = MainCoordinator()
-            self.loginInspector = MyLoginFactory().makeLoginInspector()
+            self.loginInspector = LoginFactory().makeLoginInspector()
         }
 
     func start() {
