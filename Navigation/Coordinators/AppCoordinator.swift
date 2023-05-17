@@ -8,7 +8,7 @@
 import UIKit
 
 class AppCoordinator: Coordinatable {
-
+    
     var childCoordinators = [Coordinatable]()
     var tabBarController: UITabBarController
     
@@ -19,11 +19,16 @@ class AppCoordinator: Coordinatable {
     func start() {
         let feedNC = UINavigationController()
         let feedCoordinator = FeedCoordinator(navigationController: feedNC)
+        feedCoordinator.parentCoordinator = self
         feedCoordinator.start()
         childCoordinators.append(feedCoordinator)
         
+        let userService: UserService = CurrentUserService()
+        let loginFactory = LoginFactory()
+
         let profileNC = UINavigationController()
-        let profileCoordinator = ProfileCoordinator(navigationController: profileNC)
+        let profileCoordinator = ProfileCoordinator(navigationController: profileNC, userService: userService, loginFactory: loginFactory)
+        
         profileCoordinator.start()
         childCoordinators.append(profileCoordinator)
         
@@ -32,5 +37,7 @@ class AppCoordinator: Coordinatable {
             profileCoordinator.navigationController
         ]
     }
+    
+    func finish() {}
 }
 

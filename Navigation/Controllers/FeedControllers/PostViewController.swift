@@ -20,6 +20,14 @@ class PostViewController: UIViewController {
         addSubview()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if isMovingFromParent {
+            coordinator?.finish()
+        }
+    }
+
+    
     //MARK: - Private
     
     private func tuneView() {

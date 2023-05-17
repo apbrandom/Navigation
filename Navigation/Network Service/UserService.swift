@@ -9,6 +9,7 @@ import UIKit
 
 public protocol UserService {
     var user: User { get }
+    var isAuthorized: Bool { get set }
 }
 
 public class User {
@@ -26,11 +27,13 @@ public class User {
 }
 
 public class CurrentUserService: UserService {
+    public var isAuthorized: Bool = false
     public var user = User(login: "user", fullName: "Cat Traveler", avatar: UIImage(named: "cat")!, status: "In an active search for a relaxing place")
     public init() {}
 }
 
 public class TestUserService: UserService {
+    public var isAuthorized: Bool = false
     public var user = User(login: "test", fullName: "Cat Tester", avatar: UIImage(named: "cat")!, status: "Hello, world!")
     public init() {}
 }

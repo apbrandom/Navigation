@@ -9,8 +9,9 @@ import UIKit
 
 protocol Coordinatable: AnyObject {
     var childCoordinators: [Coordinatable] { get set }
-    
+
     func start()
+    func finish()
 }
 
 protocol FeedCoordinatable: Coordinatable {
@@ -19,24 +20,11 @@ protocol FeedCoordinatable: Coordinatable {
 }
 
 protocol ProfileCoordinatable: Coordinatable {
-    func navigateToProfileVC()
+    func loginWith(_ login: String, _ password: String)
 }
 
-class MainCoordinator: Coordinatable {
-    var childCoordinators = [Coordinatable]()
-
-    func start() {
-        fatalError("Start method should be implemented.")
-    }
-    
-    func finish() {
-        fatalError("Finish method should be implemented.")
-    }
-
+extension Coordinatable {
     func addChildCoordinator(_ coordinator: Coordinatable) {
-        for element in childCoordinators {
-            if element === coordinator { return }
-        }
         childCoordinators.append(coordinator)
     }
 

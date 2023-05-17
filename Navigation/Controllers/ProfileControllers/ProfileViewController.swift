@@ -10,8 +10,7 @@ import SnapKit
 
 class ProfileViewController: UIViewController {
     
-    //MARK: - Data
-    
+    weak var coordinator: ProfileCoordinatable?
     var ViewModel: ProfileViewModel = ProfileViewModel()
     
     //MARK: - Subviews

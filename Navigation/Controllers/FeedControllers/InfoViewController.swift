@@ -35,6 +35,13 @@ class InfoViewController: UIViewController {
         alertButton.center = view.center
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if isMovingFromParent {
+            coordinator?.finish()
+        }
+    }
+    
     
     //MARK: - Private
     
