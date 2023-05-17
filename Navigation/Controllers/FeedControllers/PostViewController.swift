@@ -9,6 +9,8 @@ import UIKit
 
 class PostViewController: UIViewController {
     
+    weak var coordinator: FeedCoordinatable?
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -21,7 +23,7 @@ class PostViewController: UIViewController {
     //MARK: - Private
     
     private func tuneView() {
-        view.backgroundColor = UIColor.darkGray
+        view.backgroundColor = .cyan
     }
     
     private func addSubview() {
@@ -31,7 +33,6 @@ class PostViewController: UIViewController {
     //MARK: - Action
     
     @objc func infoBarButtonItemPressed() {
-        let infoVC = InfoViewController()
-        navigationController?.pushViewController(infoVC, animated: true)
+        coordinator?.navigateToInfoVC()
     }
 }

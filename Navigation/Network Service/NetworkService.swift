@@ -8,6 +8,9 @@
 import Foundation
 
 struct NetworkService {
+    
+    //Create random URL
+
     static func randomURL() -> URL? {
         let urlStrings = [
             "https://swapi.dev/api/people/8",

@@ -2,7 +2,7 @@
 //  FeedModel.swift
 //  Navigation
 //
-//  Created by Вадим Виноградов on 06.05.2023.
+//  Created by Вадим Виноградов on 16.05.2023.
 //
 
 import Foundation

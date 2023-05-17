@@ -9,7 +9,8 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    let feedModel = FeedModel()
+    weak var coordinator: FeedCoordinatable?
+    let viewModel = FeedViewModel()
     
     //MARK: - Subviews
     
@@ -50,7 +51,7 @@ class FeedViewController: UIViewController {
         
         button.pressed = {
             guard let text = self.newTextFiled.text, !text.isEmpty else {return}
-            let isCorect = self.feedModel.check(word: text)
+            let isCorect = self.viewModel.checkWord(text)
             self.indicationLabel.backgroundColor = isCorect ? .green : .red
         }
         return button
@@ -59,22 +60,14 @@ class FeedViewController: UIViewController {
     private lazy var firstButton: CustomButton = {
         let button = CustomButton()
         button.setTitle("First Button", for: .normal)
-
-        button.pressed = {
-            let postVC = PostViewController()
-            self.navigationController?.pushViewController(postVC, animated: true)
-        }
+        button.pressed = { self.coordinator?.navigateToPostVC() }
         return button
     }()
     
     private lazy var secondButton: CustomButton = {
         let button = CustomButton()
         button.setTitle("Second Button", for: .normal)
-
-        button.pressed = {
-            let postVC = PostViewController()
-            self.navigationController?.pushViewController(postVC, animated: true)
-        }
+        button.pressed = { self.coordinator?.navigateToPostVC() }
         return button
     }()
     
@@ -91,14 +84,7 @@ class FeedViewController: UIViewController {
     //MARK: - Private
     
     private func setupView() {
-        title = "Feed"
         view.backgroundColor = .secondarySystemBackground
-        
-        tabBarItem = UITabBarItem(
-            title: "Feed",
-            image: UIImage(systemName: "house"),
-            tag: 0
-        )
     }
     
     private func addSubviews() {

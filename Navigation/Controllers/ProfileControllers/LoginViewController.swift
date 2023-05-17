@@ -17,7 +17,6 @@ class LoginViewController: UIViewController {
     var loginDelegate: LoginViewControllerDelegate?
     var userService: UserService
 
-    
     init(userService: UserService, loginInspector: LoginInspector) {
 #if DEBUG
         self.userService = TestUserService()

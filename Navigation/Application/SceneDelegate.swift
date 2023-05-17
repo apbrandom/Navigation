@@ -11,20 +11,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    var applicationCoordinator: ApplicationCoordinator?
+    var appCoordinator: AppCoordinator?
     
     private let loginFactory = LoginFactory()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let tabBarController = UITabBarController()
         
-        guard let scene = (scene as? UIWindowScene) else { return }
+        appCoordinator = AppCoordinator(tabBarController: tabBarController)
+        appCoordinator?.start()
         
-        let window = UIWindow(windowScene: scene)
-        let applicationCoordinator = ApplicationCoordinator(window: window)
-        applicationCoordinator.start()
-            
-        self.window = window
-        self.applicationCoordinator = applicationCoordinator
+        window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
         
         //Create random URL
         if let url = NetworkService.randomURL() {
