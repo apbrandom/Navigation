@@ -40,4 +40,3 @@ class AppCoordinator: Coordinatable {
     
     func finish() {}
 }
-

@@ -13,6 +13,8 @@
 		CB08A49829A4B58C00AF49D7 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49729A4B58C00AF49D7 /* PhotosViewController.swift */; };
 		CB08A49A29A4FAAF00AF49D7 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49929A4FAAF00AF49D7 /* Photo.swift */; };
 		CB08A49E29A67E6F00AF49D7 /* PhotosCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49D29A67E6F00AF49D7 /* PhotosCollectionCell.swift */; };
+		CB1EA5BF2A162C3300C0053D /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EA5BE2A162C3300C0053D /* FeedCoordinator.swift */; };
+		CB1EA5C12A162C6D00C0053D /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EA5C02A162C6D00C0053D /* ProfileCoordinator.swift */; };
 		CB23E9112975996A0081B615 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB23E9102975996A0081B615 /* ProfileTableHeaderView.swift */; };
 		CB47082029B0BE8200F416F2 /* ProfileTableHeaderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47081F29B0BE8200F416F2 /* ProfileTableHeaderViewDelegate.swift */; };
 		CB6AF31E2965B6BF008400F2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */; };
@@ -34,7 +36,6 @@
 		CBC6EDA229F9D770000D509F /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC6EDA129F9D770000D509F /* LoginFactory.swift */; };
 		CBCABD012A0CC6C30084FDE3 /* Coordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD002A0CC6C30084FDE3 /* Coordinatable.swift */; };
 		CBCABD032A0CD0A90084FDE3 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD022A0CD0A90084FDE3 /* AppCoordinator.swift */; };
-		CBCABD052A0CD5ED0084FDE3 /* MainCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD042A0CD5ED0084FDE3 /* MainCoordinators.swift */; };
 		CBCABD0B2A0E92650084FDE3 /* ProfileViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD0A2A0E92650084FDE3 /* ProfileViewController+TableView.swift */; };
 		CBCABD0D2A0E97D90084FDE3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD0C2A0E97D90084FDE3 /* ProfileViewModel.swift */; };
 		CBF33F4729FBF788009FC759 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF3442966E320008400F2 /* Post.swift */; };
@@ -63,6 +64,8 @@
 		CB08A49929A4FAAF00AF49D7 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		CB08A49D29A67E6F00AF49D7 /* PhotosCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionCell.swift; sourceTree = "<group>"; };
 		CB0A7C8C29E49A7A002EA335 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		CB1EA5BE2A162C3300C0053D /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		CB1EA5C02A162C6D00C0053D /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		CB23E9102975996A0081B615 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		CB47081F29B0BE8200F416F2 /* ProfileTableHeaderViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderViewDelegate.swift; sourceTree = "<group>"; };
 		CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -85,7 +88,6 @@
 		CBC6EDA129F9D770000D509F /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		CBCABD002A0CC6C30084FDE3 /* Coordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinatable.swift; sourceTree = "<group>"; };
 		CBCABD022A0CD0A90084FDE3 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		CBCABD042A0CD5ED0084FDE3 /* MainCoordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinators.swift; sourceTree = "<group>"; };
 		CBCABD0A2A0E92650084FDE3 /* ProfileViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController+TableView.swift"; sourceTree = "<group>"; };
 		CBCABD0C2A0E97D90084FDE3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CBF621E829A8CE6400119FA8 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
@@ -161,7 +163,8 @@
 			children = (
 				CBCABD002A0CC6C30084FDE3 /* Coordinatable.swift */,
 				CBCABD022A0CD0A90084FDE3 /* AppCoordinator.swift */,
-				CBCABD042A0CD5ED0084FDE3 /* MainCoordinators.swift */,
+				CB1EA5BE2A162C3300C0053D /* FeedCoordinator.swift */,
+				CB1EA5C02A162C6D00C0053D /* ProfileCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -343,11 +346,13 @@
 			files = (
 				CB7AF30D2959AE5E005C51F3 /* FeedViewController.swift in Sources */,
 				CB23E9112975996A0081B615 /* ProfileTableHeaderView.swift in Sources */,
+				CB1EA5BF2A162C3300C0053D /* FeedCoordinator.swift in Sources */,
 				CBCABD0D2A0E97D90084FDE3 /* ProfileViewModel.swift in Sources */,
 				CB71F61D298E7CA200DA584D /* LoginViewController.swift in Sources */,
 				CB08A492299F7A3200AF49D7 /* PostsTableCell.swift in Sources */,
 				CBA858A929E9966800AC37B2 /* NetworkService.swift in Sources */,
 				CB08A49E29A67E6F00AF49D7 /* PhotosCollectionCell.swift in Sources */,
+				CB1EA5C12A162C6D00C0053D /* ProfileCoordinator.swift in Sources */,
 				CB8E2BEB2A13B9F700F0E708 /* FeedModel.swift in Sources */,
 				CBA56D662A000E5D00947FBF /* UserService.swift in Sources */,
 				CBC6EDA029F95995000D509F /* LoginInspector.swift in Sources */,
@@ -368,7 +373,6 @@
 				CB6AF3202965D98C008400F2 /* PostViewController.swift in Sources */,
 				CBCABD012A0CC6C30084FDE3 /* Coordinatable.swift in Sources */,
 				CB08A49429A0C6BA00AF49D7 /* UITableView+Extension.swift in Sources */,
-				CBCABD052A0CD5ED0084FDE3 /* MainCoordinators.swift in Sources */,
 				CBCABD0B2A0E92650084FDE3 /* ProfileViewController+TableView.swift in Sources */,
 				CB47082029B0BE8200F416F2 /* ProfileTableHeaderViewDelegate.swift in Sources */,
 			);

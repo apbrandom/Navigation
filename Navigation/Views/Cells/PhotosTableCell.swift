@@ -134,5 +134,4 @@ class PhotosTableCell: UITableViewCell {
             photoStackView.heightAnchor.constraint(equalToConstant: 70)
         ])
     }
-    
 }
