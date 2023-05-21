@@ -14,11 +14,6 @@ class PhotosViewController: UIViewController {
     
     var viewModel = PhotosViewModel()
     
-//    var photoData = Photo.make()
-    
-//    private let imagePublicsherFacade = ImagePublisherFacade()
-//    private let imageProcessor = ImageProcessor()
-    
     //MARK: - Subviews
     
     private lazy var photoCollectionView: UICollectionView = {
@@ -100,12 +95,12 @@ extension PhotosViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionCell.identifier, for: indexPath) as? PhotosCollectionCell
         
         cell?.update(UIImage(systemName: "questionmark"))
-        
         let photo = viewModel.getPhotoDataAt(indexPath)
         
         viewModel.proccesImages(photo: photo, complition: { processedImage in
             cell?.update(processedImage)
         })
+        
         return cell ?? UICollectionViewCell()
     }
 }
