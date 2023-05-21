@@ -34,6 +34,7 @@
 		CBB4E7432A06C30400D42679 /* CircularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4E7422A06C30400D42679 /* CircularLabel.swift */; };
 		CBC6EDA029F95995000D509F /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC6ED9D29F88459000D509F /* LoginInspector.swift */; };
 		CBC6EDA229F9D770000D509F /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC6EDA129F9D770000D509F /* LoginFactory.swift */; };
+		CBC90FA62A1A79D500545FC3 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC90FA52A1A79D500545FC3 /* PhotosViewModel.swift */; };
 		CBCABD012A0CC6C30084FDE3 /* Coordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD002A0CC6C30084FDE3 /* Coordinatable.swift */; };
 		CBCABD032A0CD0A90084FDE3 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD022A0CD0A90084FDE3 /* AppCoordinator.swift */; };
 		CBCABD0B2A0E92650084FDE3 /* ProfileViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD0A2A0E92650084FDE3 /* ProfileViewController+TableView.swift */; };
@@ -86,6 +87,7 @@
 		CBB4E7422A06C30400D42679 /* CircularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularLabel.swift; sourceTree = "<group>"; };
 		CBC6ED9D29F88459000D509F /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		CBC6EDA129F9D770000D509F /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
+		CBC90FA52A1A79D500545FC3 /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
 		CBCABD002A0CC6C30084FDE3 /* Coordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinatable.swift; sourceTree = "<group>"; };
 		CBCABD022A0CD0A90084FDE3 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		CBCABD0A2A0E92650084FDE3 /* ProfileViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController+TableView.swift"; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			children = (
 				CB8E2BE82A13AD8600F0E708 /* FeedViewModel.swift */,
 				CBCABD0C2A0E97D90084FDE3 /* ProfileViewModel.swift */,
+				CBC90FA52A1A79D500545FC3 /* PhotosViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				CB8E2BE92A13AD8600F0E708 /* FeedViewModel.swift in Sources */,
 				CBC6EDA229F9D770000D509F /* LoginFactory.swift in Sources */,
 				CB7AF30B2959AE5E005C51F3 /* SceneDelegate.swift in Sources */,
+				CBC90FA62A1A79D500545FC3 /* PhotosViewModel.swift in Sources */,
 				CB08A49829A4B58C00AF49D7 /* PhotosViewController.swift in Sources */,
 				CB6AF3202965D98C008400F2 /* PostViewController.swift in Sources */,
 				CBCABD012A0CC6C30084FDE3 /* Coordinatable.swift in Sources */,

@@ -40,12 +40,8 @@ class PhotosCollectionCell: UICollectionViewCell {
     
     //MARK: - Public
     
-    func update(_ model: UIImage?) {
-        guard let photo = model else {
-            return
-        }
-        
-        photoImageView.image = photo
+    public func update(_ image: UIImage?) {
+        photoImageView.image = image
     }
     
     //MARK: - Layout
