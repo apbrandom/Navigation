@@ -9,7 +9,7 @@ import UIKit
 
 class CustomButton: UIButton {
     
-    var pressed: (() -> Void)?
+    var pressed: (() -> Void)? = nil
     
     override var isHighlighted: Bool {
         didSet {
@@ -35,16 +35,13 @@ class CustomButton: UIButton {
         super.init(frame: frame)
         
         setupButton()
-        addTarget(
-            self,
-            action: #selector(buttonPressed),
-            for: .touchUpInside
-        )
+        addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        self.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
     func setupButton() {

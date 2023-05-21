@@ -9,6 +9,8 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
+    weak var coordinator: FeedCoordinator?
+    
     private lazy var alertButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 140, height: 45))
         button.layer.cornerRadius = 10
@@ -33,11 +35,18 @@ class InfoViewController: UIViewController {
         alertButton.center = view.center
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if isMovingFromParent {
+            coordinator?.finish()
+        }
+    }
+    
     
     //MARK: - Private
     
     private func setupView() {
-        view.backgroundColor = UIColor.systemBackground
+        view.backgroundColor = .systemPink
     }
     
     private func addSubviews() {

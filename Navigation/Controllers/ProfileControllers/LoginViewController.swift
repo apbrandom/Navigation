@@ -15,16 +15,12 @@ protocol LoginViewControllerDelegate {
 class LoginViewController: UIViewController {
     
     var loginDelegate: LoginViewControllerDelegate?
-    
     var userService: UserService
-    
-    init() {
-        
-#if DEBUG
-        userService = TestUserService()
-#else
-        userService = CurrentUserService()
-#endif
+    weak var coordinator: ProfileCoordinatable?
+
+    init(userService: UserService, loginInspector: LoginInspector) {
+        self.userService = userService
+        self.loginDelegate = loginInspector
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -149,24 +145,12 @@ class LoginViewController: UIViewController {
     //MARK: - Actions
     
     @objc private func loginButtonTapped() {
-        
         guard let login = loginTextField.text,
-              let password = passwordTextField.text,
-              let loginDelegate = loginDelegate, loginDelegate.check(login: login, password: password)
-                
-        else {
-            let alert = UIAlertController(title: "Unknown login", message: "Please, enter correct login and password", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            self.present(alert, animated: true)
-            return
-        }
-        
-        let user = userService.user
-        let profileVC = ProfileViewController()
-        profileVC.updateUser(user)
-        navigationController?.pushViewController(profileVC, animated: true)
+              let password = passwordTextField.text
+        else { return }
+        coordinator?.loginWith(login, password)
     }
-    
+
     @objc func willShowKeyboard(_ notification: NSNotification) {
         if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let keyboardHeight = keyboardFrame.height

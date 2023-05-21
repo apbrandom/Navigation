@@ -5,14 +5,9 @@
 //  Created by Вадим Виноградов on 27.04.2023.
 //
 
-import Foundation
-
-protocol LoginFactory {
-    func makeLoginInspector() -> LoginInspector
-}
-
-struct MyLoginFactory: LoginFactory {
+struct LoginFactory {
     func makeLoginInspector() -> LoginInspector {
-        return LoginInspector()
+        let checker = Checker()
+        return LoginInspector(checker: checker)
     }
 }
