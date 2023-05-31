@@ -6,17 +6,14 @@
 //
 
 import UIKit
-import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
-//MARK: - Data
+    //MARK: - Properties
     
-    var photoData = Photo.make()
+    var viewModel = PhotosViewModel()
     
-    private let imagePublicsherFacade = ImagePublisherFacade()
-    
-//MARK: - Subviews
+    //MARK: - Subviews
     
     private lazy var photoCollectionView: UICollectionView = {
         let viewLayout = UICollectionViewFlowLayout()
@@ -40,12 +37,11 @@ class PhotosViewController: UIViewController {
         return collectionView
     }()
     
-//MARK: - Lifecycle
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imagePublicsherFacadeTimer()
         setupView()
         setupCollectionView()
         setupLayouts()
@@ -57,13 +53,7 @@ class PhotosViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        imagePublicsherFacade.removeSubscription(for: self)
-    }
-    
-//MARK: - Private
+    //MARK: - Private
     
     private func setupView() {
         navigationItem.title = "Photo Gallery"
@@ -76,21 +66,15 @@ class PhotosViewController: UIViewController {
             PhotosCollectionCell.self,
             forCellWithReuseIdentifier: PhotosCollectionCell.identifier
         )
-        
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
-    }
-    
-    private func imagePublicsherFacadeTimer() {
-        imagePublicsherFacade.subscribe(self)
-        imagePublicsherFacade.addImagesWithTimer(time: 0.5, repeat: photoData.count, userImages: photoData)
     }
     
     private enum LayoutConstant {
         static let spacing: CGFloat = 8.0
     }
     
-//MARK: - layout
+    //MARK: - layout
     
     private func setupLayouts() {
         photoCollectionView.snp.makeConstraints { make in
@@ -103,15 +87,20 @@ class PhotosViewController: UIViewController {
 
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoData.count
+        return viewModel.getPhotoDataCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionCell.identifier, for: indexPath) as! PhotosCollectionCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionCell.identifier, for: indexPath) as? PhotosCollectionCell
         
-        let photo = photoData[indexPath.item]
-        cell.update(photo)
-        return cell
+        cell?.update(UIImage(systemName: "questionmark"))
+        let photo = viewModel.getPhotoDataAt(indexPath)
+        
+        viewModel.proccesImages(photo: photo, complition: { processedImage in
+            cell?.update(processedImage)
+        })
+        
+        return cell ?? UICollectionViewCell()
     }
 }
 
@@ -119,15 +108,6 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width - 4 * LayoutConstant.spacing) / 3
         return CGSize(width: width, height: width)
-    }
-}
-
-extension PhotosViewController: ImageLibrarySubscriber {
-    func receive(images: [UIImage]) {
-        DispatchQueue.main.async {
-            self.photoData = images
-            self.photoCollectionView.reloadData()
-        }
     }
 }
 

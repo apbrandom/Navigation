@@ -5,6 +5,8 @@
 //  Created by Вадим Виноградов on 25.04.2023.
 //
 
+import Foundation
+
 struct LoginInspector: LoginViewControllerDelegate {
     private let checker: Checker
 

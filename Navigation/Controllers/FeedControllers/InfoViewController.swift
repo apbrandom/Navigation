@@ -42,7 +42,6 @@ class InfoViewController: UIViewController {
         }
     }
     
-    
     //MARK: - Private
     
     private func setupView() {

@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import StorageService
 
 class ProfileTableHeaderView: UIView {
     

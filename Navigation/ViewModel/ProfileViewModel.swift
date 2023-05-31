@@ -5,7 +5,6 @@
 //  Created by Вадим Виноградов on 12.05.2023.
 //
 
-import Foundation
 import UIKit
 
 class ProfileViewModel {
