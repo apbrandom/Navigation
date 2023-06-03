@@ -10,9 +10,10 @@ import UIKit
 class FeedViewController: UIViewController {
     
     weak var coordinator: FeedCoordinatable?
-    let viewModel = FeedViewModel()
+    private let viewModel = FeedViewModel()
     private let passwordCracking = PasswordCrack()
-    var passwordToCrack: String = ""
+    private var passwordToCrack: String = ""
+    private var timer: Timer?
     
     //MARK: - Subviews
     
@@ -21,6 +22,16 @@ class FeedViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    private lazy var timerLabel: UILabel = {
+        let label = UILabel()
+        label.text = "00:00"
+        label.font = UIFont(name: "Courier", size: 25)
+        label.textColor = UIColor.gray.withAlphaComponent(0.9)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var statusPasswordLabel: UILabel = {
@@ -64,17 +75,42 @@ class FeedViewController: UIViewController {
         let button = CustomButton()
         button.setTitle("Generate and Crack", for: .normal)
         button.pressed = { [self] in
+            
+            // Reset timer
+            timer?.invalidate()
+            timerLabel.text = "0"
+            statusPasswordLabel.backgroundColor = .gray
+            
+            // Generate Random Password
             self.passwordToCrack = self.passwordCracking.generateRandomPassword(length: 4)
             passwordTextField.isSecureTextEntry = true
             passwordTextField.text = passwordToCrack
             activityIndicator.startAnimating()
-        
+            
+            // Start timer
+            var milliSecond = 0
+            var second = 0
+            timer = Timer(timeInterval: 0.01, repeats: true) { timer in
+                milliSecond += 1
+                if milliSecond == 100 {
+                    second += 1
+                    milliSecond = 0
+                }
+                DispatchQueue.main.async {
+                    self.timerLabel.text = String(format: "%02d:%02d", second, milliSecond)
+                }
+            }
+            
+            RunLoop.current.add(timer!, forMode: .common)
+            
             DispatchQueue.global().async { [weak self] in
                 self?.passwordCracking.bruteForce(passwordToUnlock: self?.passwordToCrack ?? "")
                 DispatchQueue.main.async {
                     self?.activityIndicator.stopAnimating()
                     self?.passwordTextField.isSecureTextEntry = false
                     self?.statusPasswordLabel.backgroundColor = .green
+                    self?.timerLabel.textColor = .red
+                    self?.timer?.invalidate() // Stop timer
                 }
             }
         }
@@ -106,6 +142,7 @@ class FeedViewController: UIViewController {
     
     private func addSubviews() {
         view.addSubview(feedView)
+        feedView.addSubview(timerLabel)
         feedView.addSubview(itemsStackView)
         feedView.addSubview(statusPasswordLabel)
         feedView.addSubview(activityIndicator)
@@ -122,21 +159,26 @@ class FeedViewController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.equalTo(feedView.snp.centerX)
+            make.top.equalTo(feedView.snp.top).offset(40)
+        }
+        
+        timerLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(feedView.snp.centerX)
+            make.top.equalTo(statusPasswordLabel.snp.bottom).offset(20)
+        }
+        
         statusPasswordLabel.snp.makeConstraints { make in
             make.centerX.equalTo(feedView.snp.centerX)
             make.width.height.equalTo(50)
             make.top.equalTo(feedView.snp.top).offset(90)
         }
         
-        activityIndicator.snp.makeConstraints { make in
-            make.centerX.equalTo(feedView.snp.centerX)
-            make.bottom.equalTo(itemsStackView.snp.top).offset(-45)
-        }
-        
         itemsStackView.snp.makeConstraints { make in
             make.centerX.equalTo(feedView.snp.centerX)
             make.centerY.equalTo(feedView.snp.centerY)
-            make.width.equalTo(270)
+            make.width.equalTo(330)
             make.height.equalTo(220)
         }
     }

@@ -25,8 +25,10 @@ class PhotosViewModel {
         let startTime = Date()
         imagePrecessor.processImagesOnThread(sourceImages: [photo], filter: .chrome, qos: .userInteractive, completion: { processedImages in
             let endTime = Date()
+            
             let timeInterval = endTime.timeIntervalSince(startTime)
             print("Time to process images with QoS userInteractive: \(timeInterval) seconds")
+            
             DispatchQueue.main.async {
                 if let processedCGImage = processedImages.first {
                     let processedUImage = UIImage(cgImage: processedCGImage!)

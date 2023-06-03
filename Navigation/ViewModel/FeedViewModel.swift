@@ -8,7 +8,6 @@
 import Foundation
 
 class FeedViewModel {
-    
     var feedModel = FeedModel()
 
     func checkWord(_ word: String) -> Bool {
