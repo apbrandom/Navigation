@@ -11,6 +11,8 @@ class FeedViewController: UIViewController {
     
     weak var coordinator: FeedCoordinatable?
     let viewModel = FeedViewModel()
+    private let passwordCracking = PasswordCrack()
+    var passwordToCrack: String = ""
     
     //MARK: - Subviews
     
@@ -21,11 +23,17 @@ class FeedViewController: UIViewController {
         return view
     }()
     
-    private lazy var indicationLabel: UILabel = {
+    private lazy var statusPasswordLabel: UILabel = {
         let label = CircularLabel()
         label.backgroundColor = .systemGray2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        return indicator
     }()
     
     private lazy var itemsStackView: UIStackView = {
@@ -37,36 +45,45 @@ class FeedViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var newTextFiled: UITextField = {
+    private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.text = "secret"
+        textField.text = "test"
+        textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
         textField.backgroundColor = .systemGray5
         return textField
     }()
     
-    private lazy var checkGuessButton: UIButton = {
+    private lazy var checkButton: UIButton = {
         let button = CustomButton()
         button.setTitle("Check", for: .normal)
+        return button
+    }()
+    
+    private lazy var generateAndCrackButton: CustomButton = {
+        let button = CustomButton()
+        button.setTitle("Generate and Crack", for: .normal)
+        button.pressed = { [self] in
+            self.passwordToCrack = self.passwordCracking.generateRandomPassword(length: 4)
+            passwordTextField.isSecureTextEntry = true
+            passwordTextField.text = passwordToCrack
+            activityIndicator.startAnimating()
         
-        button.pressed = {
-            guard let text = self.newTextFiled.text, !text.isEmpty else {return}
-            let isCorect = self.viewModel.checkWord(text)
-            self.indicationLabel.backgroundColor = isCorect ? .green : .red
+            DispatchQueue.global().async { [weak self] in
+                self?.passwordCracking.bruteForce(passwordToUnlock: self?.passwordToCrack ?? "")
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopAnimating()
+                    self?.passwordTextField.isSecureTextEntry = false
+                    self?.statusPasswordLabel.backgroundColor = .green
+                }
+            }
         }
         return button
     }()
     
-    private lazy var firstButton: CustomButton = {
+    private lazy var postVCButton: CustomButton = {
         let button = CustomButton()
-        button.setTitle("First Button", for: .normal)
-        button.pressed = { self.coordinator?.navigateToPostVC() }
-        return button
-    }()
-    
-    private lazy var secondButton: CustomButton = {
-        let button = CustomButton()
-        button.setTitle("Second Button", for: .normal)
+        button.setTitle("PostVC", for: .normal)
         button.pressed = { self.coordinator?.navigateToPostVC() }
         return button
     }()
@@ -90,11 +107,12 @@ class FeedViewController: UIViewController {
     private func addSubviews() {
         view.addSubview(feedView)
         feedView.addSubview(itemsStackView)
-        feedView.addSubview(indicationLabel)
-        itemsStackView.addArrangedSubview(newTextFiled)
-        itemsStackView.addArrangedSubview(checkGuessButton)
-        itemsStackView.addArrangedSubview(firstButton)
-        itemsStackView.addArrangedSubview(secondButton)
+        feedView.addSubview(statusPasswordLabel)
+        feedView.addSubview(activityIndicator)
+        itemsStackView.addArrangedSubview(passwordTextField)
+        itemsStackView.addArrangedSubview(checkButton)
+        itemsStackView.addArrangedSubview(generateAndCrackButton)
+        itemsStackView.addArrangedSubview(postVCButton)
     }
     
     //MARK: - Layout
@@ -104,11 +122,15 @@ class FeedViewController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
-        indicationLabel.snp.makeConstraints { make in
+        statusPasswordLabel.snp.makeConstraints { make in
             make.centerX.equalTo(feedView.snp.centerX)
             make.width.height.equalTo(50)
-            make.bottom.equalTo(itemsStackView.snp.top).offset(-90)
-            
+            make.top.equalTo(feedView.snp.top).offset(90)
+        }
+        
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.equalTo(feedView.snp.centerX)
+            make.bottom.equalTo(itemsStackView.snp.top).offset(-45)
         }
         
         itemsStackView.snp.makeConstraints { make in
