@@ -27,7 +27,7 @@ public class User {
 
 public class CurrentUserService: UserService {
     public var isAuthorized: Bool = false
-    public var user = User(login: "user", fullName: "Cat Traveler", avatar: UIImage(named: "cat")!, status: "In an active search for a relaxing place")
+    public var user = User(login: "user", fullName: "Cat Traveler", avatar: UIImage(named: "cat")!, status: "In an active search")
     public init() {}
 }
 

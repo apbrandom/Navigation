@@ -93,7 +93,6 @@ extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionCell.identifier, for: indexPath) as? PhotosCollectionCell
         
-        cell?.update(UIImage(systemName: "questionmark"))
         let photo = viewModel.getPhotoDataAt(indexPath)
         
         viewModel.proccesImages(photo: photo, complition: { processedImage in
