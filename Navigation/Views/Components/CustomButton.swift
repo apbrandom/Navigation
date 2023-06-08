@@ -48,7 +48,6 @@ class CustomButton: UIButton {
         let image = UIImage(named: "blue_pixel")
         setBackgroundImage(image, for: .normal)
         tintColor = .white
-//        backgroundColor = .systemBlue
         layer.cornerRadius = 10
         layer.masksToBounds = true
         layer.shadowColor = UIColor.black.cgColor

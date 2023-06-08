@@ -88,13 +88,7 @@ class ProfileTableHeaderView: UIView {
     
     lazy var setStatusButton: CustomButton = {
         let button = CustomButton()
-//        button.layer.cornerRadius = 12
-//        button.backgroundColor = .systemBlue
         button.setTitle("Set Status", for: .normal)
-//        button.layer.shadowColor = UIColor.black.cgColor
-//        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-//        button.layer.shadowOpacity = 0.7
-//        button.layer.shadowRadius = 4
         button.addTarget(
             self,
             action: #selector(setButtonPressed),
@@ -237,15 +231,11 @@ class ProfileTableHeaderView: UIView {
         }
     }
     
-    
-    
     func updateUser(_ user: User) {
         avatarImageView.image = user.avatar
         fullNameLabel.text = user.fullName
         statusLabel.text = user.status
     }
-    
-    
     
     private func showSemiTransparentView() {
         delegate?.showSemiTransparentView()
@@ -254,9 +244,6 @@ class ProfileTableHeaderView: UIView {
     private func hideSemiTransparentView() {
         delegate?.hideSemiTransparentView()
     }
-    
-    //MARK: - Action
-    
 }
 
 //MARK: - UITextFieldDeligate

@@ -25,10 +25,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         //Create random URL
-        if let url = NetworkService.randomURL() {
-            NetworkService.request(url: url)
-        } else {
-            print("Failed to generate random URL")
-        }
+//        if let url = NetworkService.randomURL() {
+//            NetworkService.request(url: url)
+//        } else {
+//            print("Failed to generate random URL")
+//        }
     }
 }

@@ -18,7 +18,7 @@ class AppCoordinator: Coordinatable {
     
     func start() {
         let feedNC = UINavigationController()
-        let feedCoordinator = FeedCoordinator(navigationController: feedNC)
+        let feedCoordinator = FeedCoordinator(navigationController: feedNC, networkService: NetworkService())
         feedCoordinator.parentCoordinator = self
         feedCoordinator.start()
         childCoordinators.append(feedCoordinator)
