@@ -10,6 +10,8 @@ import SnapKit
 
 class InfoViewController: UIViewController {
     
+    var residents = ["hello", "second"]
+    
     weak var coordinator: FeedCoordinator?
     let networkService: NetworkService
     
@@ -22,21 +24,36 @@ class InfoViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private lazy var titleLabel: UILabel = {
+    //MARK: - Subviews
+    
+    private lazy var orbitalPeriodLabel: UILabel = {
         let label = UILabel()
-        label.text = "HELLLLOOOOO"
+        label.text = "Orbital Period"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var jsonLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Waiting for ID"
         label.numberOfLines = 0
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private lazy var alertButton: CustomButton = {
+    lazy var alertButton: CustomButton = {
         let button = CustomButton()
-        button.setTitle("Press me!", for: .normal)
+        button.setTitle("Click to get a response from the server", for: .normal)
         button.pressed = { self.buttonAlertPressed() }
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    lazy var residentsTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }()
     
     override func viewDidLoad() {
@@ -44,6 +61,9 @@ class InfoViewController: UIViewController {
         
         setupView()
         setupSubviews()
+        setupTableView()
+        
+        requiestDataOrbitalPeriod()
     }
     
     override func viewDidLayoutSubviews() {
@@ -75,11 +95,12 @@ class InfoViewController: UIViewController {
                 self.showErrorMessage()
                 return
             }
+            
             guard let userUrl = networkService.urlForUser(withId: enteredId) else { return }
             networkService.request(url: userUrl) { answer in
                 DispatchQueue.main.async {
                     if let answer = answer {
-                        self.titleLabel.text = answer
+                        self.jsonLabel.text = answer
                     }
                 }
             }
@@ -116,17 +137,28 @@ class InfoViewController: UIViewController {
     }
     
     private func setupSubviews() {
-        view.addSubview(titleLabel)
+        view.addSubview(jsonLabel)
         view.addSubview(alertButton)
+        view.addSubview(orbitalPeriodLabel)
+        view.addSubview(residentsTableView)
         
         setupLayout()
+    }
+    
+    private func requiestDataOrbitalPeriod() {
+        networkService.requestPlanetData() { planetData in
+            DispatchQueue.main.async {
+                if let planetData = planetData {
+                    self.orbitalPeriodLabel.text = "Orbital Period \(planetData)"
+                }
+            }
+        }
     }
     
     //MARK: - Layout
     
     private func setupLayout() {
-        titleLabel.snp.makeConstraints { make in
-//            make.centerX.equalToSuperview()
+        jsonLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview().offset(-75)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
@@ -134,12 +166,15 @@ class InfoViewController: UIViewController {
         
         alertButton.snp.makeConstraints { make in
             make.height.equalTo(50)
-            make.top.equalTo(titleLabel.snp.bottom).offset(75)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+            make.top.equalTo(jsonLabel.snp.bottom).offset(75)
+            make.width.equalTo(350)
+        }
+        
+        orbitalPeriodLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(jsonLabel.snp.top).offset(-50)
         }
     }
-    
 }
 
 

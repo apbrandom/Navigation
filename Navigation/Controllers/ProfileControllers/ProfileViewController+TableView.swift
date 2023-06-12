@@ -20,8 +20,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func registerCells() {
-        profileTableView.register(PostsTableCell.self, forCellReuseIdentifier: PostsTableCell.indentifire)
-        profileTableView.register(PhotosTableCell.self, forCellReuseIdentifier: PhotosTableCell.indentifire )
+        profileTableView.register(
+            PostsTableCell.self,
+            forCellReuseIdentifier: PostsTableCell.indentifire
+        )
+        profileTableView.register(
+            PhotosTableCell.self,
+            forCellReuseIdentifier: PhotosTableCell.indentifire
+        )
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
