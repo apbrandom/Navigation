@@ -10,10 +10,12 @@ import SnapKit
 
 class InfoViewController: UIViewController {
     
-    var residents = ["hello", "second"]
+    //MARK: - Data
+    
+    private let networkService: NetworkService
+    internal var residents = [Resident]()
     
     weak var coordinator: FeedCoordinator?
-    let networkService: NetworkService
     
     init(networkService: NetworkService) {
         self.networkService = networkService
@@ -52,6 +54,7 @@ class InfoViewController: UIViewController {
     
     lazy var residentsTableView: UITableView = {
         let tableView = UITableView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ResidentCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -90,7 +93,7 @@ class InfoViewController: UIViewController {
             guard let text = alertController.textFields?.first?.text,
                   let enteredId = Int(text),
                   1...200 ~= enteredId
-            
+                    
             else {
                 self.showErrorMessage()
                 return
@@ -149,7 +152,14 @@ class InfoViewController: UIViewController {
         networkService.requestPlanetData() { planetData in
             DispatchQueue.main.async {
                 if let planetData = planetData {
-                    self.orbitalPeriodLabel.text = "Orbital Period \(planetData)"
+                    self.orbitalPeriodLabel.text = "Orbital Period \(planetData.orbitalPeriod)"
+                    
+                    self.networkService.fetchResidents(for: planetData) { residents in
+                        if let residents = residents {
+                            self.residents = residents
+                            self.residentsTableView.reloadData()
+                        }
+                    }
                 }
             }
         }
@@ -159,15 +169,13 @@ class InfoViewController: UIViewController {
     
     private func setupLayout() {
         jsonLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview().offset(-75)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+            make.centerY.equalTo(view.safeAreaLayoutGuide).offset(-75)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
         }
         
         alertButton.snp.makeConstraints { make in
-            make.height.equalTo(50)
             make.top.equalTo(jsonLabel.snp.bottom).offset(75)
-            make.width.equalTo(350)
         }
         
         orbitalPeriodLabel.snp.makeConstraints { make in

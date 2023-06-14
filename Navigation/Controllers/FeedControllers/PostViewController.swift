@@ -28,7 +28,6 @@ class PostViewController: UIViewController {
         }
     }
 
-    
     //MARK: - Private
     
     private func tuneView() {

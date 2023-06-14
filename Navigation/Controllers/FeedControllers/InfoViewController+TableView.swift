@@ -9,15 +9,15 @@ import UIKit
 
 extension InfoViewController: UITableViewDataSource, UITableViewDelegate {
     
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         residents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ResidentCell", for: indexPath)
-        cell.textLabel?.text = residents[indexPath]
-        return UITableViewCell()
+        
+        cell.textLabel?.text = residents[indexPath.row].name
+        return cell
     }
     
     func setupTableView() {
@@ -34,8 +34,7 @@ extension InfoViewController: UITableViewDataSource, UITableViewDelegate {
    private func setupLayout() {
         residentsTableView.snp.makeConstraints { make in
             make.top.equalTo(alertButton.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }

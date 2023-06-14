@@ -28,7 +28,7 @@
 		CB7AF30D2959AE5E005C51F3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF30C2959AE5E005C51F3 /* FeedViewController.swift */; };
 		CB7AF3122959AE5E005C51F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB7AF3112959AE5E005C51F3 /* Assets.xcassets */; };
 		CB83B76F2A337AD100D0086D /* JsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB83B76E2A337AD100D0086D /* JsonData.swift */; };
-		CB83B7712A337B1A00D0086D /* PlanetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB83B7702A337B1A00D0086D /* PlanetData.swift */; };
+		CB83B7712A337B1A00D0086D /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB83B7702A337B1A00D0086D /* Planet.swift */; };
 		CB83B7772A37D04800D0086D /* InfoViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB83B7762A37D04800D0086D /* InfoViewController+TableView.swift */; };
 		CB8E2BE92A13AD8600F0E708 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E2BE82A13AD8600F0E708 /* FeedViewModel.swift */; };
 		CB8E2BEB2A13B9F700F0E708 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E2BEA2A13B9F700F0E708 /* FeedModel.swift */; };
@@ -87,7 +87,7 @@
 		CB7AF3112959AE5E005C51F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB7AF3162959AE5E005C51F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB83B76E2A337AD100D0086D /* JsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonData.swift; sourceTree = "<group>"; };
-		CB83B7702A337B1A00D0086D /* PlanetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetData.swift; sourceTree = "<group>"; };
+		CB83B7702A337B1A00D0086D /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		CB83B7762A37D04800D0086D /* InfoViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InfoViewController+TableView.swift"; sourceTree = "<group>"; };
 		CB8E2BE82A13AD8600F0E708 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		CB8E2BEA2A13B9F700F0E708 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
@@ -266,7 +266,7 @@
 			children = (
 				CBA858A829E9966800AC37B2 /* NetworkService.swift */,
 				CB83B76E2A337AD100D0086D /* JsonData.swift */,
-				CB83B7702A337B1A00D0086D /* PlanetData.swift */,
+				CB83B7702A337B1A00D0086D /* Planet.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -384,7 +384,7 @@
 				CB6AF31E2965B6BF008400F2 /* ProfileViewController.swift in Sources */,
 				CBB4E7432A06C30400D42679 /* CircularLabel.swift in Sources */,
 				CB6AF349296763C7008400F2 /* InfoViewController.swift in Sources */,
-				CB83B7712A337B1A00D0086D /* PlanetData.swift in Sources */,
+				CB83B7712A337B1A00D0086D /* Planet.swift in Sources */,
 				CB83B76F2A337AD100D0086D /* JsonData.swift in Sources */,
 				CB71F6212997883D00DA584D /* CustomButton.swift in Sources */,
 				CB08A49A29A4FAAF00AF49D7 /* Photo.swift in Sources */,

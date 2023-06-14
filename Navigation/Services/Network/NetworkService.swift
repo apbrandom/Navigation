@@ -9,10 +9,20 @@ import Foundation
 
 class NetworkService {
     
-    // для первой задачи
+    let group = DispatchGroup()
+    
+    func urlForUser(withId: Int) -> URL? {
+        return URL(string: "https://jsonplaceholder.typicode.com/todos/\(withId)")
+    }
+    
+    func urlPlanetInstance() -> URL? {
+        return URL(string: "https://swapi.dev/api/planets/1")
+    }
+    
+    // Task #1
     func request(url: URL, completion: @escaping (String?) -> Void) {
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             if let error = error {
                 print("Error: \(error.localizedDescription)")
@@ -42,13 +52,13 @@ class NetworkService {
         task.resume()
     }
     
-    // Задача 2
-    func requestPlanetData(completion: @escaping (String?) -> Void) {
+    // Task #2
+    func requestPlanetData(completion: @escaping (Planet?) -> Void) {
         guard let url = urlPlanetInstance() else {
             completion(nil)
             return
         }
-
+        
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 print("Error: \(error)")
@@ -57,8 +67,28 @@ class NetworkService {
                 let decoder = JSONDecoder()
                 do {
                     let planetData = try decoder.decode(Planet.self, from: data)
-
-                    completion(planetData.orbitalPeriod)
+            
+                    completion(planetData)
+                } catch {
+                    print("Decoding error: \(error)")
+                    completion(nil)
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    //Task #3
+    func fetchResidentData(url: URL, completion: @escaping (Resident?) -> Void) {
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print("Error: \(error)")
+                completion(nil)
+            } else if let data = data {
+                let decoder = JSONDecoder()
+                do {
+                    let residentData = try decoder.decode(Resident.self, from: data)
+                    completion(residentData)
                 } catch {
                     print("Decoding error: \(error)")
                     completion(nil)
@@ -68,11 +98,21 @@ class NetworkService {
         task.resume()
     }
 
-    func urlForUser(withId: Int) -> URL? {
-        return URL(string: "https://jsonplaceholder.typicode.com/todos/\(withId)")
-    }
-    
-    func urlPlanetInstance() -> URL? {
-        return URL(string: "https://swapi.dev/api/planets/1")
+    func fetchResidents(for planet: Planet, completion: @escaping ([Resident]?) -> Void) {
+        var residents = [Resident]()
+        
+        for url in planet.residents {
+            group.enter()
+            fetchResidentData(url: url) { resident in
+                if let resident = resident {
+                    residents.append(resident)
+                }
+                self.group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            completion(residents)
+        }
     }
 }

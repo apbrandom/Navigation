@@ -31,12 +31,15 @@ class CustomButton: UIButton {
         }
     }
     
+    override var intrinsicContentSize: CGSize {
+            return CGSize(width: 350, height: 50)
+        }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupViewButton()
         addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -59,6 +62,4 @@ class CustomButton: UIButton {
     @objc func buttonPressed() {
         pressed?()
     }
-    
-    
 }
