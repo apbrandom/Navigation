@@ -100,6 +100,7 @@ class InfoViewController: UIViewController {
             }
             
             guard let userUrl = networkService.urlForUser(withId: enteredId) else { return }
+            
             networkService.request(url: userUrl) { answer in
                 DispatchQueue.main.async {
                     if let answer = answer {
