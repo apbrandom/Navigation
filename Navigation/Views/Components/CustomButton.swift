@@ -34,7 +34,7 @@ class CustomButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupButton()
+        setupViewButton()
         addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         
     }
@@ -44,11 +44,13 @@ class CustomButton: UIButton {
         self.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
-    func setupButton() {
-        tintColor = .systemBackground
-        backgroundColor = .systemBlue
-        layer.cornerRadius = 5
-        layer.cornerRadius = 5
+    func setupViewButton() {
+        let image = UIImage(named: "blue_pixel")
+        setBackgroundImage(image, for: .normal)
+        tintColor = .white
+//        backgroundColor = .systemBlue
+        layer.cornerRadius = 10
+        layer.masksToBounds = true
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 4, height: 4)
         layer.shadowOpacity = 0.7

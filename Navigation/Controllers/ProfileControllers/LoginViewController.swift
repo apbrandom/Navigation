@@ -106,12 +106,7 @@ class LoginViewController: UIViewController {
     
     private lazy var logInButton: CustomButton = {
         let button = CustomButton()
-        let image = UIImage(named: "blue_pixel")
-        button.setBackgroundImage(image, for: .normal)
         button.setTitle("Log in", for: .normal)
-        button.tintColor = .white
-        button.layer.cornerRadius = 10
-        button.layer.masksToBounds = true
         button.addTarget(
             self,
             action: #selector(loginButtonTapped),

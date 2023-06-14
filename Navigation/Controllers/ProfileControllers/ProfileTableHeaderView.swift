@@ -88,16 +88,16 @@ class ProfileTableHeaderView: UIView {
     
     lazy var setStatusButton: CustomButton = {
         let button = CustomButton()
-        button.layer.cornerRadius = 12
-        button.backgroundColor = .systemBlue
+//        button.layer.cornerRadius = 12
+//        button.backgroundColor = .systemBlue
         button.setTitle("Set Status", for: .normal)
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowRadius = 4
+//        button.layer.shadowColor = UIColor.black.cgColor
+//        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+//        button.layer.shadowOpacity = 0.7
+//        button.layer.shadowRadius = 4
         button.addTarget(
             self,
-            action: #selector(didAvatarImageTaped),
+            action: #selector(setButtonPressed),
             for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -117,64 +117,7 @@ class ProfileTableHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Private
-    
-    private func setupSubviews() {
-        addSubview(setStatusButton)
-        addSubview(infoStackView)
-        infoStackView.addArrangedSubview(fullNameLabel)
-        infoStackView.addArrangedSubview(statusLabel)
-        infoStackView.addArrangedSubview(statusTextField)
-        addSubview(avatarImageView)
-        addSubview(closeButton)
-    }
-    
-    // MARK: - Layout
-    
-    override var intrinsicContentSize: CGSize {
-        CGSize(
-            width: UIView.noIntrinsicMetric,
-            height: 220.0
-        )
-    }
-    
-    private func setupConstarins() {
-        avatarImageView.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().offset(16)
-            make.width.height.equalTo(120)
-        }
-        
-        setStatusButton.snp.makeConstraints { make in
-            make.top.equalTo(avatarImageView.snp.bottom).offset(16)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(50)
-        }
-        
-        infoStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(27)
-            make.bottom.equalTo(setStatusButton.snp.top).offset(-16)
-            make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-        }
-        
-        statusTextField.snp.makeConstraints { make in
-            make.height.equalTo(40)
-        }
-        
-        closeButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-        }
-    }
-    
     //MARK: - Action
-    
-    func updateUser(_ user: User) {
-        avatarImageView.image = user.avatar
-        fullNameLabel.text = user.fullName
-        statusLabel.text = user.status
-    }
     
     @objc private func statusTextChanged(_ textField: UITextField) {
         if let text = statusTextField.text {
@@ -184,14 +127,7 @@ class ProfileTableHeaderView: UIView {
     
     @objc private func setButtonPressed(_ textField: UITextField) {
         statusLabel.text = statusText
-    }
-    
-    private func showSemiTransparentView() {
-        delegate?.showSemiTransparentView()
-    }
-    
-    private func hideSemiTransparentView() {
-        delegate?.hideSemiTransparentView()
+        statusTextField.text = ""
     }
     
     @objc private func didAvatarImageTaped() {
@@ -249,6 +185,78 @@ class ProfileTableHeaderView: UIView {
                 }
             })
     }
+    
+    //MARK: - Private
+    
+    private func setupSubviews() {
+        addSubview(setStatusButton)
+        addSubview(infoStackView)
+        infoStackView.addArrangedSubview(fullNameLabel)
+        infoStackView.addArrangedSubview(statusLabel)
+        infoStackView.addArrangedSubview(statusTextField)
+        addSubview(avatarImageView)
+        addSubview(closeButton)
+    }
+    
+    // MARK: - Layout
+    
+    override var intrinsicContentSize: CGSize {
+        CGSize(
+            width: UIView.noIntrinsicMetric,
+            height: 220.0
+        )
+    }
+    
+    private func setupConstarins() {
+        avatarImageView.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().offset(16)
+            make.width.height.equalTo(120)
+        }
+        
+        setStatusButton.snp.makeConstraints { make in
+            make.top.equalTo(avatarImageView.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(50)
+        }
+        
+        infoStackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(27)
+            make.bottom.equalTo(setStatusButton.snp.top).offset(-16)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        
+        statusTextField.snp.makeConstraints { make in
+            make.height.equalTo(40)
+        }
+        
+        closeButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+    }
+    
+    
+    
+    func updateUser(_ user: User) {
+        avatarImageView.image = user.avatar
+        fullNameLabel.text = user.fullName
+        statusLabel.text = user.status
+    }
+    
+    
+    
+    private func showSemiTransparentView() {
+        delegate?.showSemiTransparentView()
+    }
+    
+    private func hideSemiTransparentView() {
+        delegate?.hideSemiTransparentView()
+    }
+    
+    //MARK: - Action
+    
 }
 
 //MARK: - UITextFieldDeligate
