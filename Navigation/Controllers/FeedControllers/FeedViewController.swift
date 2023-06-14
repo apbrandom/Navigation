@@ -145,7 +145,6 @@ class FeedViewController: UIViewController {
         feedView.addSubview(timerLabel)
         feedView.addSubview(itemsStackView)
         feedView.addSubview(statusPasswordLabel)
-//        feedView.addSubview(activityIndicator)
         itemsStackView.addArrangedSubview(passwordTextField)
         passwordTextField.addSubview(activityIndicator)
         itemsStackView.addArrangedSubview(checkButton)
