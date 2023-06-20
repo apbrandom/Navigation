@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import FirebaseAuth
 
 protocol LoginViewControllerDelegate {
     func check(login: String, password: String) -> Bool
@@ -16,8 +17,9 @@ class LoginViewController: UIViewController {
     
     var loginDelegate: LoginViewControllerDelegate?
     var userService: UserService
+    var keyboardManager: KeyboardManager?
     weak var coordinator: ProfileCoordinatable?
-
+    
     init(userService: UserService, loginInspector: LoginInspector) {
         self.userService = userService
         self.loginDelegate = loginInspector
@@ -67,51 +69,36 @@ class LoginViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var loginTextField: UITextField = { [unowned self] in
-        let textField = UITextField()
-        textField.backgroundColor = UIColor.systemGray6
-        textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        textField.textColor = .black
+    private lazy var loginTextField: CustomTextField = { [unowned self] in
+        let textField = CustomTextField()
         textField.text = "user"
         textField.placeholder = "Email or phone"
-        textField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
-        textField.autocorrectionType = UITextAutocorrectionType.no
-        textField.keyboardType = UIKeyboardType.default
-        textField.clearButtonMode = UITextField.ViewMode.whileEditing
-        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        textField.autocapitalizationType = .none
         textField.delegate = self
-        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
-    private lazy var passwordTextField: UITextField = { [unowned self] in
-        let textField = UITextField()
-        textField.backgroundColor = UIColor.systemGray6
-        textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+    private lazy var passwordTextField: CustomTextField = { [unowned self] in
+        let textField = CustomTextField()
         textField.placeholder = "Password"
-        textField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
         textField.text = "password"
-        textField.autocorrectionType = UITextAutocorrectionType.no
-        textField.keyboardType = UIKeyboardType.default
-        textField.returnKeyType = UIReturnKeyType.done
-        textField.clearButtonMode = UITextField.ViewMode.whileEditing
-        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        textField.autocapitalizationType = .none
         textField.isSecureTextEntry = true
         textField.delegate = self
-        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
-    private lazy var logInButton: CustomButton = {
+    private lazy var signInButton: CustomButton = {
         let button = CustomButton()
-        button.setTitle("Log in", for: .normal)
-        button.addTarget(
-            self,
-            action: #selector(loginButtonTapped),
-            for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Sign In", for: .normal)
+        button.pressed = { self.signInButtonTapped() }
+        return button
+    }()
+    
+    private lazy var signUpButton: CustomButton = {
+        let button = CustomButton()
+        button.setBackgroundImage(.none, for: .normal)
+        button.setTitle("Sign Up", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.pressed = { self.signUpButtonTapped() }
         return button
     }()
     
@@ -125,43 +112,30 @@ class LoginViewController: UIViewController {
         setupConstraints()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        setupKeyboardObservers()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        removeKeyboardObservers()
-    }
-    
     //MARK: - Actions
     
-    @objc private func loginButtonTapped() {
+    @objc private func signInButtonTapped() {
         guard let login = loginTextField.text,
               let password = passwordTextField.text
         else { return }
         coordinator?.loginWith(login, password)
     }
-
-    @objc func willShowKeyboard(_ notification: NSNotification) {
-        if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let keyboardHeight = keyboardFrame.height
-            let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
-            
-            loginScrollView.contentInset = contentInsets
-            loginScrollView.scrollIndicatorInsets = contentInsets
-            loginScrollView.scrollRectToVisible(logInButton.frame, animated: true)
-        }
-    }
     
-    @objc func willHideKeyboard(_ notification: NSNotification) {
-        let contentInsets = UIEdgeInsets.zero
+    @objc private func signUpButtonTapped() {
         
-        loginScrollView.contentInset = contentInsets
-        loginScrollView.scrollIndicatorInsets = contentInsets
+        
+//        guard let email = loginTextField.text,
+//              let password = passwordTextField.text
+//        else { return }
+//
+//        Auth.auth().createUser(withEmail: email, password: password) {
+//            authResult, error in
+//            if let error = error {
+//                print("Failed to sign up: ", error.localizedDescription)
+//                return
+//            }
+//            print("User signed successfully")
+//        }
     }
     
     //MARK: - Private
@@ -175,6 +149,8 @@ class LoginViewController: UIViewController {
             image: UIImage(systemName: "person"),
             tag: 0
         )
+        
+        keyboardManager = KeyboardManager(scrollView: loginScrollView)
     }
     
     private func setupSubview() {
@@ -184,32 +160,10 @@ class LoginViewController: UIViewController {
         contentView.addSubview(loginStackView)
         loginStackView.addArrangedSubview(loginTextField)
         loginStackView.addArrangedSubview(passwordTextField)
-        contentView.addSubview(logInButton)
+        contentView.addSubview(signInButton)
+        contentView.addSubview(signUpButton)
     }
-    
-    private func setupKeyboardObservers() {
-        let notificationCenter = NotificationCenter.default
-        
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(self.willShowKeyboard(_:)),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(self.willHideKeyboard(_:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-    }
-    
-    private func removeKeyboardObservers() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.removeObserver(self)
-    }
-    
+ 
     //MARK: - Layout
     
     private func setupConstraints() {
@@ -234,10 +188,17 @@ class LoginViewController: UIViewController {
             make.leading.trailing.equalTo(contentView).inset(16)
         }
         
-        logInButton.snp.makeConstraints { make in
+        signInButton.snp.makeConstraints { make in
             make.top.equalTo(loginStackView.snp.bottom).offset(16)
             make.leading.trailing.equalTo(contentView).inset(16)
-            make.height.equalTo(50)
+        }
+        
+        signUpButton.snp.makeConstraints { make in
+            make.top.equalTo(signInButton.snp.bottom).offset(16)
+            make.centerX.equalTo(contentView.snp.centerX)
+            make.width.equalTo(100)
+//            make.leading.trailing.equalTo(contentView).inset(16)
+//            make.height.equalTo(50)
             make.bottom.equalTo(contentView.snp.bottom).offset(-16)
         }
     }

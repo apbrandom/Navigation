@@ -15,7 +15,7 @@ class ProfileCoordinator: ProfileCoordinatable {
     var navigationController: UINavigationController
     var userService: UserService
     var loginFactory: LoginFactory
-
+    
     init(navigationController: UINavigationController, userService: UserService, loginFactory: LoginFactory) {
         self.navigationController = navigationController
         self.userService = userService
@@ -39,7 +39,7 @@ class ProfileCoordinator: ProfileCoordinatable {
             parentCoordinator?.addChildCoordinator(self)
         }
     }
-
+    
     func loginWith(_ login: String, _ password: String) {
         if loginFactory.makeLoginInspector().check(login: login, password: password) {
             userService.isAuthorized = true
@@ -56,6 +56,13 @@ class ProfileCoordinator: ProfileCoordinatable {
             navigationController.present(alert, animated: true)
         }
     }
+    
+    func navigateToSignUp() {
+        let signUpViewController = SignUpViewController()
+        navigationController.isNavigationBarHidden = false
+        navigationController.pushViewController(signUpViewController, animated: true)
+    }
+
     
     func finish() {
         

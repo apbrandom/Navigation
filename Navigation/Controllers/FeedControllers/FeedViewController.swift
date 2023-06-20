@@ -172,11 +172,11 @@ class FeedViewController: UIViewController {
         }
         
         itemsStackView.snp.makeConstraints { make in
-            make.centerX.equalTo(feedView.snp.centerX)
             make.centerY.equalTo(feedView.snp.centerY)
-            make.width.equalTo(330)
+            make.leading.trailing.equalTo(feedView).inset(16)
             make.height.equalTo(220)
         }
+        
         activityIndicator.snp.makeConstraints { make in
             make.centerX.equalTo(passwordTextField.snp.centerX)
             make.centerY.equalTo(passwordTextField.snp.centerY)

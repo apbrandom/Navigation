@@ -57,6 +57,7 @@ class CustomButton: UIButton {
         layer.shadowOffset = CGSize(width: 4, height: 4)
         layer.shadowOpacity = 0.7
         layer.shadowRadius = 5
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     @objc func buttonPressed() {
