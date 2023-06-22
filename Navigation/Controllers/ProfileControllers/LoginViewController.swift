@@ -2,7 +2,7 @@
 //  LogInViewController.swift
 //  Navigation
 //
-//  Created by Вадим Виноградов on 04.02.2023.
+//  Created by Vadim Vinogradov on 04.02.2023.
 //
 
 import UIKit
@@ -71,7 +71,7 @@ class LoginViewController: UIViewController {
     
     private lazy var loginTextField: CustomTextField = { [unowned self] in
         let textField = CustomTextField()
-        textField.text = "user"
+        textField.text = "user@mail.com"
         textField.placeholder = "Email or phone"
         textField.delegate = self
         return textField
@@ -114,29 +114,30 @@ class LoginViewController: UIViewController {
     
     //MARK: - Actions
     
-    @objc private func signInButtonTapped() {
-        guard let login = loginTextField.text,
+    private func signInButtonTapped() {
+        guard let email = loginTextField.text,
               let password = passwordTextField.text
         else { return }
-        coordinator?.loginWith(login, password)
+        
+        CheckerService.shared.checkCredentials(email: email, password: password) { [weak self] result in
+            switch result {
+            case .success(let authResult):
+                print("User \(authResult.user.uid) signed in successfully")
+                self?.coordinator?.loginWith(email, password)
+            case .failure(let error):
+                print("Failed to sign in: ", error.localizedDescription)
+                self?.showAlert(
+                    title: "Error",
+                    message: error.localizedDescription)
+            }
+        }
     }
     
-    @objc private func signUpButtonTapped() {
-        
-        
-//        guard let email = loginTextField.text,
-//              let password = passwordTextField.text
-//        else { return }
-//
-//        Auth.auth().createUser(withEmail: email, password: password) {
-//            authResult, error in
-//            if let error = error {
-//                print("Failed to sign up: ", error.localizedDescription)
-//                return
-//            }
-//            print("User signed successfully")
-//        }
+    private func signUpButtonTapped() {
+        let signUpVC = SignUpViewController()
+        navigationController?.pushViewController(signUpVC, animated: true)
     }
+    
     
     //MARK: - Private
     
@@ -163,7 +164,7 @@ class LoginViewController: UIViewController {
         contentView.addSubview(signInButton)
         contentView.addSubview(signUpButton)
     }
- 
+    
     //MARK: - Layout
     
     private func setupConstraints() {
@@ -197,8 +198,8 @@ class LoginViewController: UIViewController {
             make.top.equalTo(signInButton.snp.bottom).offset(16)
             make.centerX.equalTo(contentView.snp.centerX)
             make.width.equalTo(100)
-//            make.leading.trailing.equalTo(contentView).inset(16)
-//            make.height.equalTo(50)
+            //            make.leading.trailing.equalTo(contentView).inset(16)
+            //            make.height.equalTo(50)
             make.bottom.equalTo(contentView.snp.bottom).offset(-16)
         }
     }
