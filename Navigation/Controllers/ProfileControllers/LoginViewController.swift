@@ -9,20 +9,21 @@ import UIKit
 import SnapKit
 import FirebaseAuth
 
-protocol LoginViewControllerDelegate {
-    func check(login: String, password: String) -> Bool
+protocol LoginViewControllerDelegate: AnyObject {
+    func checkCredentials(email: String, password: String, completion: @escaping (Result<AuthDataResult, Error>) -> Void)
+    func signUp(email: String, password: String, completion: @escaping (Result<AuthDataResult, Error>) -> Void)
 }
 
 class LoginViewController: UIViewController {
     
-    var loginDelegate: LoginViewControllerDelegate?
+    private var delegate: LoginViewControllerDelegate?
     var userService: UserService
     var keyboardManager: KeyboardManager?
     weak var coordinator: ProfileCoordinatable?
     
     init(userService: UserService, loginInspector: LoginInspector) {
         self.userService = userService
-        self.loginDelegate = loginInspector
+        self.delegate = loginInspector
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -118,8 +119,8 @@ class LoginViewController: UIViewController {
         guard let email = loginTextField.text,
               let password = passwordTextField.text
         else { return }
-        
-        CheckerService.shared.checkCredentials(email: email, password: password) { [weak self] result in
+
+        delegate?.checkCredentials(email: email, password: password) { [weak self] result in
             switch result {
             case .success(let authResult):
                 print("User \(authResult.user.uid) signed in successfully")
@@ -127,8 +128,8 @@ class LoginViewController: UIViewController {
             case .failure(let error):
                 print("Failed to sign in: ", error.localizedDescription)
                 self?.showAlert(
-                    title: "Error",
-                    message: error.localizedDescription)
+                    title: "Login Failed",
+                    message: "Invalid username or password. Please try again")
             }
         }
     }
@@ -137,7 +138,6 @@ class LoginViewController: UIViewController {
         let signUpVC = SignUpViewController()
         navigationController?.pushViewController(signUpVC, animated: true)
     }
-    
     
     //MARK: - Private
     
@@ -198,8 +198,6 @@ class LoginViewController: UIViewController {
             make.top.equalTo(signInButton.snp.bottom).offset(16)
             make.centerX.equalTo(contentView.snp.centerX)
             make.width.equalTo(100)
-            //            make.leading.trailing.equalTo(contentView).inset(16)
-            //            make.height.equalTo(50)
             make.bottom.equalTo(contentView.snp.bottom).offset(-16)
         }
     }

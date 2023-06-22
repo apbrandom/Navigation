@@ -11,6 +11,10 @@ import FirebaseAuth
 
 class SignUpViewController: UIViewController {
     
+    private let checkerService: CheckerServiceProtocol = CheckerService.shared
+    
+    //MARK: - Subviews
+    
     private lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Email"
@@ -57,41 +61,41 @@ class SignUpViewController: UIViewController {
     // MARK: - Actions
     
     private func registerButtonTapped() {
-         guard let email = emailTextField.text,
-               !email.isEmpty,
-               let password = passwordTextField.text,
-               !password.isEmpty,
-               let repeatPassword = repeatPasswordTextField.text,
-               !repeatPassword.isEmpty else {
-             showAlert(
-                 title: "Error",
-                 message: "All fields must be filled out")
-             return
-         }
-         guard password == repeatPassword else {
-             showAlert(
-                 title: "Error",
-                 message: "Passwords must be the same")
-             return
-         }
-         
-         // register new user:
-         Auth.auth().createUser(withEmail: email, password: password) {
-             authResult, error in
-             if let error = error {
-                 print("Failed to sign up: ", error.localizedDescription)
-                 self.showAlert(
-                     title: "Error",
-                     message: error.localizedDescription)
-                 return
-             }
-             print("User signed successfully")
-             self.navigationController?.popViewController(animated: true)
-             self.showAlert(
-                 title: "Great!",
-                 message: "You have successfully registered")
-         }
-     }
+        guard let email = emailTextField.text,
+              !email.isEmpty,
+              let password = passwordTextField.text,
+              !password.isEmpty,
+              let repeatPassword = repeatPasswordTextField.text,
+              !repeatPassword.isEmpty else {
+            showAlert(
+                title: "Error",
+                message: "All fields must be filled out")
+            return
+        }
+        guard password == repeatPassword else {
+            showAlert(
+                title: "Registration Error",
+                message: "Passwords must be the same")
+            return
+        }
+        
+        // register a new user:
+        checkerService.signUp(email: email, password: password) { [weak self] result in
+            switch result {
+            case .success(_):
+                print("User signed up successfully")
+                self?.navigationController?.popViewController(animated: true)
+                self?.showAlert(
+                    title: "Great!",
+                    message: "You have successfully registered")
+            case .failure(let error):
+                print("Failed to sign up: ", error.localizedDescription)
+                self?.showAlert(
+                    title: "Registration error",
+                    message: error.localizedDescription)
+            }
+        }
+    }
     
     private func setupView() {
         navigationController?.isNavigationBarHidden = false
