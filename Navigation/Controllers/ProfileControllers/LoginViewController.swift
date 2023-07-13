@@ -16,6 +16,12 @@ protocol LoginViewControllerDelegate: AnyObject {
 
 class LoginViewController: UIViewController {
     
+    enum LoginError: Error {
+        case incompleteFoarm
+        case invalidPassword
+        case incorectPasswordLenght
+    }
+    
     private var delegate: LoginViewControllerDelegate?
     var userService: UserService
     var keyboardManager: KeyboardManager?
