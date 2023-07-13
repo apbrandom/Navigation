@@ -16,12 +16,6 @@ protocol LoginViewControllerDelegate: AnyObject {
 
 class LoginViewController: UIViewController {
     
-    enum LoginError: Error {
-        case incompleteFoarm
-        case invalidPassword
-        case incorectPasswordLenght
-    }
-    
     private var delegate: LoginViewControllerDelegate?
     var userService: UserService
     var keyboardManager: KeyboardManager?
@@ -123,14 +117,17 @@ class LoginViewController: UIViewController {
     
     private func signInButtonTapped() {
         guard let email = loginTextField.text,
-              let password = passwordTextField.text
-        else { return }
+              let password = passwordTextField.text else {
+            preconditionFailure("Form must not be empty")
+        }
 
         delegate?.checkCredentials(email: email, password: password) { [weak self] result in
             switch result {
+                
             case .success(let authResult):
                 print("User \(authResult.user.uid) signed in successfully")
                 self?.coordinator?.loginWith(email, password)
+            
             case .failure(let error):
                 print("Failed to sign in: ", error.localizedDescription)
                 self?.showAlert(

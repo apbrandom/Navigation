@@ -13,6 +13,8 @@
 		CB08A49829A4B58C00AF49D7 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49729A4B58C00AF49D7 /* PhotosViewController.swift */; };
 		CB08A49A29A4FAAF00AF49D7 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49929A4FAAF00AF49D7 /* Photo.swift */; };
 		CB08A49E29A67E6F00AF49D7 /* PhotosCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49D29A67E6F00AF49D7 /* PhotosCollectionCell.swift */; };
+		CB134C2C2A60195D00E7DF62 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB134C2B2A60195D00E7DF62 /* Alert.swift */; };
+		CB134C2E2A6019BB00E7DF62 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB134C2D2A6019BB00E7DF62 /* String+Extension.swift */; };
 		CB1EA5BF2A162C3300C0053D /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EA5BE2A162C3300C0053D /* FeedCoordinator.swift */; };
 		CB1EA5C12A162C6D00C0053D /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EA5C02A162C6D00C0053D /* ProfileCoordinator.swift */; };
 		CB1F562E2A27A3D9004FE83A /* PasswordCrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1F562D2A27A3D9004FE83A /* PasswordCrack.swift */; };
@@ -102,6 +104,8 @@
 		CB08A49929A4FAAF00AF49D7 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		CB08A49D29A67E6F00AF49D7 /* PhotosCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionCell.swift; sourceTree = "<group>"; };
 		CB0A7C8C29E49A7A002EA335 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		CB134C2B2A60195D00E7DF62 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		CB134C2D2A6019BB00E7DF62 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		CB1EA5BE2A162C3300C0053D /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		CB1EA5C02A162C6D00C0053D /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		CB1F562D2A27A3D9004FE83A /* PasswordCrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCrack.swift; sourceTree = "<group>"; };
@@ -276,6 +280,8 @@
 				CB08A49329A0C6BA00AF49D7 /* UITableView+Extension.swift */,
 				CB5075B92A41D6C4007338D3 /* KeyboardManager.swift */,
 				CB8037792A44491400BD2395 /* ShowAlert.swift */,
+				CB134C2B2A60195D00E7DF62 /* Alert.swift */,
+				CB134C2D2A6019BB00E7DF62 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -474,6 +480,7 @@
 				CBCABD0D2A0E97D90084FDE3 /* ProfileViewModel.swift in Sources */,
 				CB71F61D298E7CA200DA584D /* LoginViewController.swift in Sources */,
 				CB08A492299F7A3200AF49D7 /* PostsTableCell.swift in Sources */,
+				CB134C2C2A60195D00E7DF62 /* Alert.swift in Sources */,
 				CBA858A929E9966800AC37B2 /* NetworkService.swift in Sources */,
 				CB08A49E29A67E6F00AF49D7 /* PhotosCollectionCell.swift in Sources */,
 				CB1F562E2A27A3D9004FE83A /* PasswordCrack.swift in Sources */,
@@ -509,6 +516,7 @@
 				CB08A49429A0C6BA00AF49D7 /* UITableView+Extension.swift in Sources */,
 				CBCABD0B2A0E92650084FDE3 /* ProfileViewController+TableView.swift in Sources */,
 				CB47082029B0BE8200F416F2 /* ProfileTableHeaderViewDelegate.swift in Sources */,
+				CB134C2E2A6019BB00E7DF62 /* String+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
