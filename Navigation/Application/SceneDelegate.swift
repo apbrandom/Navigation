@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -14,6 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var appCoordinator: AppCoordinator?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let tabBarController = UITabBarController()
         
@@ -24,11 +26,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
-        //Create random URL
-//        if let url = NetworkService.randomURL() {
-//            NetworkService.request(url: url)
-//        } else {
-//            print("Failed to generate random URL")
-//        }
+        func sceneWillResignActive(_ scene: UIScene) {
+            // This method is called when the scene will move from an active state to an inactive state.
+            do {
+                try Auth.auth().signOut()
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
+        }
+        
+        func sceneDidDisconnect(_ scene: UIScene) {
+            // Called as the scene is being released by the system.
+            do {
+                try Auth.auth().signOut()
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
+        }
     }
 }
