@@ -25,9 +25,9 @@ class ProfileCoordinator: ProfileCoordinatable {
     func start() {
         if userService.isAuthorized {
             let user = userService.user
-            let profileVC = ProfileViewController()
-            profileVC.updateUser(user)
-            navigationController.viewControllers = [profileVC]
+            let profileViewController = ProfileViewController()
+            profileViewController.updateUser(user)
+            navigationController.viewControllers = [profileViewController]
         } else {
             let loginVC = LoginViewController(userService: userService, loginInspector: loginFactory.makeLoginInspector())
             let image = UIImage(systemName: "person")
@@ -61,6 +61,6 @@ class ProfileCoordinator: ProfileCoordinatable {
     }
 
     func finish() {
-        
+        parentCoordinator?.removeChildCoordinator(self)
     }
 }

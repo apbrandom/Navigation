@@ -9,7 +9,7 @@ import Foundation
 
 public struct Post {
     public var title: String = ""
-    public  var author: String = ""
+    public var author: String = ""
     public var image: String = ""
     public var likes: Int = 0
     public var views: Int = 0
