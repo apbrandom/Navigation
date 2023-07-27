@@ -30,6 +30,4 @@ class FavouriteCoordinator: FavouriteCoordinatable {
     func finish() {
         parentCoordinator?.removeChildCoordinator(self)
     }
-    
-    
 }

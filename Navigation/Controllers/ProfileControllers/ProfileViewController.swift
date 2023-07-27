@@ -10,6 +10,11 @@ import SnapKit
 
 class ProfileViewController: UIViewController {
     
+    enum ViewModelType {
+            case profile
+            case favourites
+        }
+    
     weak var coordinator: ProfileCoordinatable?
     var ViewModel: ProfileViewModel = ProfileViewModel()
     

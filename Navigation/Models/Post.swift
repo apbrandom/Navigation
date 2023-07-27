@@ -48,7 +48,7 @@ extension Post {
                 image: "Apple_swift",
                 likes: 47,
                 views: 765
-            ),
+            )
         ]
     }
 }
