@@ -31,11 +31,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return ViewModel.numberOfSection()
+        return viewModel.numberOfSection()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ViewModel.numbersOfRow(in: section)
+        return viewModel.numbersOfRow(in: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,14 +46,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             guard let photoCell = tableView.dequeueReusableCell(withIdentifier: PhotosTableCell.indentifire, for: indexPath) as? PhotosTableCell else {
                 fatalError("could not dequeueReusableCell")
             }
-            photoCell.update(ViewModel.photoData)
+            photoCell.update(viewModel.photoData)
             cell = photoCell
             
         } else {
             guard let postCell = tableView.dequeueReusableCell(withIdentifier: PostsTableCell.indentifire, for: indexPath) as? PostsTableCell else {
                 fatalError("could not dequeueReusableCell")
             }
-            postCell.update(ViewModel.postData[indexPath.row])
+            postCell.update(viewModel.postData[indexPath.row])
             cell = postCell
             let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
             doubleTap.numberOfTapsRequired = 2
@@ -74,7 +74,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         doubleTapAnimation(recognizer)
         print("Двойное нажатие")
         if let indexPath = profileTableView.indexPathForSelectedRow {
-            let post = ViewModel.postData[indexPath.row]
+            let post = viewModel.postData[indexPath.row]
             CoreDataStorageService.shared.savePostItem(
                     title: post.title,
                     author: post.author,

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CB01E4582A6EFCCC007A285F /* FavouriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01E4572A6EFCCC007A285F /* FavouriteCoordinator.swift */; };
-		CB01E45A2A6FC408007A285F /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01E4592A6FC408007A285F /* FavouriteViewController.swift */; };
+		CB01E45A2A6FC408007A285F /* SavedPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01E4592A6FC408007A285F /* SavedPostsViewController.swift */; };
 		CB08A492299F7A3200AF49D7 /* PostsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A491299F7A3200AF49D7 /* PostsTableCell.swift */; };
 		CB08A49429A0C6BA00AF49D7 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49329A0C6BA00AF49D7 /* UITableView+Extension.swift */; };
 		CB08A49629A4B3AA00AF49D7 /* PhotosTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49529A4B3AA00AF49D7 /* PhotosTableCell.swift */; };
@@ -67,6 +67,8 @@
 		CBFC5E8A2A72CFC300D37566 /* CDPostItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC5E882A72CFC300D37566 /* CDPostItem+CoreDataClass.swift */; };
 		CBFC5E8B2A72CFC300D37566 /* CDPostItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC5E892A72CFC300D37566 /* CDPostItem+CoreDataProperties.swift */; };
 		CBFC5E8D2A72D12100D37566 /* CoreDataStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC5E8C2A72D12100D37566 /* CoreDataStorageService.swift */; };
+		CBFC5E8F2A744FBA00D37566 /* SavedPostsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC5E8E2A744FBA00D37566 /* SavedPostsViewController+TableView.swift */; };
+		CBFC5E912A74503300D37566 /* FavouritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC5E902A74503300D37566 /* FavouritesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,7 +86,7 @@
 
 /* Begin PBXFileReference section */
 		CB01E4572A6EFCCC007A285F /* FavouriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCoordinator.swift; sourceTree = "<group>"; };
-		CB01E4592A6FC408007A285F /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
+		CB01E4592A6FC408007A285F /* SavedPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostsViewController.swift; sourceTree = "<group>"; };
 		CB08A491299F7A3200AF49D7 /* PostsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableCell.swift; sourceTree = "<group>"; };
 		CB08A49329A0C6BA00AF49D7 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		CB08A49529A4B3AA00AF49D7 /* PhotosTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableCell.swift; sourceTree = "<group>"; };
@@ -136,6 +138,8 @@
 		CBFC5E882A72CFC300D37566 /* CDPostItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPostItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CBFC5E892A72CFC300D37566 /* CDPostItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPostItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CBFC5E8C2A72D12100D37566 /* CoreDataStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageService.swift; sourceTree = "<group>"; };
+		CBFC5E8E2A744FBA00D37566 /* SavedPostsViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavedPostsViewController+TableView.swift"; sourceTree = "<group>"; };
+		CBFC5E902A74503300D37566 /* FavouritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,7 +242,8 @@
 		CB94F1052A7016490048525D /* FavouriteControllers */ = {
 			isa = PBXGroup;
 			children = (
-				CB01E4592A6FC408007A285F /* FavouriteViewController.swift */,
+				CB01E4592A6FC408007A285F /* SavedPostsViewController.swift */,
+				CBFC5E8E2A744FBA00D37566 /* SavedPostsViewController+TableView.swift */,
 			);
 			path = FavouriteControllers;
 			sourceTree = "<group>";
@@ -343,6 +348,7 @@
 				CB8E2BE82A13AD8600F0E708 /* FeedViewModel.swift */,
 				CBCABD0C2A0E97D90084FDE3 /* ProfileViewModel.swift */,
 				CBC90FA52A1A79D500545FC3 /* PhotosViewModel.swift */,
+				CBFC5E902A74503300D37566 /* FavouritesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -469,7 +475,7 @@
 				CB1F562E2A27A3D9004FE83A /* PasswordCrack.swift in Sources */,
 				CB1EA5C12A162C6D00C0053D /* ProfileCoordinator.swift in Sources */,
 				CB8E2BEB2A13B9F700F0E708 /* FeedModel.swift in Sources */,
-				CB01E45A2A6FC408007A285F /* FavouriteViewController.swift in Sources */,
+				CB01E45A2A6FC408007A285F /* SavedPostsViewController.swift in Sources */,
 				CBA56D662A000E5D00947FBF /* UserService.swift in Sources */,
 				CBC6EDA029F95995000D509F /* LoginInspector.swift in Sources */,
 				CB7AF3092959AE5E005C51F3 /* AppDelegate.swift in Sources */,
@@ -482,6 +488,7 @@
 				CB71F6212997883D00DA584D /* CustomButton.swift in Sources */,
 				CB5075BA2A41D6C4007338D3 /* KeyboardManager.swift in Sources */,
 				CB08A49A29A4FAAF00AF49D7 /* Photo.swift in Sources */,
+				CBFC5E912A74503300D37566 /* FavouritesViewModel.swift in Sources */,
 				CBCABD032A0CD0A90084FDE3 /* AppCoordinator.swift in Sources */,
 				CBFC5E872A72CE3A00D37566 /* YourModelName.xcdatamodeld in Sources */,
 				CBF33F4729FBF788009FC759 /* Post.swift in Sources */,
@@ -490,6 +497,7 @@
 				CB8037782A44485A00BD2395 /* CheckerService.swift in Sources */,
 				CBFC5E8D2A72D12100D37566 /* CoreDataStorageService.swift in Sources */,
 				CB5075BC2A41D90A007338D3 /* CustomTextField.swift in Sources */,
+				CBFC5E8F2A744FBA00D37566 /* SavedPostsViewController+TableView.swift in Sources */,
 				CB08A49629A4B3AA00AF49D7 /* PhotosTableCell.swift in Sources */,
 				CBF621E929A8CE6400119FA8 /* Reusable.swift in Sources */,
 				CB8E2BE92A13AD8600F0E708 /* FeedViewModel.swift in Sources */,

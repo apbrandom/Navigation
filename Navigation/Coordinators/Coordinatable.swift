@@ -34,7 +34,7 @@ protocol ProfileCoordinatable: Coordinatable {
 
 /// Базовый протокол для FavouriteCoordinator. В данном случае он не имеет специальных методов,
 /// но мы оставляем его для будущего расширения.
-protocol FavouriteCoordinatable: Coordinatable {
+protocol SavedPostsCoordinatable: Coordinatable {
     
 }
 

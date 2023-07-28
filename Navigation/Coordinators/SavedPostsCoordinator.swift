@@ -18,10 +18,10 @@ class SavedPostsCoordinator: SavedPostsCoordinatable {
         }
     
     func start() {
-        let favouriteViewController = SavedPostsViewController()
-        let image = UIImage(systemName: "square.and.arrow.down")
-        let selectedImage = UIImage(systemName: "square.and.arrow.down.fill")
-        favouriteViewController.tabBarItem = .init(title: "Saved", image: image, selectedImage: selectedImage)
+        let favouriteViewController = savedPostViewController()
+        let image = UIImage(systemName: "star")
+        let selectedImage = UIImage(systemName: "star.fill")
+        favouriteViewController.tabBarItem = .init(title: "Favourite", image: image, selectedImage: selectedImage)
         favouriteViewController.coordinator = self
         
         navigationController.viewControllers = [favouriteViewController]

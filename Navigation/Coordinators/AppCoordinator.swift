@@ -29,7 +29,7 @@ class AppCoordinator: Coordinatable {
         let profileCoordinator = ProfileCoordinator(navigationController: profileNavigationController, userService: userService, loginFactory: loginFactory)
         
         let favouriteNavigationController = UINavigationController()
-        let favouriteCoordinator = FavouriteCoordinator(navigationController: favouriteNavigationController)
+        let favouriteCoordinator = SavedPostsCoordinator(navigationController: favouriteNavigationController)
         favouriteCoordinator.parentCoordinator = self
         favouriteCoordinator.start()
         childCoordinators.append(favouriteCoordinator)
