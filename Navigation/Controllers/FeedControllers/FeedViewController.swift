@@ -145,8 +145,9 @@ class FeedViewController: UIViewController {
         feedView.addSubview(timerLabel)
         feedView.addSubview(itemsStackView)
         feedView.addSubview(statusPasswordLabel)
-        feedView.addSubview(activityIndicator)
+//        feedView.addSubview(activityIndicator)
         itemsStackView.addArrangedSubview(passwordTextField)
+        passwordTextField.addSubview(activityIndicator)
         itemsStackView.addArrangedSubview(checkButton)
         itemsStackView.addArrangedSubview(generateAndCrackButton)
         itemsStackView.addArrangedSubview(postVCButton)
@@ -157,11 +158,6 @@ class FeedViewController: UIViewController {
     func setupConstrains() {
         feedView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-        
-        activityIndicator.snp.makeConstraints { make in
-            make.centerX.equalTo(feedView.snp.centerX)
-            make.top.equalTo(feedView.snp.top).offset(40)
         }
         
         timerLabel.snp.makeConstraints { make in
@@ -176,10 +172,14 @@ class FeedViewController: UIViewController {
         }
         
         itemsStackView.snp.makeConstraints { make in
-            make.centerX.equalTo(feedView.snp.centerX)
             make.centerY.equalTo(feedView.snp.centerY)
-            make.width.equalTo(330)
+            make.leading.trailing.equalTo(feedView).inset(16)
             make.height.equalTo(220)
+        }
+        
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.equalTo(passwordTextField.snp.centerX)
+            make.centerY.equalTo(passwordTextField.snp.centerY)
         }
     }
 }

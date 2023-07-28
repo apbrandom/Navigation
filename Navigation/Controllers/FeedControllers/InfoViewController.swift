@@ -6,29 +6,67 @@
 //
 
 import UIKit
+import SnapKit
 
 class InfoViewController: UIViewController {
     
+    //MARK: - Data
+    
+    private let networkService: NetworkService
+    internal var residents = [Resident]()
+    
     weak var coordinator: FeedCoordinator?
     
-    private lazy var alertButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 140, height: 45))
-        button.layer.cornerRadius = 10
-        button.backgroundColor = UIColor.blue
-        button.setTitle("Press me!", for: .normal)
-        button.addTarget(
-            self,
-            action: #selector(buttonAlertPressed),
-            for: .touchUpInside
-        )
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - Subviews
+    
+    private lazy var orbitalPeriodLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Orbital Period"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var jsonLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Waiting for ID"
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var alertButton: CustomButton = {
+        let button = CustomButton()
+        button.setTitle("Click to get a response from the server", for: .normal)
+        button.pressed = { self.buttonAlertPressed() }
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    lazy var residentsTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ResidentCell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        addSubviews()
+        setupSubviews()
+        setupTableView()
+        
+        requiestDataOrbitalPeriod()
     }
     
     override func viewDidLayoutSubviews() {
@@ -42,36 +80,110 @@ class InfoViewController: UIViewController {
         }
     }
     
-    //MARK: - Private
-    
-    private func setupView() {
-        view.backgroundColor = .systemPink
-    }
-    
-    private func addSubviews() {
-        view.addSubview(alertButton)
-    }
-    
     //MARK: - Action
     
     @objc func buttonAlertPressed() {
-        let alertController = UIAlertController(title: "Error", message: "You are pressed the button now", preferredStyle: .alert)
+        let alertController = UIAlertController(
+            title: "Select the id 1-200",
+            message: "Please enter your id to receive a message from the server",
+            preferredStyle: .alert
+        )
         
-        let action0 = UIAlertAction(title: "OK", style: .default)  { (action0) in
-            let text = alertController.textFields?.first?.text
-            print(text ?? "no text")
+        let okAction = UIAlertAction(title: "OK", style: .default) { [unowned self] _ in
+            guard let text = alertController.textFields?.first?.text,
+                  let enteredId = Int(text),
+                  1...200 ~= enteredId
+                    
+            else {
+                self.showErrorMessage()
+                return
+            }
+            
+            guard let userUrl = networkService.urlForUser(withId: enteredId) else { return }
+            
+            networkService.request(url: userUrl) { answer in
+                DispatchQueue.main.async {
+                    if let answer = answer {
+                        self.jsonLabel.text = answer
+                    }
+                }
+            }
         }
         
         alertController.addTextField { (textFiled) in
             textFiled.placeholder = "Enter your message"
-            
         }
         
-        let action1 = UIAlertAction(title: "Cancel", style: .cancel)
-        alertController.addAction(action0)
-        alertController.addAction(action1)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true)
     }
+    
+    func showErrorMessage() {
+        let errorAlertController = UIAlertController(
+            title: "Error",
+            message: "Entered ID is not in the range 1-200 or is not a number.",
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        errorAlertController.addAction(okAction)
+        
+        self.present(errorAlertController, animated: true)
+    }
+    
+    //MARK: - Private
+    
+    private func setupView() {
+        view.backgroundColor = .systemGray4
+    }
+    
+    private func setupSubviews() {
+        view.addSubview(jsonLabel)
+        view.addSubview(alertButton)
+        view.addSubview(orbitalPeriodLabel)
+        view.addSubview(residentsTableView)
+        
+        setupLayout()
+    }
+    
+    private func requiestDataOrbitalPeriod() {
+        networkService.requestPlanetData() { planetData in
+            DispatchQueue.main.async {
+                if let planetData = planetData {
+                    self.orbitalPeriodLabel.text = "Orbital Period \(planetData.orbitalPeriod)"
+                    
+                    self.networkService.fetchResidents(for: planetData) { residents in
+                        if let residents = residents {
+                            self.residents = residents
+                            self.residentsTableView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    //MARK: - Layout
+    
+    private func setupLayout() {
+        jsonLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(view.safeAreaLayoutGuide).offset(-75)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
+        }
+        
+        alertButton.snp.makeConstraints { make in
+            make.top.equalTo(jsonLabel.snp.bottom).offset(75)
+        }
+        
+        orbitalPeriodLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(jsonLabel.snp.top).offset(-50)
+        }
+    }
 }
+
 

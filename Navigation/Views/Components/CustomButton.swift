@@ -31,12 +31,15 @@ class CustomButton: UIButton {
         }
     }
     
+    override var intrinsicContentSize: CGSize {
+            return CGSize(width: 350, height: 50)
+        }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupViewButton()
         addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -48,18 +51,16 @@ class CustomButton: UIButton {
         let image = UIImage(named: "blue_pixel")
         setBackgroundImage(image, for: .normal)
         tintColor = .white
-//        backgroundColor = .systemBlue
         layer.cornerRadius = 10
         layer.masksToBounds = true
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 4, height: 4)
         layer.shadowOpacity = 0.7
         layer.shadowRadius = 5
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     @objc func buttonPressed() {
         pressed?()
     }
-    
-    
 }

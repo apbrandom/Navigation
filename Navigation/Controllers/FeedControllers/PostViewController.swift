@@ -24,10 +24,10 @@ class PostViewController: UIViewController {
         super.viewDidDisappear(animated)
         if isMovingFromParent {
             coordinator?.finish()
+            
         }
     }
 
-    
     //MARK: - Private
     
     private func tuneView() {

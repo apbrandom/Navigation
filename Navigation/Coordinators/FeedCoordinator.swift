@@ -13,10 +13,12 @@ class FeedCoordinator: FeedCoordinatable  {
     
     var childCoordinators = [Coordinatable]()
     var navigationController: UINavigationController
+    let networkService: NetworkService
     
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
+    init(navigationController: UINavigationController, networkService: NetworkService) {
+            self.navigationController = navigationController
+            self.networkService = networkService
+        }
     
     func start() {
         let feedVC = FeedViewController()
@@ -29,7 +31,7 @@ class FeedCoordinator: FeedCoordinatable  {
     }
     
     func navigateToInfoVC() {
-        let infoVC = InfoViewController()
+        let infoVC = InfoViewController(networkService: NetworkService())
             infoVC.coordinator = self
             navigationController.pushViewController(infoVC, animated: true)
     }
