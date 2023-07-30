@@ -107,6 +107,19 @@ class PostsTableCell: UITableViewCell {
         postViewsLabel.text = "Views: \(post.views)"
     }
     
+    func updateCD(post: CDPostItem?) {
+        guard let post = post else {
+            return
+        }
+        
+        postTitleLabel.text = post.title
+        postAuthorTextView.text = post.author
+        postImageView.image = UIImage(named: post.image ?? "questionmark") 
+        postLikesLabel.text = "Likes: \(post.likes)"
+        postViewsLabel.text = "Views: \(post.views)"
+    }
+
+    
     //MARK: - Layout
     
     private func setupConstrants() {

@@ -17,26 +17,33 @@ class AppCoordinator: Coordinatable {
     }
     
     func start() {
-        let feedNC = UINavigationController()
-        let feedCoordinator = FeedCoordinator(navigationController: feedNC, networkService: NetworkService())
+        let feedNavigationController = UINavigationController()
+        let feedCoordinator = FeedCoordinator(navigationController: feedNavigationController, networkService: NetworkService())
         feedCoordinator.parentCoordinator = self
         feedCoordinator.start()
         childCoordinators.append(feedCoordinator)
         
         let userService: UserService = CurrentUserService()
         let loginFactory = LoginFactory()
-
-        let profileNC = UINavigationController()
-        let profileCoordinator = ProfileCoordinator(navigationController: profileNC, userService: userService, loginFactory: loginFactory)
+        let profileNavigationController = UINavigationController()
+        let profileCoordinator = ProfileCoordinator(navigationController: profileNavigationController, userService: userService, loginFactory: loginFactory)
+        
+        let favouriteNavigationController = UINavigationController()
+        let favouriteCoordinator = SavedPostsCoordinator(navigationController: favouriteNavigationController)
+        favouriteCoordinator.parentCoordinator = self
+        favouriteCoordinator.start()
+        childCoordinators.append(favouriteCoordinator)
         
         profileCoordinator.start()
         childCoordinators.append(profileCoordinator)
         
         tabBarController.viewControllers = [
             feedCoordinator.navigationController,
-            profileCoordinator.navigationController
+            profileCoordinator.navigationController,
+            favouriteCoordinator.navigationController
         ]
     }
+    
     
     func finish() {}
 }

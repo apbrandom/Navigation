@@ -9,9 +9,9 @@ import UIKit
 import SnapKit
 
 class ProfileViewController: UIViewController {
-    
+
     weak var coordinator: ProfileCoordinatable?
-    var ViewModel: ProfileViewModel = ProfileViewModel()
+    var viewModel = ProfileViewModel()
     
     //MARK: - Subviews
     
@@ -58,8 +58,8 @@ class ProfileViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        ViewModel.keyboardWillShow = nil
-        ViewModel.keyboardWillHide = nil
+        viewModel.keyboardWillShow = nil
+        viewModel.keyboardWillHide = nil
     }
     
     //MARK: - Action
@@ -105,11 +105,11 @@ class ProfileViewController: UIViewController {
     }
     
     func keyboardSetup() {
-        ViewModel.keyboardWillShow = { [weak self] keyboardHeight in
+        viewModel.keyboardWillShow = { [weak self] keyboardHeight in
             self?.profileTableView.contentInset.bottom += keyboardHeight
         }
         
-        ViewModel.keyboardWillHide = { [weak self] in
+        viewModel.keyboardWillHide = { [weak self] in
             self?.profileTableView.contentInset.bottom = 0.0
         }
     }

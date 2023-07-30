@@ -42,5 +42,7 @@ class FeedCoordinator: FeedCoordinatable  {
         navigationController.pushViewController(postVC, animated: true)
     }
     
-    func finish() {}
+    func finish() {
+        parentCoordinator?.removeChildCoordinator(self)
+    }
 }

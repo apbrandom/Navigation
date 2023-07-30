@@ -23,16 +23,19 @@ class ProfileCoordinator: ProfileCoordinatable {
     }
     
     func start() {
+        let tabBarItem = UITabBarItem(title: "Profile",
+                                      image: UIImage(systemName: "person"),
+                                      selectedImage: UIImage(systemName: "person.fill"))
+
         if userService.isAuthorized {
             let user = userService.user
-            let profileVC = ProfileViewController()
-            profileVC.updateUser(user)
-            navigationController.viewControllers = [profileVC]
+            let profileViewController = ProfileViewController()
+
+            profileViewController.updateUser(user)
+            navigationController.viewControllers = [profileViewController]
         } else {
             let loginVC = LoginViewController(userService: userService, loginInspector: loginFactory.makeLoginInspector())
-            let image = UIImage(systemName: "person")
-            let selectedImage = UIImage(systemName: "person.fill")
-            loginVC.tabBarItem = .init(title: "Profile", image: image, selectedImage: selectedImage)
+            loginVC.tabBarItem = tabBarItem
             loginVC.coordinator = self
             navigationController.viewControllers = [loginVC]
             parentCoordinator?.addChildCoordinator(self)
@@ -61,6 +64,6 @@ class ProfileCoordinator: ProfileCoordinatable {
     }
 
     func finish() {
-        
+        parentCoordinator?.removeChildCoordinator(self)
     }
 }
