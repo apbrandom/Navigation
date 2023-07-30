@@ -44,8 +44,8 @@ class InfoViewController: UIViewController {
         return label
     }()
     
-    lazy var alertButton: CustomButton = {
-        let button = CustomButton()
+    lazy var alertButton: VKStyleButton = {
+        let button = VKStyleButton()
         button.setTitle("Click to get a response from the server", for: .normal)
         button.pressed = { self.buttonAlertPressed() }
         button.translatesAutoresizingMaskIntoConstraints = false

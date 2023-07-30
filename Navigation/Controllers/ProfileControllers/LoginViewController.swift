@@ -87,15 +87,15 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
-    private lazy var signInButton: CustomButton = {
-        let button = CustomButton()
+    private lazy var signInButton: VKStyleButton = {
+        let button = VKStyleButton()
         button.setTitle("Sign In", for: .normal)
         button.pressed = { self.signInButtonTapped() }
         return button
     }()
     
-    private lazy var signUpButton: CustomButton = {
-        let button = CustomButton()
+    private lazy var signUpButton: VKStyleButton = {
+        let button = VKStyleButton()
         button.setBackgroundImage(.none, for: .normal)
         button.setTitle("Sign Up", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)

@@ -66,13 +66,13 @@ class FeedViewController: UIViewController {
     }()
     
     private lazy var checkButton: UIButton = {
-        let button = CustomButton()
+        let button = VKStyleButton()
         button.setTitle("Check", for: .normal)
         return button
     }()
     
-    private lazy var generateAndCrackButton: CustomButton = {
-        let button = CustomButton()
+    private lazy var generateAndCrackButton: VKStyleButton = {
+        let button = VKStyleButton()
         button.setTitle("Generate and Crack", for: .normal)
         button.pressed = { [self] in
             
@@ -117,8 +117,8 @@ class FeedViewController: UIViewController {
         return button
     }()
     
-    private lazy var postVCButton: CustomButton = {
-        let button = CustomButton()
+    private lazy var postVCButton: VKStyleButton = {
+        let button = VKStyleButton()
         button.setTitle("PostVC", for: .normal)
         button.pressed = { self.coordinator?.navigateToPostVC() }
         return button

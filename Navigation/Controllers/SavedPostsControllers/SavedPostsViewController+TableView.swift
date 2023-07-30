@@ -20,6 +20,7 @@ extension SavedPostsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let post = viewModel.post(for: indexPath.row)
         cell.updateCD(post: post)
+        cell.selectionStyle = .none
         return cell
     }
 }

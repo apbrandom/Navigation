@@ -17,33 +17,45 @@ class AppCoordinator: Coordinatable {
     }
     
     func start() {
+        
+        //Feed Flow
         let feedNavigationController = UINavigationController()
         let feedCoordinator = FeedCoordinator(navigationController: feedNavigationController, networkService: NetworkService())
         feedCoordinator.parentCoordinator = self
         feedCoordinator.start()
         childCoordinators.append(feedCoordinator)
         
+        //Profile Flow
+        let profileNavigationController = UINavigationController()
         let userService: UserService = CurrentUserService()
         let loginFactory = LoginFactory()
-        let profileNavigationController = UINavigationController()
         let profileCoordinator = ProfileCoordinator(navigationController: profileNavigationController, userService: userService, loginFactory: loginFactory)
-        
-        let favouriteNavigationController = UINavigationController()
-        let favouriteCoordinator = SavedPostsCoordinator(navigationController: favouriteNavigationController)
-        favouriteCoordinator.parentCoordinator = self
-        favouriteCoordinator.start()
-        childCoordinators.append(favouriteCoordinator)
-        
         profileCoordinator.start()
         childCoordinators.append(profileCoordinator)
         
+        //SavedPosts Flow
+        let savedPostsNavigationController = UINavigationController()
+        let savedPostsCoordinator = SavedPostsCoordinator(navigationController: savedPostsNavigationController)
+        savedPostsCoordinator.parentCoordinator = self
+        savedPostsCoordinator.start()
+        childCoordinators.append(savedPostsCoordinator)
+
+        
+        //Map Flow
+        let mapNavigationController = UINavigationController()
+        let mapCoordinator = MapCoordinator(navigationController: mapNavigationController)
+        mapCoordinator.parentCoordinator = self
+        mapCoordinator.start()
+        childCoordinators.append(mapCoordinator)
+        
+        // add coordinator to tabBar
         tabBarController.viewControllers = [
             feedCoordinator.navigationController,
             profileCoordinator.navigationController,
-            favouriteCoordinator.navigationController
+            savedPostsCoordinator.navigationController,
+            mapCoordinator.navigationController
         ]
     }
-    
     
     func finish() {}
 }
