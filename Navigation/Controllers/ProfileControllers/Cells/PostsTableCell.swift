@@ -27,7 +27,7 @@ class PostsTableCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(systemName: "quistionmark")
         imageView.tintColor = .label
-        imageView.backgroundColor = .black
+        imageView.backgroundColor = .darkModeBackground
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -36,6 +36,7 @@ class PostsTableCell: UITableViewCell {
         let textView = UITextView()
         textView.font = .systemFont(ofSize: 14)
         textView.textColor = .systemGray
+        textView.backgroundColor = .darkModeBackground
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,6 +66,7 @@ class PostsTableCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        backgroundColor = .darkModeBackground
         setupSubviews()
         setupConstrants()
     }

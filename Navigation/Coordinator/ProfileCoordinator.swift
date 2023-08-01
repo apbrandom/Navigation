@@ -29,7 +29,7 @@ class ProfileCoordinator: ProfileCoordinatable {
             profileViewController.updateUser(user)
             navigationController.viewControllers = [profileViewController]
         } else {
-            let loginViewController = AuthorizationViewController(userService: userService, loginInspector: loginFactory.makeLoginInspector())
+            let loginViewController = LoginViewController(userService: userService, loginInspector: loginFactory.makeLoginInspector())
             loginViewController.coordinator = self
             navigationController.viewControllers = [loginViewController]
             parentCoordinator?.addChildCoordinator(self)

@@ -19,7 +19,7 @@ class FeedViewController: UIViewController {
     
     private lazy var feedView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .darkModeBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -59,7 +59,7 @@ class FeedViewController: UIViewController {
     
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
-        let text = NSLocalizedString("FeedVCTextField", comment: "")
+        let text = "FeedVCTextField".localized
         textField.text = text
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
@@ -69,14 +69,14 @@ class FeedViewController: UIViewController {
     
     private lazy var checkButton: UIButton = {
         let button = VKStyleButton()
-        let text = NSLocalizedString("FeedVCCheckButton", comment: "")
+        let text = "FeedVCCheckButton".localized
         button.setTitle(text, for: .normal)
         return button
     }()
     
     private lazy var generateAndCrackButton: VKStyleButton = {
         let button = VKStyleButton()
-        let text = NSLocalizedString("FeedVCGenerateAndCrackButton", comment: "")
+        let text = "FeedVCGenerateAndCrackButton".localized
         button.setTitle(text, for: .normal)
         button.pressed = { [self] in
             
@@ -123,7 +123,7 @@ class FeedViewController: UIViewController {
     
     private lazy var postVCButton: VKStyleButton = {
         let button = VKStyleButton()
-        let text = NSLocalizedString("FeedVCButtonPost", comment: "")
+        let text = "FeedVCButtonPost".localized
         button.setTitle(text, for: .normal)
         button.pressed = { self.coordinator?.navigateToPostVC() }
         return button
@@ -142,8 +142,8 @@ class FeedViewController: UIViewController {
     //MARK: - Private
     
     private func setupView() {
-        view.backgroundColor = .secondarySystemBackground
-        let text = NSLocalizedString("FeedVCNavigationItemTitle", comment: "")
+        view.backgroundColor = .darkModeBackground
+        let text = "FeedVCNavigationItemTitle".localized
         navigationItem.title = text
     }
     

@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configView()
+        setupView()
         setupSubviews()
         setupConstrains()
         keyboardSetup()
@@ -70,9 +70,8 @@ class ProfileViewController: UIViewController {
     
     //MARK: - Privte
     
-    private func configView() {
-        view.backgroundColor = .systemBlue
-        view.backgroundColor = .secondarySystemBackground
+    private func setupView() {
+        view.backgroundColor = .darkModeBackground
 
         setupTableView()
         setupHeaderView()

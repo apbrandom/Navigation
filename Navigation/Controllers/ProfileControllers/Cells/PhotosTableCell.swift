@@ -17,7 +17,6 @@ class PhotosTableCell: UITableViewCell {
         let label = UILabel()
         let text = NSLocalizedString("PhotosTableCellPhotoLabel", comment: "")
         label.text = text
-        label.textColor = .black
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -80,6 +79,7 @@ class PhotosTableCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        backgroundColor = .darkModeBackground
         setupSubviews()
         setupConstraints()
     }
