@@ -35,10 +35,12 @@ class SignUpViewController: UIViewController {
         return textField
     }()
     
-    private lazy var signUpButton: CustomButton = {
-        let button = CustomButton()
+    private lazy var signUpButton: VKStyleButton = {
+        let button = VKStyleButton()
         button.setTitle("Sign Up", for: .normal)
-        button.pressed =  { self.registerButtonTapped() }
+        button.pressed = {
+            self.registerButtonTapped()
+        }
         return button
     }()
     

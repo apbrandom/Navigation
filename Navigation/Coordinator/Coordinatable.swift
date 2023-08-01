@@ -38,6 +38,10 @@ protocol SavedPostsCoordinatable: Coordinatable {
     
 }
 
+protocol MapCoordinatable: Coordinatable {
+    
+}
+
 /// Расширяем базовый протокол Coordinatable методами для добавления и удаления childCoordinators.
 extension Coordinatable {
     

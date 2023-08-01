@@ -21,13 +21,10 @@ class FeedCoordinator: FeedCoordinatable  {
         }
     
     func start() {
-        let feedVC = FeedViewController()
-        let image = UIImage(systemName: "house")
-        let selectedImage = UIImage(systemName: "house.fill")
-        feedVC.tabBarItem = .init(title: "Feed", image: image, selectedImage: selectedImage)
-        feedVC.coordinator = self
+        let feedViewController = FeedViewController()
+        navigationController.viewControllers = [feedViewController]
         
-        navigationController.viewControllers = [feedVC]
+        setupTabBarItem()
     }
     
     func navigateToInfoVC() {
@@ -40,6 +37,13 @@ class FeedCoordinator: FeedCoordinatable  {
         let postVC = PostViewController()
         postVC.coordinator = self
         navigationController.pushViewController(postVC, animated: true)
+    }
+    
+    private func setupTabBarItem() {
+        let image = UIImage(systemName: "house")
+        let selectedImage = UIImage(systemName: "house.fill")
+        let tabBarItem = UITabBarItem(title: "Feed", image: image, selectedImage: selectedImage)
+        navigationController.tabBarItem = tabBarItem
     }
     
     func finish() {

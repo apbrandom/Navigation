@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CB01E4582A6EFCCC007A285F /* FavouriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01E4572A6EFCCC007A285F /* FavouriteCoordinator.swift */; };
+		CB01E4582A6EFCCC007A285F /* SavedPostsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01E4572A6EFCCC007A285F /* SavedPostsCoordinator.swift */; };
 		CB01E45A2A6FC408007A285F /* SavedPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01E4592A6FC408007A285F /* SavedPostsViewController.swift */; };
 		CB08A492299F7A3200AF49D7 /* PostsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A491299F7A3200AF49D7 /* PostsTableCell.swift */; };
 		CB08A49429A0C6BA00AF49D7 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49329A0C6BA00AF49D7 /* UITableView+Extension.swift */; };
@@ -15,6 +15,11 @@
 		CB08A49829A4B58C00AF49D7 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49729A4B58C00AF49D7 /* PhotosViewController.swift */; };
 		CB08A49A29A4FAAF00AF49D7 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49929A4FAAF00AF49D7 /* Photo.swift */; };
 		CB08A49E29A67E6F00AF49D7 /* PhotosCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08A49D29A67E6F00AF49D7 /* PhotosCollectionCell.swift */; };
+		CB0C6F8C2A756ED300977308 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0C6F8B2A756ED300977308 /* CircleButton.swift */; };
+		CB0C6F8E2A757E1000977308 /* ButtonPressed.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0C6F8D2A757E1000977308 /* ButtonPressed.swift */; };
+		CB0C6F932A7680F700977308 /* MapStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0C6F922A7680F700977308 /* MapStyleButton.swift */; };
+		CB0C6F952A76ACA700977308 /* MapViewController+CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0C6F942A76ACA700977308 /* MapViewController+CLLocationManager.swift */; };
+		CB0C6F972A76ADC700977308 /* MapViewController+MKMapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0C6F962A76ADC700977308 /* MapViewController+MKMapViewDelegate.swift */; };
 		CB134C2C2A60195D00E7DF62 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB134C2B2A60195D00E7DF62 /* Alert.swift */; };
 		CB134C2E2A6019BB00E7DF62 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB134C2D2A6019BB00E7DF62 /* String+Extension.swift */; };
 		CB1EA5BF2A162C3300C0053D /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EA5BE2A162C3300C0053D /* FeedCoordinator.swift */; };
@@ -29,7 +34,7 @@
 		CB6AF3202965D98C008400F2 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF31F2965D98C008400F2 /* PostViewController.swift */; };
 		CB6AF349296763C7008400F2 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF348296763C7008400F2 /* InfoViewController.swift */; };
 		CB71F61D298E7CA200DA584D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71F61C298E7CA200DA584D /* LoginViewController.swift */; };
-		CB71F6212997883D00DA584D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71F6202997883D00DA584D /* CustomButton.swift */; };
+		CB71F6212997883D00DA584D /* VKStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71F6202997883D00DA584D /* VKStyleButton.swift */; };
 		CB7AF3092959AE5E005C51F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF3082959AE5E005C51F3 /* AppDelegate.swift */; };
 		CB7AF30B2959AE5E005C51F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF30A2959AE5E005C51F3 /* SceneDelegate.swift */; };
 		CB7AF30D2959AE5E005C51F3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF30C2959AE5E005C51F3 /* FeedViewController.swift */; };
@@ -69,6 +74,8 @@
 		CBFC5E8D2A72D12100D37566 /* CoreDataStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC5E8C2A72D12100D37566 /* CoreDataStorageService.swift */; };
 		CBFC5E8F2A744FBA00D37566 /* SavedPostsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC5E8E2A744FBA00D37566 /* SavedPostsViewController+TableView.swift */; };
 		CBFC5E912A74503300D37566 /* FavouritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC5E902A74503300D37566 /* FavouritesViewModel.swift */; };
+		CBFC5E932A753A6A00D37566 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC5E922A753A6A00D37566 /* MapCoordinator.swift */; };
+		CBFC5E962A753F4700D37566 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC5E952A753F4700D37566 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,7 +92,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CB01E4572A6EFCCC007A285F /* FavouriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCoordinator.swift; sourceTree = "<group>"; };
+		CB01E4572A6EFCCC007A285F /* SavedPostsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostsCoordinator.swift; sourceTree = "<group>"; };
 		CB01E4592A6FC408007A285F /* SavedPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostsViewController.swift; sourceTree = "<group>"; };
 		CB08A491299F7A3200AF49D7 /* PostsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableCell.swift; sourceTree = "<group>"; };
 		CB08A49329A0C6BA00AF49D7 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
@@ -94,6 +101,11 @@
 		CB08A49929A4FAAF00AF49D7 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		CB08A49D29A67E6F00AF49D7 /* PhotosCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionCell.swift; sourceTree = "<group>"; };
 		CB0A7C8C29E49A7A002EA335 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		CB0C6F8B2A756ED300977308 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
+		CB0C6F8D2A757E1000977308 /* ButtonPressed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPressed.swift; sourceTree = "<group>"; };
+		CB0C6F922A7680F700977308 /* MapStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyleButton.swift; sourceTree = "<group>"; };
+		CB0C6F942A76ACA700977308 /* MapViewController+CLLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewController+CLLocationManager.swift"; sourceTree = "<group>"; };
+		CB0C6F962A76ADC700977308 /* MapViewController+MKMapViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewController+MKMapViewDelegate.swift"; sourceTree = "<group>"; };
 		CB134C2B2A60195D00E7DF62 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		CB134C2D2A6019BB00E7DF62 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		CB1EA5BE2A162C3300C0053D /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
@@ -109,7 +121,7 @@
 		CB6AF3442966E320008400F2 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		CB6AF348296763C7008400F2 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		CB71F61C298E7CA200DA584D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		CB71F6202997883D00DA584D /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		CB71F6202997883D00DA584D /* VKStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKStyleButton.swift; sourceTree = "<group>"; };
 		CB7AF3052959AE5E005C51F3 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB7AF3082959AE5E005C51F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB7AF30A2959AE5E005C51F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +152,8 @@
 		CBFC5E8C2A72D12100D37566 /* CoreDataStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageService.swift; sourceTree = "<group>"; };
 		CBFC5E8E2A744FBA00D37566 /* SavedPostsViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavedPostsViewController+TableView.swift"; sourceTree = "<group>"; };
 		CBFC5E902A74503300D37566 /* FavouritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewModel.swift; sourceTree = "<group>"; };
+		CBFC5E922A753A6A00D37566 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
+		CBFC5E952A753F4700D37566 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +176,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CB0C6F8F2A7581B700977308 /* CustomButtons */ = {
+			isa = PBXGroup;
+			children = (
+				CB0C6F8D2A757E1000977308 /* ButtonPressed.swift */,
+				CB0C6F8B2A756ED300977308 /* CircleButton.swift */,
+				CB71F6202997883D00DA584D /* VKStyleButton.swift */,
+				CB0C6F922A7680F700977308 /* MapStyleButton.swift */,
+			);
+			path = CustomButtons;
+			sourceTree = "<group>";
+		};
 		CB1F562C2A27A1F1004FE83A /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,7 +212,8 @@
 			children = (
 				CBC6ED9929F873A1000D509F /* FeedControllers */,
 				CBC6ED9A29F873BD000D509F /* ProfileControllers */,
-				CB94F1052A7016490048525D /* FavouriteControllers */,
+				CB94F1052A7016490048525D /* SavedPostsControllers */,
+				CBFC5E942A753EBC00D37566 /* MapControllers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -212,7 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				CBC6ED9329F86E52000D509F /* Application */,
-				CB8E2B9F2A11339900F0E708 /* Coordinators */,
+				CB8E2B9F2A11339900F0E708 /* Coordinator */,
 				CB1F562C2A27A1F1004FE83A /* Services */,
 				CBC6ED9429F86EEE000D509F /* Extensions */,
 				CBCABD082A0E852D0084FDE3 /* ViewModel */,
@@ -227,25 +253,26 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
-		CB8E2B9F2A11339900F0E708 /* Coordinators */ = {
+		CB8E2B9F2A11339900F0E708 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
 				CBCABD002A0CC6C30084FDE3 /* Coordinatable.swift */,
 				CBCABD022A0CD0A90084FDE3 /* AppCoordinator.swift */,
 				CB1EA5BE2A162C3300C0053D /* FeedCoordinator.swift */,
 				CB1EA5C02A162C6D00C0053D /* ProfileCoordinator.swift */,
-				CB01E4572A6EFCCC007A285F /* FavouriteCoordinator.swift */,
+				CB01E4572A6EFCCC007A285F /* SavedPostsCoordinator.swift */,
+				CBFC5E922A753A6A00D37566 /* MapCoordinator.swift */,
 			);
-			path = Coordinators;
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		CB94F1052A7016490048525D /* FavouriteControllers */ = {
+		CB94F1052A7016490048525D /* SavedPostsControllers */ = {
 			isa = PBXGroup;
 			children = (
 				CB01E4592A6FC408007A285F /* SavedPostsViewController.swift */,
 				CBFC5E8E2A744FBA00D37566 /* SavedPostsViewController+TableView.swift */,
 			);
-			path = FavouriteControllers;
+			path = SavedPostsControllers;
 			sourceTree = "<group>";
 		};
 		CBC6ED9329F86E52000D509F /* Application */ = {
@@ -292,8 +319,8 @@
 		CBC6ED9729F8722A000D509F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				CB0C6F8F2A7581B700977308 /* CustomButtons */,
 				CBB4E7422A06C30400D42679 /* CircularLabel.swift */,
-				CB71F6202997883D00DA584D /* CustomButton.swift */,
 				CB5075BB2A41D90A007338D3 /* CustomTextField.swift */,
 			);
 			path = Components;
@@ -373,6 +400,16 @@
 				CB1F562D2A27A3D9004FE83A /* PasswordCrack.swift */,
 			);
 			path = LoginService;
+			sourceTree = "<group>";
+		};
+		CBFC5E942A753EBC00D37566 /* MapControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC5E952A753F4700D37566 /* MapViewController.swift */,
+				CB0C6F942A76ACA700977308 /* MapViewController+CLLocationManager.swift */,
+				CB0C6F962A76ADC700977308 /* MapViewController+MKMapViewDelegate.swift */,
+			);
+			path = MapControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -465,12 +502,14 @@
 				CB7AF30D2959AE5E005C51F3 /* FeedViewController.swift in Sources */,
 				CB23E9112975996A0081B615 /* ProfileTableHeaderView.swift in Sources */,
 				CB1EA5BF2A162C3300C0053D /* FeedCoordinator.swift in Sources */,
-				CB01E4582A6EFCCC007A285F /* FavouriteCoordinator.swift in Sources */,
+				CB01E4582A6EFCCC007A285F /* SavedPostsCoordinator.swift in Sources */,
 				CBCABD0D2A0E97D90084FDE3 /* ProfileViewModel.swift in Sources */,
 				CB71F61D298E7CA200DA584D /* LoginViewController.swift in Sources */,
 				CB08A492299F7A3200AF49D7 /* PostsTableCell.swift in Sources */,
 				CB134C2C2A60195D00E7DF62 /* Alert.swift in Sources */,
 				CBA858A929E9966800AC37B2 /* NetworkService.swift in Sources */,
+				CBFC5E962A753F4700D37566 /* MapViewController.swift in Sources */,
+				CBFC5E932A753A6A00D37566 /* MapCoordinator.swift in Sources */,
 				CB08A49E29A67E6F00AF49D7 /* PhotosCollectionCell.swift in Sources */,
 				CB1F562E2A27A3D9004FE83A /* PasswordCrack.swift in Sources */,
 				CB1EA5C12A162C6D00C0053D /* ProfileCoordinator.swift in Sources */,
@@ -481,17 +520,21 @@
 				CB7AF3092959AE5E005C51F3 /* AppDelegate.swift in Sources */,
 				CBFC5E8A2A72CFC300D37566 /* CDPostItem+CoreDataClass.swift in Sources */,
 				CB6AF31E2965B6BF008400F2 /* ProfileViewController.swift in Sources */,
+				CB0C6F8C2A756ED300977308 /* CircleButton.swift in Sources */,
+				CB0C6F952A76ACA700977308 /* MapViewController+CLLocationManager.swift in Sources */,
 				CBB4E7432A06C30400D42679 /* CircularLabel.swift in Sources */,
 				CB6AF349296763C7008400F2 /* InfoViewController.swift in Sources */,
 				CB83B7712A337B1A00D0086D /* Planet.swift in Sources */,
 				CB83B76F2A337AD100D0086D /* JsonData.swift in Sources */,
-				CB71F6212997883D00DA584D /* CustomButton.swift in Sources */,
+				CB71F6212997883D00DA584D /* VKStyleButton.swift in Sources */,
 				CB5075BA2A41D6C4007338D3 /* KeyboardManager.swift in Sources */,
 				CB08A49A29A4FAAF00AF49D7 /* Photo.swift in Sources */,
 				CBFC5E912A74503300D37566 /* FavouritesViewModel.swift in Sources */,
 				CBCABD032A0CD0A90084FDE3 /* AppCoordinator.swift in Sources */,
 				CBFC5E872A72CE3A00D37566 /* YourModelName.xcdatamodeld in Sources */,
+				CB0C6F8E2A757E1000977308 /* ButtonPressed.swift in Sources */,
 				CBF33F4729FBF788009FC759 /* Post.swift in Sources */,
+				CB0C6F932A7680F700977308 /* MapStyleButton.swift in Sources */,
 				CBFC5E8B2A72CFC300D37566 /* CDPostItem+CoreDataProperties.swift in Sources */,
 				CB5075BE2A41EACB007338D3 /* SignUpViewController.swift in Sources */,
 				CB8037782A44485A00BD2395 /* CheckerService.swift in Sources */,
@@ -500,6 +543,7 @@
 				CBFC5E8F2A744FBA00D37566 /* SavedPostsViewController+TableView.swift in Sources */,
 				CB08A49629A4B3AA00AF49D7 /* PhotosTableCell.swift in Sources */,
 				CBF621E929A8CE6400119FA8 /* Reusable.swift in Sources */,
+				CB0C6F972A76ADC700977308 /* MapViewController+MKMapViewDelegate.swift in Sources */,
 				CB8E2BE92A13AD8600F0E708 /* FeedViewModel.swift in Sources */,
 				CBC6EDA229F9D770000D509F /* LoginFactory.swift in Sources */,
 				CB80377A2A44491400BD2395 /* ShowAlert.swift in Sources */,
@@ -570,7 +614,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -625,7 +669,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -646,6 +690,7 @@
 				DEVELOPMENT_TEAM = 5JY83H55A5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please Give Permision";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -679,6 +724,7 @@
 				DEVELOPMENT_TEAM = 5JY83H55A5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please Give Permision";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

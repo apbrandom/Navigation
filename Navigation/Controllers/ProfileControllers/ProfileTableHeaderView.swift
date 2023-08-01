@@ -85,8 +85,8 @@ class ProfileTableHeaderView: UIView {
         return textField
     }()
     
-    lazy var setStatusButton: CustomButton = {
-        let button = CustomButton()
+    lazy var setStatusButton: VKStyleButton = {
+        let button = VKStyleButton()
         button.setTitle("Set Status", for: .normal)
         button.addTarget(
             self,

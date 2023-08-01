@@ -11,20 +11,25 @@ class SavedPostsCoordinator: SavedPostsCoordinatable {
 
     weak var parentCoordinator: Coordinatable?
     var childCoordinators = [Coordinatable]()
-    var navigationController: UINavigationController
     
+    var navigationController: UINavigationController
     init(navigationController: UINavigationController) {
             self.navigationController = navigationController
         }
     
     func start() {
-        let favouriteViewController = SavedPostsViewController()
+        let savedPostsViewController = SavedPostsViewController()
+        savedPostsViewController.coordinator = self
+        navigationController.viewControllers = [savedPostsViewController]
+        
+        setupTabBarItem()
+    }
+    
+    private func setupTabBarItem() {
         let image = UIImage(systemName: "square.and.arrow.down")
         let selectedImage = UIImage(systemName: "square.and.arrow.down.fill")
-        favouriteViewController.tabBarItem = .init(title: "Saved", image: image, selectedImage: selectedImage)
-        favouriteViewController.coordinator = self
-        
-        navigationController.viewControllers = [favouriteViewController]
+        let tabBarItem = UITabBarItem(title: "Saved", image: image, selectedImage: selectedImage)
+        navigationController.tabBarItem = tabBarItem
     }
     
     func finish() {
