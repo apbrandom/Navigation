@@ -14,3 +14,9 @@ extension String {
         return emailPredicate.evaluate(with: self)
     }
 }
+
+extension String {
+    var localized: String {
+        NSLocalizedString(self, comment: self)
+    }
+}
