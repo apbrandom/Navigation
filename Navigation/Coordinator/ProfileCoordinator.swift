@@ -29,7 +29,7 @@ class ProfileCoordinator: ProfileCoordinatable {
             profileViewController.updateUser(user)
             navigationController.viewControllers = [profileViewController]
         } else {
-            let loginViewController = LoginViewController(userService: userService, loginInspector: loginFactory.makeLoginInspector())
+            let loginViewController = AuthorizationViewController(userService: userService, loginInspector: loginFactory.makeLoginInspector())
             loginViewController.coordinator = self
             navigationController.viewControllers = [loginViewController]
             parentCoordinator?.addChildCoordinator(self)
@@ -62,7 +62,8 @@ class ProfileCoordinator: ProfileCoordinatable {
     private func setupTabBarItem() {
         let image = UIImage(systemName: "person")
         let selectedImage = UIImage(systemName: "person.fill")
-        let tabBarItem = UITabBarItem(title: "Profile", image: image, selectedImage: selectedImage)
+        let text = NSLocalizedString("ProfileCoordinatorTabBarItem", comment: "")
+        let tabBarItem = UITabBarItem(title: text, image: image, selectedImage: selectedImage)
         navigationController.tabBarItem = tabBarItem
     }
     

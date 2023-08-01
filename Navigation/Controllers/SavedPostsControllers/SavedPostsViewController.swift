@@ -53,7 +53,8 @@ class SavedPostsViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        navigationItem.title = "Saved Posts"
+        let text = NSLocalizedString("SavedPostsVCNavigationItemTitle", comment: "")
+        navigationItem.title = text
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 }

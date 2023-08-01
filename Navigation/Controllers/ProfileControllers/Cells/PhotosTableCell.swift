@@ -15,7 +15,8 @@ class PhotosTableCell: UITableViewCell {
     
     private lazy var photoLabel: UILabel = {
         let label = UILabel()
-        label.text = "Photos"
+        let text = NSLocalizedString("PhotosTableCellPhotoLabel", comment: "")
+        label.text = text
         label.textColor = .black
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +85,7 @@ class PhotosTableCell: UITableViewCell {
     }
     
     required init? (coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("init\(coder): has not been implemented")
     }
     
     //MARK: - Private
