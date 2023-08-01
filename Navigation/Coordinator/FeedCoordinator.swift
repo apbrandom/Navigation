@@ -42,7 +42,8 @@ class FeedCoordinator: FeedCoordinatable  {
     private func setupTabBarItem() {
         let image = UIImage(systemName: "house")
         let selectedImage = UIImage(systemName: "house.fill")
-        let tabBarItem = UITabBarItem(title: "Feed", image: image, selectedImage: selectedImage)
+        let text = NSLocalizedString("FeedCoordinatorTabBarItem", comment: "")
+        let tabBarItem = UITabBarItem(title: text, image: image, selectedImage: selectedImage)
         navigationController.tabBarItem = tabBarItem
     }
     

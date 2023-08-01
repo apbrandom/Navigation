@@ -72,7 +72,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func handleDoubleTap(_ recognizer: UITapGestureRecognizer) {
         doubleTapAnimation(recognizer)
-        print("Двойное нажатие")
         if let indexPath = profileTableView.indexPathForSelectedRow {
             let post = viewModel.postData[indexPath.row]
             CoreDataStorageService.shared.savePostItem(

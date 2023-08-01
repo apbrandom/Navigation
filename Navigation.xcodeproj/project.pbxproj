@@ -20,6 +20,8 @@
 		CB0C6F932A7680F700977308 /* MapStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0C6F922A7680F700977308 /* MapStyleButton.swift */; };
 		CB0C6F952A76ACA700977308 /* MapViewController+CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0C6F942A76ACA700977308 /* MapViewController+CLLocationManager.swift */; };
 		CB0C6F972A76ADC700977308 /* MapViewController+MKMapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0C6F962A76ADC700977308 /* MapViewController+MKMapViewDelegate.swift */; };
+		CB0C6FA12A77D11E00977308 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB0C6FA02A77D11E00977308 /* Localizable.xcstrings */; };
+		CB0C6FA52A793AEB00977308 /* infoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB0C6FA42A793AEB00977308 /* infoPlist.xcstrings */; };
 		CB134C2C2A60195D00E7DF62 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB134C2B2A60195D00E7DF62 /* Alert.swift */; };
 		CB134C2E2A6019BB00E7DF62 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB134C2D2A6019BB00E7DF62 /* String+Extension.swift */; };
 		CB1EA5BF2A162C3300C0053D /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EA5BE2A162C3300C0053D /* FeedCoordinator.swift */; };
@@ -33,7 +35,7 @@
 		CB6AF31E2965B6BF008400F2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */; };
 		CB6AF3202965D98C008400F2 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF31F2965D98C008400F2 /* PostViewController.swift */; };
 		CB6AF349296763C7008400F2 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF348296763C7008400F2 /* InfoViewController.swift */; };
-		CB71F61D298E7CA200DA584D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71F61C298E7CA200DA584D /* LoginViewController.swift */; };
+		CB71F61D298E7CA200DA584D /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71F61C298E7CA200DA584D /* AuthorizationViewController.swift */; };
 		CB71F6212997883D00DA584D /* VKStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71F6202997883D00DA584D /* VKStyleButton.swift */; };
 		CB7AF3092959AE5E005C51F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF3082959AE5E005C51F3 /* AppDelegate.swift */; };
 		CB7AF30B2959AE5E005C51F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF30A2959AE5E005C51F3 /* SceneDelegate.swift */; };
@@ -106,6 +108,8 @@
 		CB0C6F922A7680F700977308 /* MapStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyleButton.swift; sourceTree = "<group>"; };
 		CB0C6F942A76ACA700977308 /* MapViewController+CLLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewController+CLLocationManager.swift"; sourceTree = "<group>"; };
 		CB0C6F962A76ADC700977308 /* MapViewController+MKMapViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewController+MKMapViewDelegate.swift"; sourceTree = "<group>"; };
+		CB0C6FA02A77D11E00977308 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		CB0C6FA42A793AEB00977308 /* infoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = infoPlist.xcstrings; sourceTree = "<group>"; };
 		CB134C2B2A60195D00E7DF62 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		CB134C2D2A6019BB00E7DF62 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		CB1EA5BE2A162C3300C0053D /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
@@ -120,7 +124,7 @@
 		CB6AF31F2965D98C008400F2 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		CB6AF3442966E320008400F2 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		CB6AF348296763C7008400F2 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
-		CB71F61C298E7CA200DA584D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CB71F61C298E7CA200DA584D /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		CB71F6202997883D00DA584D /* VKStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKStyleButton.swift; sourceTree = "<group>"; };
 		CB7AF3052959AE5E005C51F3 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB7AF3082959AE5E005C51F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -249,6 +253,8 @@
 				CBFC5E852A72CE3A00D37566 /* YourModelName.xcdatamodeld */,
 				CB7AF3162959AE5E005C51F3 /* Info.plist */,
 				CBB238362A70037200095E77 /* GoogleService-Info.plist */,
+				CB0C6FA02A77D11E00977308 /* Localizable.xcstrings */,
+				CB0C6FA42A793AEB00977308 /* infoPlist.xcstrings */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -340,7 +346,7 @@
 		CBC6ED9A29F873BD000D509F /* ProfileControllers */ = {
 			isa = PBXGroup;
 			children = (
-				CB71F61C298E7CA200DA584D /* LoginViewController.swift */,
+				CB71F61C298E7CA200DA584D /* AuthorizationViewController.swift */,
 				CB5075BD2A41EACB007338D3 /* SignUpViewController.swift */,
 				CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */,
 				CBCABD0A2A0E92650084FDE3 /* ProfileViewController+TableView.swift */,
@@ -466,6 +472,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = CB7AF2FC2959AE5D005C51F3;
 			packageReferences = (
@@ -488,6 +495,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB7AF3122959AE5E005C51F3 /* Assets.xcassets in Resources */,
+				CB0C6FA52A793AEB00977308 /* infoPlist.xcstrings in Resources */,
+				CB0C6FA12A77D11E00977308 /* Localizable.xcstrings in Resources */,
 				CBB238372A70037200095E77 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,7 +513,7 @@
 				CB1EA5BF2A162C3300C0053D /* FeedCoordinator.swift in Sources */,
 				CB01E4582A6EFCCC007A285F /* SavedPostsCoordinator.swift in Sources */,
 				CBCABD0D2A0E97D90084FDE3 /* ProfileViewModel.swift in Sources */,
-				CB71F61D298E7CA200DA584D /* LoginViewController.swift in Sources */,
+				CB71F61D298E7CA200DA584D /* AuthorizationViewController.swift in Sources */,
 				CB08A492299F7A3200AF49D7 /* PostsTableCell.swift in Sources */,
 				CB134C2C2A60195D00E7DF62 /* Alert.swift in Sources */,
 				CBA858A929E9966800AC37B2 /* NetworkService.swift in Sources */,
@@ -618,6 +627,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ld64";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -672,6 +682,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ld64";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

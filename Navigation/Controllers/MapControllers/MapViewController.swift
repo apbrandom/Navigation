@@ -80,8 +80,8 @@ class MapViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        navigationItem.title = "Map"
-        
+        let text = NSLocalizedString("MapVCNavigationItemTitle", comment: "")
+        navigationItem.title = text
         let longPress = UILongPressGestureRecognizer(target: self,
                                                      action: #selector(addAnnatationOnLongPress(gesture:)))
         longPress.minimumPressDuration = 1.0

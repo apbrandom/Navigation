@@ -14,7 +14,7 @@ protocol LoginViewControllerDelegate: AnyObject {
     func signUp(email: String, password: String, completion: @escaping (Result<AuthDataResult, Error>) -> Void)
 }
 
-class LoginViewController: UIViewController {
+class AuthorizationViewController: UIViewController {
     
     private var delegate: LoginViewControllerDelegate?
     var userService: UserService
@@ -73,14 +73,16 @@ class LoginViewController: UIViewController {
     private lazy var loginTextField: CustomTextField = { [unowned self] in
         let textField = CustomTextField()
         textField.text = "user@mail.com"
-        textField.placeholder = "Email or phone"
+        let text = NSLocalizedString("AuthorizationVCLoginTextField", comment: "")
+        textField.placeholder = text
         textField.delegate = self
         return textField
     }()
     
     private lazy var passwordTextField: CustomTextField = { [unowned self] in
         let textField = CustomTextField()
-        textField.placeholder = "Password"
+        let text = NSLocalizedString("AuthorizationVCPasswordTextField", comment: "")
+        textField.placeholder = text
         textField.text = "password"
         textField.isSecureTextEntry = true
         textField.delegate = self
@@ -89,7 +91,8 @@ class LoginViewController: UIViewController {
     
     private lazy var signInButton: VKStyleButton = {
         let button = VKStyleButton()
-        button.setTitle("Sign In", for: .normal)
+        let text = NSLocalizedString("AuthorizationVCSignInButton", comment: "")
+        button.setTitle(text, for: .normal)
         button.pressed = { self.signInButtonTapped() }
         return button
     }()
@@ -97,7 +100,10 @@ class LoginViewController: UIViewController {
     private lazy var signUpButton: VKStyleButton = {
         let button = VKStyleButton()
         button.setBackgroundImage(.none, for: .normal)
-        button.setTitle("Sign Up", for: .normal)
+        let text = NSLocalizedString("AuthorizationVCSignUpButton", comment: "")
+        button.setTitle(text, for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.minimumScaleFactor = 0.5
         button.setTitleColor(.systemBlue, for: .normal)
         button.pressed = { self.signUpButtonTapped() }
         return button
@@ -145,15 +151,9 @@ class LoginViewController: UIViewController {
     //MARK: - Private
     
     private func setupView() {
-        title = "Profile"
         view.backgroundColor = .secondarySystemBackground
-        
-        tabBarItem = UITabBarItem(
-            title: "Profile",
-            image: UIImage(systemName: "person"),
-            tag: 0
-        )
-        
+        let text = NSLocalizedString("LoginVCNavigationTitle", comment: "")
+        navigationItem.title = text
         keyboardManager = KeyboardManager(scrollView: loginScrollView)
     }
     
@@ -200,7 +200,7 @@ class LoginViewController: UIViewController {
         signUpButton.snp.makeConstraints { make in
             make.top.equalTo(signInButton.snp.bottom).offset(16)
             make.centerX.equalTo(contentView.snp.centerX)
-            make.width.equalTo(100)
+            make.width.equalTo(140)
             make.bottom.equalTo(contentView.snp.bottom).offset(-16)
         }
     }
@@ -208,7 +208,7 @@ class LoginViewController: UIViewController {
 
 //MARK: - Delegate
 
-extension LoginViewController: UITextFieldDelegate {
+extension AuthorizationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

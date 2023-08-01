@@ -28,7 +28,8 @@ class MapCoordinator: MapCoordinatable {
     private func setupTabBarItem() {
         let image = UIImage(systemName: "map")
         let selectedImage = UIImage(systemName: "map.fill")
-        let tabBarItem = UITabBarItem(title: "Map", image: image, selectedImage: selectedImage)
+        let text = NSLocalizedString("MapCoordinatorTabBarItem", comment: "")
+        let tabBarItem = UITabBarItem(title: text, image: image, selectedImage: selectedImage)
         navigationController.tabBarItem = tabBarItem
     }
     

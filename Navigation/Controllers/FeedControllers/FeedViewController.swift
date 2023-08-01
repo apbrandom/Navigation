@@ -26,8 +26,9 @@ class FeedViewController: UIViewController {
     
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
+        let text = NSLocalizedString("FeedVCTimerLabel", comment: "")
         label.text = "00:00"
-        label.font = UIFont(name: "Courier", size: 25)
+        label.font = UIFont(name: text, size: 25)
         label.textColor = UIColor.gray.withAlphaComponent(0.9)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +59,8 @@ class FeedViewController: UIViewController {
     
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.text = "test"
+        let text = NSLocalizedString("FeedVCTextField", comment: "")
+        textField.text = text
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
         textField.backgroundColor = .systemGray5
@@ -67,13 +69,15 @@ class FeedViewController: UIViewController {
     
     private lazy var checkButton: UIButton = {
         let button = VKStyleButton()
-        button.setTitle("Check", for: .normal)
+        let text = NSLocalizedString("FeedVCCheckButton", comment: "")
+        button.setTitle(text, for: .normal)
         return button
     }()
     
     private lazy var generateAndCrackButton: VKStyleButton = {
         let button = VKStyleButton()
-        button.setTitle("Generate and Crack", for: .normal)
+        let text = NSLocalizedString("FeedVCGenerateAndCrackButton", comment: "")
+        button.setTitle(text, for: .normal)
         button.pressed = { [self] in
             
             // Reset timer
@@ -119,7 +123,8 @@ class FeedViewController: UIViewController {
     
     private lazy var postVCButton: VKStyleButton = {
         let button = VKStyleButton()
-        button.setTitle("PostVC", for: .normal)
+        let text = NSLocalizedString("FeedVCButtonPost", comment: "")
+        button.setTitle(text, for: .normal)
         button.pressed = { self.coordinator?.navigateToPostVC() }
         return button
     }()
@@ -138,6 +143,8 @@ class FeedViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .secondarySystemBackground
+        let text = NSLocalizedString("FeedVCNavigationItemTitle", comment: "")
+        navigationItem.title = text
     }
     
     private func addSubviews() {

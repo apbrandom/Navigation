@@ -28,7 +28,8 @@ class SavedPostsCoordinator: SavedPostsCoordinatable {
     private func setupTabBarItem() {
         let image = UIImage(systemName: "square.and.arrow.down")
         let selectedImage = UIImage(systemName: "square.and.arrow.down.fill")
-        let tabBarItem = UITabBarItem(title: "Saved", image: image, selectedImage: selectedImage)
+        let text = NSLocalizedString("SavedCoordinatorTabBarItem", comment: "")
+        let tabBarItem = UITabBarItem(title: text, image: image, selectedImage: selectedImage)
         navigationController.tabBarItem = tabBarItem
     }
     
