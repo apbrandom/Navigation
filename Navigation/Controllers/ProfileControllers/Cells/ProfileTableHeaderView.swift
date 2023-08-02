@@ -56,7 +56,6 @@ class ProfileTableHeaderView: UIView {
     private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 18)
-        label.textColor = .black
         return label
     }()
     
@@ -76,7 +75,7 @@ class ProfileTableHeaderView: UIView {
         textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.cornerRadius = 12
         textField.layer.backgroundColor = UIColor.systemBackground.cgColor
-        let text = NSLocalizedString("ProfileTableHeaderViewStatusTextField", comment: "")
+        let text = "ProfileTableHeaderViewStatusTextField".localized
         textField.placeholder = text
         textField.addTarget(
             self,

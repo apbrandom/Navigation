@@ -14,7 +14,7 @@ protocol LoginViewControllerDelegate: AnyObject {
     func signUp(email: String, password: String, completion: @escaping (Result<AuthDataResult, Error>) -> Void)
 }
 
-class AuthorizationViewController: UIViewController {
+class LoginViewController: UIViewController {
     
     private var delegate: LoginViewControllerDelegate?
     var userService: UserService
@@ -35,7 +35,7 @@ class AuthorizationViewController: UIViewController {
     
     private lazy var loginScrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .systemBackground
+        scrollView.backgroundColor = .darkModeBackground
         scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +44,7 @@ class AuthorizationViewController: UIViewController {
     
     private lazy var contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .darkModeBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -151,8 +151,8 @@ class AuthorizationViewController: UIViewController {
     //MARK: - Private
     
     private func setupView() {
-        view.backgroundColor = .secondarySystemBackground
-        let text = NSLocalizedString("LoginVCNavigationTitle", comment: "")
+        view.backgroundColor = .darkModeBackground
+        let text = "LoginVCNavigationTitle".localized
         navigationItem.title = text
         keyboardManager = KeyboardManager(scrollView: loginScrollView)
     }
@@ -208,7 +208,7 @@ class AuthorizationViewController: UIViewController {
 
 //MARK: - Delegate
 
-extension AuthorizationViewController: UITextFieldDelegate {
+extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
