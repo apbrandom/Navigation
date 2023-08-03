@@ -69,7 +69,7 @@
 		CBAC1F6D2A7A95E90002D30A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = CBAC1F6C2A7A95E90002D30A /* FirebaseMessaging */; };
 		CBAC1F6F2A7A95E90002D30A /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = CBAC1F6E2A7A95E90002D30A /* FirebasePerformance */; };
 		CBAC1F712A7A95E90002D30A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CBAC1F702A7A95E90002D30A /* FirebaseStorage */; };
-		CBAC1F792A7BAB3F0002D30A /* NavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAC1F782A7BAB3F0002D30A /* NavigationTests.swift */; };
+		CBAC1F792A7BAB3F0002D30A /* FeedViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAC1F782A7BAB3F0002D30A /* FeedViewModelTests.swift */; };
 		CBB238372A70037200095E77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBB238362A70037200095E77 /* GoogleService-Info.plist */; };
 		CBB4E7432A06C30400D42679 /* CircularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4E7422A06C30400D42679 /* CircularLabel.swift */; };
 		CBC6EDA029F95995000D509F /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC6ED9D29F88459000D509F /* LoginInspector.swift */; };
@@ -164,7 +164,7 @@
 		CB8E2BEA2A13B9F700F0E708 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		CBA858A829E9966800AC37B2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		CBAC1F762A7BAB3F0002D30A /* NavigationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavigationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CBAC1F782A7BAB3F0002D30A /* NavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTests.swift; sourceTree = "<group>"; };
+		CBAC1F782A7BAB3F0002D30A /* FeedViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModelTests.swift; sourceTree = "<group>"; };
 		CBB238362A70037200095E77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CBB4E7422A06C30400D42679 /* CircularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularLabel.swift; sourceTree = "<group>"; };
 		CBC6ED9D29F88459000D509F /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
@@ -329,7 +329,7 @@
 		CBAC1F772A7BAB3F0002D30A /* NavigationTests */ = {
 			isa = PBXGroup;
 			children = (
-				CBAC1F782A7BAB3F0002D30A /* NavigationTests.swift */,
+				CBAC1F782A7BAB3F0002D30A /* FeedViewModelTests.swift */,
 				CBF6E25D2A7BEA5F00CAF49C /* LoginViewControllerTests.swift */,
 			);
 			path = NavigationTests;
@@ -670,7 +670,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBF6E25E2A7BEA5F00CAF49C /* LoginViewControllerTests.swift in Sources */,
-				CBAC1F792A7BAB3F0002D30A /* NavigationTests.swift in Sources */,
+				CBAC1F792A7BAB3F0002D30A /* FeedViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
