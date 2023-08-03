@@ -21,12 +21,12 @@ class LoginViewController: UIViewController {
     var keyboardManager: KeyboardManager?
     weak var coordinator: ProfileCoordinatable?
     
-    init(userService: UserService, loginInspector: LoginInspector) {
+    init(userService: UserService, loginInspector: LoginViewControllerDelegate) {
         self.userService = userService
         self.delegate = loginInspector
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -121,7 +121,7 @@ class LoginViewController: UIViewController {
     
     //MARK: - Actions
     
-    private func signInButtonTapped() {
+    internal func signInButtonTapped() {
         guard let email = loginTextField.text,
               let password = passwordTextField.text else {
             preconditionFailure("Form must not be empty")
@@ -143,7 +143,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func signUpButtonTapped() {
+    internal func signUpButtonTapped() {
         let signUpVC = SignUpViewController()
         navigationController?.pushViewController(signUpVC, animated: true)
     }

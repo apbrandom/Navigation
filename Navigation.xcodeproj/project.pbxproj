@@ -82,7 +82,7 @@
 		CBF33F4729FBF788009FC759 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF3442966E320008400F2 /* Post.swift */; };
 		CBF33F4A29FD9CA1009FC759 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = CBF33F4929FD9CA1009FC759 /* iOSIntPackage */; settings = {ATTRIBUTES = (Required, ); }; };
 		CBF621E929A8CE6400119FA8 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF621E829A8CE6400119FA8 /* Reusable.swift */; };
-		CBF6E25C2A7BCCC700CAF49C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6E25B2A7BCCC700CAF49C /* LoginViewModel.swift */; };
+		CBF6E25E2A7BEA5F00CAF49C /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6E25D2A7BEA5F00CAF49C /* LoginViewControllerTests.swift */; };
 		CBFC5E872A72CE3A00D37566 /* YourModelName.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CBFC5E852A72CE3A00D37566 /* YourModelName.xcdatamodeld */; };
 		CBFC5E8A2A72CFC300D37566 /* CDPostItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC5E882A72CFC300D37566 /* CDPostItem+CoreDataClass.swift */; };
 		CBFC5E8B2A72CFC300D37566 /* CDPostItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC5E892A72CFC300D37566 /* CDPostItem+CoreDataProperties.swift */; };
@@ -175,7 +175,7 @@
 		CBCABD0A2A0E92650084FDE3 /* ProfileViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController+TableView.swift"; sourceTree = "<group>"; };
 		CBCABD0C2A0E97D90084FDE3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CBF621E829A8CE6400119FA8 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
-		CBF6E25B2A7BCCC700CAF49C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		CBF6E25D2A7BEA5F00CAF49C /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
 		CBFC5E862A72CE3A00D37566 /* CDPostItem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CDPostItem.xcdatamodel; sourceTree = "<group>"; };
 		CBFC5E882A72CFC300D37566 /* CDPostItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPostItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CBFC5E892A72CFC300D37566 /* CDPostItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPostItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -330,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				CBAC1F782A7BAB3F0002D30A /* NavigationTests.swift */,
+				CBF6E25D2A7BEA5F00CAF49C /* LoginViewControllerTests.swift */,
 			);
 			path = NavigationTests;
 			sourceTree = "<group>";
@@ -436,7 +437,6 @@
 				CBCABD0C2A0E97D90084FDE3 /* ProfileViewModel.swift */,
 				CBC90FA52A1A79D500545FC3 /* PhotosViewModel.swift */,
 				CBFC5E902A74503300D37566 /* FavouritesViewModel.swift */,
-				CBF6E25B2A7BCCC700CAF49C /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -611,7 +611,6 @@
 				CBCABD0D2A0E97D90084FDE3 /* ProfileViewModel.swift in Sources */,
 				CB71F61D298E7CA200DA584D /* LoginViewController.swift in Sources */,
 				CB08A492299F7A3200AF49D7 /* PostsTableCell.swift in Sources */,
-				CBF6E25C2A7BCCC700CAF49C /* LoginViewModel.swift in Sources */,
 				CB134C2C2A60195D00E7DF62 /* Alert.swift in Sources */,
 				CBA858A929E9966800AC37B2 /* NetworkService.swift in Sources */,
 				CBFC5E962A753F4700D37566 /* MapViewController.swift in Sources */,
@@ -670,6 +669,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBF6E25E2A7BEA5F00CAF49C /* LoginViewControllerTests.swift in Sources */,
 				CBAC1F792A7BAB3F0002D30A /* NavigationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

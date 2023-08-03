@@ -8,7 +8,7 @@
 import XCTest
 @testable import Navigation
 
-final class NavigationTests: XCTestCase {
+final class FeedViewModelTests: XCTestCase {
     
     var sut: FeedViewModel!
     
