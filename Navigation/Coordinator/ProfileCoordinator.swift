@@ -8,6 +8,8 @@
 import UIKit
 
 class ProfileCoordinator: ProfileCoordinatable {
+
+    
     
     weak var parentCoordinator: Coordinatable?
     
@@ -15,6 +17,7 @@ class ProfileCoordinator: ProfileCoordinatable {
     var navigationController: UINavigationController
     var userService: UserService
     var loginFactory: LoginFactory
+    var loginViewModel: LoginViewModel!
     
     init(navigationController: UINavigationController, userService: UserService, loginFactory: LoginFactory) {
         self.navigationController = navigationController
@@ -57,6 +60,7 @@ class ProfileCoordinator: ProfileCoordinatable {
                 self.navigationController.present(alert, animated: true)
             }
         }
+        
     }
     
     private func setupTabBarItem() {
