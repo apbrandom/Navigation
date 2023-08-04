@@ -257,6 +257,40 @@
         }
       }
     },
+    "LocalNSScheduleBodyText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check out the latest updates"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Посмотрите последние обновления"
+          }
+        }
+      }
+    },
+    "LocalNSScheduleTitleText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Reminder"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ежедневное напоминание"
+          }
+        }
+      }
+    },
     "LoginVCNavigationTitle" : {
       "extractionState" : "manual",
       "localizations" : {
