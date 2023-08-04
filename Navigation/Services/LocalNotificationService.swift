@@ -7,20 +7,33 @@
 
 import UserNotifications
 
-class LocalNotificationService {
+class LocalNotificationService: NSObject, UNUserNotificationCenterDelegate  {
+    
     
     static let shared = LocalNotificationService()
     private let notificationCenter = UNUserNotificationCenter.current()
-   
-    private init() { }
+    var userMessage = "LocalNSScheduleBodyText".localized
     
-    func scheduleNotification() {
+    private override init() {
+        super.init()
+        
+        notificationCenter.delegate = self
+    }
+    
+    internal func registerUpdatesCategory() {
+        let viewUpdatesAction = UNNotificationAction(identifier: "viewUpdates", title: "View Updates", options: [])
+        let updatesCategory = UNNotificationCategory(identifier: "updates", actions: [viewUpdatesAction], intentIdentifiers: [], options: [])
+        notificationCenter.setNotificationCategories([updatesCategory])
+    }
+    
+    internal func scheduleNotification() {
         let content = UNMutableNotificationContent()
         let titleText = "LocalNSScheduleTitleText".localized
-        let bodyText = "LocalNSScheduleBodyText".localized
+        let bodyText = userMessage
         content.title = titleText
         content.body = bodyText
         content.sound = .default
+        content.categoryIdentifier = "updates"
         
         var dateComponents = DateComponents()
         dateComponents.hour = 19
@@ -36,6 +49,8 @@ class LocalNotificationService {
     }
     
     internal func registerForLatestUpdatesIfPossible() {
+        registerUpdatesCategory()
+        
         //Checking whether authorization has already been granted
         let defaults = UserDefaults.standard
         let wasPermissionGranted = defaults.bool(forKey: "wasPermissionGranted")
@@ -60,5 +75,12 @@ class LocalNotificationService {
         }
     }
     
+    //MARK: - Delegate methods
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.actionIdentifier == "viewUpdates" {
+            print("View updates action received")
+        }
+        completionHandler()
+    }
 }
 
