@@ -665,15 +665,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CBAC1F722A7BAB3F0002D30A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CBF6E25E2A7BEA5F00CAF49C /* LoginViewControllerTests.swift in Sources */,
-				CBAC1F792A7BAB3F0002D30A /* FeedViewModelTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */

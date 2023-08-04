@@ -21,6 +21,7 @@ class LoginViewController: UIViewController {
     var keyboardManager: KeyboardManager?
     weak var coordinator: ProfileCoordinatable?
     
+
     init(userService: UserService, loginInspector: LoginViewControllerDelegate) {
         self.userService = userService
         self.delegate = loginInspector
@@ -122,6 +123,7 @@ class LoginViewController: UIViewController {
     //MARK: - Actions
     
     internal func signInButtonTapped() {
+
         guard let email = loginTextField.text,
               let password = passwordTextField.text else {
             preconditionFailure("Form must not be empty")
@@ -143,7 +145,10 @@ class LoginViewController: UIViewController {
         }
     }
     
+
     internal func signUpButtonTapped() {
+
+
         let signUpVC = SignUpViewController()
         navigationController?.pushViewController(signUpVC, animated: true)
     }
@@ -214,3 +219,4 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
 }
+
