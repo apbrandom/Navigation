@@ -29,8 +29,9 @@ protocol FeedCoordinatable: Coordinatable {
 
 /// Указываем, что ProfileCoordinator должен иметь метод для логина.
 protocol ProfileCoordinatable: Coordinatable {
-    func loginWith(_ login: String, _ password: String)
+    func loginWith(_ login: String, _ uid: String)
 }
+
 
 /// Базовый протокол для FavouriteCoordinator. В данном случае он не имеет специальных методов,
 /// но мы оставляем его для будущего расширения.

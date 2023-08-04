@@ -36,3 +36,4 @@ public class TestUserService: UserService {
     public var user = User(login: "test", fullName: "Cat Tester", avatar: UIImage(named: "cat")!, status: "Hello, world!")
     public init() {}
 }
+
