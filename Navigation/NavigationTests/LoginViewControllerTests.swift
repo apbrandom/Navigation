@@ -6,8 +6,9 @@
 //
 
 import XCTest
-@testable import Navigation
 import FirebaseAuth
+@testable import Navigation
+
 
 class LoginViewControllerTests: XCTestCase {
     var sut: LoginViewController!
