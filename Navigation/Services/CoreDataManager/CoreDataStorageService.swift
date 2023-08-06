@@ -20,7 +20,7 @@ class CoreDataStorageService {
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }
     
-    func savePostItem(title: String, author: String, image: String, likes: Int32, views: Int32) {
+    func savePostItem(title: String, author: String, image: UIImage?, likes: Int32, views: Int32) {
         let postItem = CDPostItem(context: context)
         postItem.title = title
         postItem.author = author

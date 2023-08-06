@@ -34,6 +34,8 @@
 		CB5075BE2A41EACB007338D3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5075BD2A41EACB007338D3 /* SignUpViewController.swift */; };
 		CB64BE162A7EF60E007BBD01 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = CB64BE152A7EF60E007BBD01 /* KeychainAccess */; };
 		CB64BE182A7EF640007BBD01 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB64BE172A7EF640007BBD01 /* KeychainService.swift */; };
+		CB64BE1A2A7FE029007BBD01 /* PostsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB64BE192A7FE029007BBD01 /* PostsStorage.swift */; };
+		CB64BE1C2A7FE9AB007BBD01 /* ProfileViewController+Drag&Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB64BE1B2A7FE9AB007BBD01 /* ProfileViewController+Drag&Drop.swift */; };
 		CB6AF31E2965B6BF008400F2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */; };
 		CB6AF3202965D98C008400F2 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF31F2965D98C008400F2 /* PostViewController.swift */; };
 		CB6AF349296763C7008400F2 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF348296763C7008400F2 /* InfoViewController.swift */; };
@@ -148,6 +150,8 @@
 		CB5075BB2A41D90A007338D3 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		CB5075BD2A41EACB007338D3 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		CB64BE172A7EF640007BBD01 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		CB64BE192A7FE029007BBD01 /* PostsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsStorage.swift; sourceTree = "<group>"; };
+		CB64BE1B2A7FE9AB007BBD01 /* ProfileViewController+Drag&Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController+Drag&Drop.swift"; sourceTree = "<group>"; };
 		CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CB6AF31F2965D98C008400F2 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		CB6AF3442966E320008400F2 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 				CBFC5E802A72CD3700D37566 /* LoginService */,
 				CBFC5E7B2A72C4F400D37566 /* CoreDataManager */,
 				CBCABD062A0E845B0084FDE3 /* Network */,
+				CB64BE192A7FE029007BBD01 /* PostsStorage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -417,6 +422,7 @@
 				CB5075BD2A41EACB007338D3 /* SignUpViewController.swift */,
 				CB6AF31D2965B6BF008400F2 /* ProfileViewController.swift */,
 				CBCABD0A2A0E92650084FDE3 /* ProfileViewController+TableView.swift */,
+				CB64BE1B2A7FE9AB007BBD01 /* ProfileViewController+Drag&Drop.swift */,
 				CB08A49729A4B58C00AF49D7 /* PhotosViewController.swift */,
 				CBC6ED9629F871BA000D509F /* Cells */,
 			);
@@ -625,6 +631,7 @@
 				CBCABD0D2A0E97D90084FDE3 /* ProfileViewModel.swift in Sources */,
 				CB71F61D298E7CA200DA584D /* LoginViewController.swift in Sources */,
 				CB08A492299F7A3200AF49D7 /* PostsTableCell.swift in Sources */,
+				CB64BE1A2A7FE029007BBD01 /* PostsStorage.swift in Sources */,
 				CB134C2C2A60195D00E7DF62 /* Alert.swift in Sources */,
 				CBA858A929E9966800AC37B2 /* NetworkService.swift in Sources */,
 				CBFC5E962A753F4700D37566 /* MapViewController.swift in Sources */,
@@ -667,6 +674,7 @@
 				CB0C6F972A76ADC700977308 /* MapViewController+MKMapViewDelegate.swift in Sources */,
 				CB8E2BE92A13AD8600F0E708 /* FeedViewModel.swift in Sources */,
 				CBC6EDA229F9D770000D509F /* LoginFactory.swift in Sources */,
+				CB64BE1C2A7FE9AB007BBD01 /* ProfileViewController+Drag&Drop.swift in Sources */,
 				CB80377A2A44491400BD2395 /* ShowAlert.swift in Sources */,
 				CB7AF30B2959AE5E005C51F3 /* SceneDelegate.swift in Sources */,
 				CBC90FA62A1A79D500545FC3 /* PhotosViewModel.swift in Sources */,
@@ -835,7 +843,9 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please Give Permision";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -870,7 +880,9 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please Give Permision";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

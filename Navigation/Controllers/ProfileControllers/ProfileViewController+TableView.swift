@@ -12,10 +12,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func setupTableView() {
         profileTableView.rowHeight = UITableView.automaticDimension
         profileTableView.estimatedRowHeight = 500
-        
         profileTableView.dataSource = self
         profileTableView.delegate = self
-        
+        profileTableView.dragInteractionEnabled = true
+        profileTableView.dragDelegate = self
+        profileTableView.dropDelegate = self
         self.registerCells()
     }
     
@@ -75,15 +76,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if let indexPath = profileTableView.indexPathForSelectedRow {
             let post = viewModel.postData[indexPath.row]
             CoreDataStorageService.shared.savePostItem(
-                    title: post.title,
-                    author: post.author,
-                    image: post.image,
-                    likes: Int32(post.likes),
-                    views: Int32(post.views)
-                )
+                title: post.title,
+                author: post.author,
+                image: post.image,
+                likes: Int32(post.likes),
+                views: Int32(post.views)
+            )
             let alert = UIAlertController(title: "Post Saved", message: "Your post has been saved successfully!", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
