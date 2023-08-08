@@ -9,7 +9,10 @@ import UIKit
 
 class ProfileViewModel {
     
-    let postData = Post.make()
+    var postData: [Post] {
+        return PostStorage.shared.getAllPosts()
+    }
+    
     let photoData = Photo.make()
     
     var keyboardWillShow: ((CGFloat) -> Void)?
@@ -21,20 +24,16 @@ class ProfileViewModel {
     
     private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
-        
         notificationCenter.addObserver(
             self,
             selector: #selector(self.willShowKeyboard(_:)),
             name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        
+            object: nil)
         notificationCenter.addObserver(
             self,
             selector: #selector(self.willHideKeyboard(_:)),
             name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
+            object: nil)
     }
     
     @objc private func willShowKeyboard(_ notification: NSNotification) {

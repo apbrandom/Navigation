@@ -96,7 +96,10 @@ class PostsTableCell: UITableViewCell {
         postAuthorTextView.text = post.author
         
         // Apply a filter to the posts image
-        let originalImage = UIImage(named: post.image) ?? UIImage()
+        guard let originalImage = post.image else {
+            print("No image in post found")
+            return
+        }
         let imageProcessor = ImageProcessor()
         
         let filter = ColorFilter.chrome
@@ -113,10 +116,11 @@ class PostsTableCell: UITableViewCell {
         guard let post = post else {
             return
         }
+        let quest = UIImage(systemName: "questionmark")
         
         postTitleLabel.text = post.title
         postAuthorTextView.text = post.author
-        postImageView.image = UIImage(named: post.image ?? "questionmark") 
+        postImageView.image = post.image ??  quest
         postLikesLabel.text = "Likes: \(post.likes)"
         postViewsLabel.text = "Views: \(post.views)"
     }

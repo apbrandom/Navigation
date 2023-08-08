@@ -20,6 +20,7 @@ class LoginViewController: UIViewController {
     var userService: UserService
     var keyboardManager: KeyboardManager?
     weak var coordinator: ProfileCoordinatable?
+    private let biometricAuthService = LocalAuthorizationService()
     
 
     init(userService: UserService, loginInspector: LoginViewControllerDelegate) {
@@ -27,7 +28,7 @@ class LoginViewController: UIViewController {
         self.delegate = loginInspector
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -90,11 +91,22 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
+    private lazy var buttonsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [signInButton, biometricAuthButton, signUpButton])
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    
     private lazy var signInButton: VKStyleButton = {
         let button = VKStyleButton()
         let text = NSLocalizedString("AuthorizationVCSignInButton", comment: "")
         button.setTitle(text, for: .normal)
         button.pressed = { self.signInButtonTapped() }
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -107,6 +119,17 @@ class LoginViewController: UIViewController {
         button.titleLabel?.minimumScaleFactor = 0.5
         button.setTitleColor(.systemBlue, for: .normal)
         button.pressed = { self.signUpButtonTapped() }
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var biometricAuthButton: VKStyleButton = {
+        let button = VKStyleButton()
+        let text = NSLocalizedString("BiometricAuthButton", comment: "")
+        button.setTitle(text, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.pressed = { self.handleBiometricAuthButton() }
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -118,6 +141,7 @@ class LoginViewController: UIViewController {
         setupView()
         setupSubview()
         setupConstraints()
+        setupBiometricType()
     }
     
     //MARK: - Actions
@@ -128,14 +152,14 @@ class LoginViewController: UIViewController {
               let password = passwordTextField.text else {
             preconditionFailure("Form must not be empty")
         }
-
         delegate?.checkCredentials(email: email, password: password) { [weak self] result in
             switch result {
                 
             case .success(let authResult):
                 print("User \(authResult.user.uid) signed in successfully")
                 self?.coordinator?.loginWith(email, password)
-            
+                KeychainService.shared.save(email: email, password: password)
+                
             case .failure(let error):
                 print("Failed to sign in: ", error.localizedDescription)
                 self?.showAlert(
@@ -153,6 +177,39 @@ class LoginViewController: UIViewController {
         navigationController?.pushViewController(signUpVC, animated: true)
     }
     
+    @objc private func handleBiometricAuthButton() {
+        biometricAuthService.authorizeIfPossible { [weak self] (success, error) in
+            if success {
+                if let email = KeychainService.shared.retrieveEmail(),
+                   let password = KeychainService.shared.retrievePassword() {
+                    self?.delegate?.checkCredentials(email: email, password: password) { result in
+                        switch result {
+                        case .success(let authResult):
+                            print("User \(authResult.user.uid) signed in successfully with biometrics")
+                            self?.coordinator?.loginWith(email, password)
+                        case .failure(let error):
+                            print("Failed to sign in with saved credentials: ", error.localizedDescription)
+                            self?.showAlert(
+                                title: "Login Failed",
+                                message: "Could not sign in with saved credentials. Please log in manually.")
+                        }
+                    }
+                } else {
+                    print("No saved credentials found")
+                    self?.showAlert(
+                        title: "Login Failed",
+                        message: "No saved credentials found. Please log in manually.")
+                }
+                print("Biometric authentication successful")
+            } else if let error = error {
+                self?.showAlert(
+                    title: "Authentication Failed",
+                    message: error.localizedDescription)
+            }
+        }
+    }
+    
+    
     //MARK: - Private
     
     private func setupView() {
@@ -169,8 +226,35 @@ class LoginViewController: UIViewController {
         contentView.addSubview(loginStackView)
         loginStackView.addArrangedSubview(loginTextField)
         loginStackView.addArrangedSubview(passwordTextField)
-        contentView.addSubview(signInButton)
-        contentView.addSubview(signUpButton)
+        contentView.addSubview(buttonsStackView)
+    }
+    
+    
+    private func setupBiometricType() {
+        guard let email = KeychainService.shared.retrieveEmail(),
+              let _ = KeychainService.shared.retrievePassword() else {
+                print("No saved credentials found")
+                biometricAuthButton.isHidden = true
+                return
+        }
+        
+        print("Saved credentials found for email: \(email)")
+
+        let biometricType = biometricAuthService.availableBiometryType
+        print("Available biometric type: \(biometricType)")
+        switch biometricType {
+        case .faceID:
+            biometricAuthButton.setTitle("Face Id", for: .normal)
+            biometricAuthButton.isHidden = false
+        case .touchID:
+            biometricAuthButton.setTitle("Touch Id", for: .normal)
+            biometricAuthButton.isHidden = false
+            // Available biometric type: LABiometryType(rawValue: 0) isHidden = false
+        case .none:
+            biometricAuthButton.isHidden = false
+        @unknown default:
+            biometricAuthButton.isEnabled = false
+        }
     }
     
     //MARK: - Layout
@@ -197,18 +281,25 @@ class LoginViewController: UIViewController {
             make.leading.trailing.equalTo(contentView).inset(16)
         }
         
-        signInButton.snp.makeConstraints { make in
+        buttonsStackView.snp.makeConstraints { make in
             make.top.equalTo(loginStackView.snp.bottom).offset(16)
             make.leading.trailing.equalTo(contentView).inset(16)
         }
         
+        signInButton.snp.makeConstraints { make in
+            make.height.lessThanOrEqualTo(50)
+        }
+        
+        biometricAuthButton.snp.makeConstraints { make in
+            make.height.lessThanOrEqualTo(50)
+        }
+        
         signUpButton.snp.makeConstraints { make in
-            make.top.equalTo(signInButton.snp.bottom).offset(16)
-            make.centerX.equalTo(contentView.snp.centerX)
-            make.width.equalTo(140)
+            make.height.lessThanOrEqualTo(50)
             make.bottom.equalTo(contentView.snp.bottom).offset(-16)
         }
     }
+    
 }
 
 //MARK: - Delegate
