@@ -92,7 +92,7 @@ class PostsTableCell: UITableViewCell {
             return
         }
         
-        postTitleLabel.text = post.title
+        postTitleLabel.text = post.description
         postAuthorTextView.text = post.author
         
         // Apply a filter to the posts image
@@ -120,7 +120,11 @@ class PostsTableCell: UITableViewCell {
         
         postTitleLabel.text = post.title
         postAuthorTextView.text = post.author
-        postImageView.image = post.image ??  quest
+        if let imageData = post.image, let img = UIImage(data: imageData) {
+            postImageView.image = img
+        } else {
+            postImageView.image = quest
+        }
         postLikesLabel.text = "Likes: \(post.likes)"
         postViewsLabel.text = "Views: \(post.views)"
     }

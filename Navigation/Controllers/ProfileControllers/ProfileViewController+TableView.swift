@@ -76,7 +76,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if let indexPath = profileTableView.indexPathForSelectedRow {
             let post = viewModel.postData[indexPath.row]
             CoreDataStorageService.shared.savePostItem(
-                title: post.title,
+                title: post.description,
                 author: post.author,
                 image: post.image,
                 likes: Int32(post.likes),

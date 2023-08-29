@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController {
 
     weak var coordinator: ProfileCoordinatable?
     var viewModel = ProfileViewModel()
+    var postDragAtIndex: Int = 0
     
     //MARK: - Subviews
     

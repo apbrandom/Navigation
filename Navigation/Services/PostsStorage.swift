@@ -19,8 +19,11 @@ class PostStorage {
         posts.insert(post, at: index)
     }
     
+    func remove(at index: Int) {
+        posts.remove(at: index)
+    }
+    
     func getAllPosts() -> [Post] {
         return posts
     }
-
 }

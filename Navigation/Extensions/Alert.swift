@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Alert {
+struct Alert {
     static func showBasic(title: String, message: String, on vc: UIViewController) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

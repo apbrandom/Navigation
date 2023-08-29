@@ -244,8 +244,9 @@ class LoginViewController: UIViewController {
         case .touchID:
             biometricAuthButton.setTitle("Touch Id", for: .normal)
             biometricAuthButton.isHidden = false
-            // Available biometric type: LABiometryType(rawValue: 0) isHidden = false
         case .none:
+            biometricAuthButton.isHidden = false
+        case .opticID:
             biometricAuthButton.isHidden = false
         @unknown default:
             biometricAuthButton.isEnabled = false

@@ -9,7 +9,6 @@ import UserNotifications
 
 class LocalNotificationService: NSObject, UNUserNotificationCenterDelegate  {
     
-    
     static let shared = LocalNotificationService()
     private let notificationCenter = UNUserNotificationCenter.current()
     var userMessage = "LocalNSScheduleBodyText".localized

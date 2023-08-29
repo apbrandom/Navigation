@@ -253,10 +253,10 @@
 				CBA39EC42A7D0AC6006DAA52 /* LocalNotificationService.swift */,
 				CBECA79C2A7E96CE00E8C943 /* LocalAuthorizationService.swift */,
 				CB64BE172A7EF640007BBD01 /* KeychainService.swift */,
+				CB64BE192A7FE029007BBD01 /* PostsStorage.swift */,
 				CBFC5E802A72CD3700D37566 /* LoginService */,
 				CBFC5E7B2A72C4F400D37566 /* CoreDataManager */,
 				CBCABD062A0E845B0084FDE3 /* Network */,
-				CB64BE192A7FE029007BBD01 /* PostsStorage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -846,7 +846,7 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -883,7 +883,7 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
