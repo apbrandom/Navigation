@@ -6,7 +6,7 @@
 //
 
 import Foundation
-//import CoreData
+import CoreData
 
 class FavouritesViewModel {
     
@@ -28,15 +28,9 @@ class FavouritesViewModel {
         return savedPosts?[index]
     }
     
-    func deletePost(_ post: CDPostItem) {
-        let viewContext = CoreDataStorageService.shared.viewContext
-        viewContext.delete(post)
-        do {
-            try viewContext.save()
-        } catch let error as NSError {
-            print("Ошибка при удалении поста: \(error.localizedDescription)")
-        }
+    func deletePost(_ post: CDPostItem, in context: NSManagedObjectContext) {
+        CoreDataStorageService.shared.deletePostItem(postItem: post, in: context)
     }
     
-}
+} 
 

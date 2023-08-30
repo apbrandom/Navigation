@@ -12,11 +12,11 @@ extension SavedPostsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { (action, view, completion) in
             if let post = self.fetchedResultsController.fetchedObjects?[indexPath.row] {
-                self.viewModel.deletePost(post)
+                self.viewModel.deletePost(post, in: self.fetchedResultsController.managedObjectContext)
             }
             completion(true)
         }
-
+        
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
@@ -26,7 +26,7 @@ extension SavedPostsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostsTableCell.indentifire, for: indexPath) as? PostsTableCell else {
-                    return UITableViewCell()
+            return UITableViewCell()
         }
         
         let post = fetchedResultsController.object(at: indexPath)
