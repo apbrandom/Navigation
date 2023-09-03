@@ -41,6 +41,9 @@
 		CB6AF349296763C7008400F2 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF348296763C7008400F2 /* InfoViewController.swift */; };
 		CB71F61D298E7CA200DA584D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71F61C298E7CA200DA584D /* LoginViewController.swift */; };
 		CB71F6212997883D00DA584D /* VKStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71F6202997883D00DA584D /* VKStyleButton.swift */; };
+		CB7555382AA23A0C009035D9 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CB7555372AA23A0C009035D9 /* Realm */; };
+		CB75553A2AA23A0C009035D9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CB7555392AA23A0C009035D9 /* RealmSwift */; };
+		CB75553C2AA24AF6009035D9 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB75553B2AA24AF6009035D9 /* RealmService.swift */; };
 		CB7AF3092959AE5E005C51F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF3082959AE5E005C51F3 /* AppDelegate.swift */; };
 		CB7AF30B2959AE5E005C51F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF30A2959AE5E005C51F3 /* SceneDelegate.swift */; };
 		CB7AF30D2959AE5E005C51F3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7AF30C2959AE5E005C51F3 /* FeedViewController.swift */; };
@@ -77,6 +80,7 @@
 		CBAC1F792A7BAB3F0002D30A /* FeedViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAC1F782A7BAB3F0002D30A /* FeedViewModelTests.swift */; };
 		CBB238372A70037200095E77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBB238362A70037200095E77 /* GoogleService-Info.plist */; };
 		CBB4E7432A06C30400D42679 /* CircularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4E7422A06C30400D42679 /* CircularLabel.swift */; };
+		CBBB26DD2AA227F700BDDCC8 /* RealmUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB26DC2AA227F700BDDCC8 /* RealmUser.swift */; };
 		CBC6EDA029F95995000D509F /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC6ED9D29F88459000D509F /* LoginInspector.swift */; };
 		CBC6EDA229F9D770000D509F /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC6EDA129F9D770000D509F /* LoginFactory.swift */; };
 		CBC90FA62A1A79D500545FC3 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC90FA52A1A79D500545FC3 /* PhotosViewModel.swift */; };
@@ -84,6 +88,7 @@
 		CBCABD032A0CD0A90084FDE3 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD022A0CD0A90084FDE3 /* AppCoordinator.swift */; };
 		CBCABD0B2A0E92650084FDE3 /* ProfileViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD0A2A0E92650084FDE3 /* ProfileViewController+TableView.swift */; };
 		CBCABD0D2A0E97D90084FDE3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCABD0C2A0E97D90084FDE3 /* ProfileViewModel.swift */; };
+		CBE4AD052AA3963D00219050 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE4AD042AA3963D00219050 /* LoginManager.swift */; };
 		CBECA79D2A7E96CE00E8C943 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBECA79C2A7E96CE00E8C943 /* LocalAuthorizationService.swift */; };
 		CBF33F4729FBF788009FC759 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AF3442966E320008400F2 /* Post.swift */; };
 		CBF33F4A29FD9CA1009FC759 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = CBF33F4929FD9CA1009FC759 /* iOSIntPackage */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -158,6 +163,7 @@
 		CB6AF348296763C7008400F2 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		CB71F61C298E7CA200DA584D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CB71F6202997883D00DA584D /* VKStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKStyleButton.swift; sourceTree = "<group>"; };
+		CB75553B2AA24AF6009035D9 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		CB7AF3052959AE5E005C51F3 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB7AF3082959AE5E005C51F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB7AF30A2959AE5E005C51F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -177,6 +183,7 @@
 		CBAC1F782A7BAB3F0002D30A /* FeedViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModelTests.swift; sourceTree = "<group>"; };
 		CBB238362A70037200095E77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CBB4E7422A06C30400D42679 /* CircularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularLabel.swift; sourceTree = "<group>"; };
+		CBBB26DC2AA227F700BDDCC8 /* RealmUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUser.swift; sourceTree = "<group>"; };
 		CBC6ED9D29F88459000D509F /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		CBC6EDA129F9D770000D509F /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		CBC90FA52A1A79D500545FC3 /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
@@ -184,6 +191,7 @@
 		CBCABD022A0CD0A90084FDE3 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		CBCABD0A2A0E92650084FDE3 /* ProfileViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController+TableView.swift"; sourceTree = "<group>"; };
 		CBCABD0C2A0E97D90084FDE3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		CBE4AD042AA3963D00219050 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		CBECA79C2A7E96CE00E8C943 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		CBF621E829A8CE6400119FA8 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		CBF6E25D2A7BEA5F00CAF49C /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
@@ -202,11 +210,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB7555382AA23A0C009035D9 /* Realm in Frameworks */,
 				CBAC1F6D2A7A95E90002D30A /* FirebaseMessaging in Frameworks */,
 				CBAC1F6B2A7A95E90002D30A /* FirebaseMLModelDownloader in Frameworks */,
 				CB64BE162A7EF60E007BBD01 /* KeychainAccess in Frameworks */,
 				CBAC1F572A7A95E90002D30A /* FirebaseDatabaseSwift in Frameworks */,
 				CBAC1F652A7A95E90002D30A /* FirebaseInAppMessaging-Beta in Frameworks */,
+				CB75553A2AA23A0C009035D9 /* RealmSwift in Frameworks */,
 				CBAC1F552A7A95E90002D30A /* FirebaseDatabase in Frameworks */,
 				CBA9547A29E30E2F004E45EB /* SnapKit in Frameworks */,
 				CBAC1F612A7A95E90002D30A /* FirebaseFunctions in Frameworks */,
@@ -250,13 +260,10 @@
 		CB1F562C2A27A1F1004FE83A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				CBA39EC42A7D0AC6006DAA52 /* LocalNotificationService.swift */,
-				CBECA79C2A7E96CE00E8C943 /* LocalAuthorizationService.swift */,
-				CB64BE172A7EF640007BBD01 /* KeychainService.swift */,
-				CB64BE192A7FE029007BBD01 /* PostsStorage.swift */,
 				CBFC5E802A72CD3700D37566 /* LoginService */,
-				CBFC5E7B2A72C4F400D37566 /* CoreDataManager */,
 				CBCABD062A0E845B0084FDE3 /* Network */,
+				CBFC5E7B2A72C4F400D37566 /* CoreDataManager */,
+				CBBB26DF2AA2291100BDDCC8 /* Others */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -349,6 +356,16 @@
 				CBF6E25D2A7BEA5F00CAF49C /* LoginViewControllerTests.swift */,
 			);
 			path = NavigationTests;
+			sourceTree = "<group>";
+		};
+		CBBB26DF2AA2291100BDDCC8 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				CBC6EDA129F9D770000D509F /* LoginFactory.swift */,
+				CBA39EC42A7D0AC6006DAA52 /* LocalNotificationService.swift */,
+				CBECA79C2A7E96CE00E8C943 /* LocalAuthorizationService.swift */,
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 		CBC6ED9329F86E52000D509F /* Application */ = {
@@ -461,6 +478,8 @@
 		CBFC5E7B2A72C4F400D37566 /* CoreDataManager */ = {
 			isa = PBXGroup;
 			children = (
+				CB1F562D2A27A3D9004FE83A /* PasswordCrack.swift */,
+				CB64BE192A7FE029007BBD01 /* PostsStorage.swift */,
 				CBFC5E882A72CFC300D37566 /* CDPostItem+CoreDataClass.swift */,
 				CBFC5E892A72CFC300D37566 /* CDPostItem+CoreDataProperties.swift */,
 				CBFC5E8C2A72D12100D37566 /* CoreDataStorageService.swift */,
@@ -471,11 +490,13 @@
 		CBFC5E802A72CD3700D37566 /* LoginService */ = {
 			isa = PBXGroup;
 			children = (
-				CBC6EDA129F9D770000D509F /* LoginFactory.swift */,
 				CBC6ED9D29F88459000D509F /* LoginInspector.swift */,
-				CB8037772A44485A00BD2395 /* CheckerService.swift */,
 				CB0A7C8C29E49A7A002EA335 /* UserService.swift */,
-				CB1F562D2A27A3D9004FE83A /* PasswordCrack.swift */,
+				CB8037772A44485A00BD2395 /* CheckerService.swift */,
+				CB64BE172A7EF640007BBD01 /* KeychainService.swift */,
+				CBBB26DC2AA227F700BDDCC8 /* RealmUser.swift */,
+				CB75553B2AA24AF6009035D9 /* RealmService.swift */,
+				CBE4AD042AA3963D00219050 /* LoginManager.swift */,
 			);
 			path = LoginService;
 			sourceTree = "<group>";
@@ -529,6 +550,8 @@
 				CBAC1F6E2A7A95E90002D30A /* FirebasePerformance */,
 				CBAC1F702A7A95E90002D30A /* FirebaseStorage */,
 				CB64BE152A7EF60E007BBD01 /* KeychainAccess */,
+				CB7555372AA23A0C009035D9 /* Realm */,
+				CB7555392AA23A0C009035D9 /* RealmSwift */,
 			);
 			productName = Navigation;
 			productReference = CB7AF3052959AE5E005C51F3 /* Navigation.app */;
@@ -586,6 +609,7 @@
 				CBF33F4829FD9CA1009FC759 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 				CBAC1F4D2A7A95E90002D30A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				CB64BE142A7EF60E007BBD01 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				CBBB26DB2AA2217200BDDCC8 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = CB7AF3062959AE5E005C51F3 /* Products */;
 			projectDirPath = "";
@@ -623,9 +647,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB7AF30D2959AE5E005C51F3 /* FeedViewController.swift in Sources */,
+				CB75553C2AA24AF6009035D9 /* RealmService.swift in Sources */,
 				CB0C6FA92A79A3EF00977308 /* UIColor+Extensions.swift in Sources */,
 				CB23E9112975996A0081B615 /* ProfileTableHeaderView.swift in Sources */,
 				CB1EA5BF2A162C3300C0053D /* FeedCoordinator.swift in Sources */,
+				CBE4AD052AA3963D00219050 /* LoginManager.swift in Sources */,
 				CBECA79D2A7E96CE00E8C943 /* LocalAuthorizationService.swift in Sources */,
 				CB01E4582A6EFCCC007A285F /* SavedPostsCoordinator.swift in Sources */,
 				CBCABD0D2A0E97D90084FDE3 /* ProfileViewModel.swift in Sources */,
@@ -635,6 +661,7 @@
 				CB134C2C2A60195D00E7DF62 /* Alert.swift in Sources */,
 				CBA858A929E9966800AC37B2 /* NetworkService.swift in Sources */,
 				CBFC5E962A753F4700D37566 /* MapViewController.swift in Sources */,
+				CBBB26DD2AA227F700BDDCC8 /* RealmUser.swift in Sources */,
 				CBFC5E932A753A6A00D37566 /* MapCoordinator.swift in Sources */,
 				CB08A49E29A67E6F00AF49D7 /* PhotosCollectionCell.swift in Sources */,
 				CB1F562E2A27A3D9004FE83A /* PasswordCrack.swift in Sources */,
@@ -1004,6 +1031,14 @@
 				minimumVersion = 10.13.0;
 			};
 		};
+		CBBB26DB2AA2217200BDDCC8 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		CBF33F4829FD9CA1009FC759 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
@@ -1019,6 +1054,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CB64BE142A7EF60E007BBD01 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		CB7555372AA23A0C009035D9 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBBB26DB2AA2217200BDDCC8 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		CB7555392AA23A0C009035D9 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBBB26DB2AA2217200BDDCC8 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		CBA9547929E30E2F004E45EB /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

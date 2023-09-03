@@ -19,7 +19,6 @@ class NetworkService {
         return URL(string: "https://swapi.dev/api/planets/1")
     }
     
-    // Task #1
     func request(url: URL, completion: @escaping (String?) -> Void) {
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -52,7 +51,6 @@ class NetworkService {
         task.resume()
     }
     
-    // Task #2
     func requestPlanetData(completion: @escaping (Planet?) -> Void) {
         guard let url = urlPlanetInstance() else {
             completion(nil)
