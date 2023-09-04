@@ -23,8 +23,8 @@ class LoginManager {
             checkerService.checkCredentials(email: email, password: password) { [weak self] result in
                 switch result {
                 case .success(let authResult):
-                    self?.keychainService.saveCredentials(email: email, password: password)
-                    self?.realmService.saveUser(email: email) // Изменение тут
+                    self?.keychainService.saveCredentials(password: password)
+                    self?.realmService.saveUser(email: email) 
                     completion(.success(authResult))
                 case .failure(let error):
                     completion(.failure(error))

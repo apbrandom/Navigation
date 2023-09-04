@@ -54,14 +54,14 @@ class RealmService {
                 print("RealmService saveUser: \(error.localizedDescription)")
             }
         }
-
-    func retrieveUser(email: String) -> RealmUser? {
+    
+    func retrieveFirstUser() -> RealmUser? {
         guard let realm = realm else {
             print("Realm is not initialized.")
             return nil
         }
-        
-        return realm.objects(RealmUser.self).filter("email = %@", email).first
+        return realm.objects(RealmUser.self).first
     }
+
 }
 

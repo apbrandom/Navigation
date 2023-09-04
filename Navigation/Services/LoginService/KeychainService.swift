@@ -9,8 +9,8 @@ import Foundation
 import KeychainAccess
 
 protocol CredentialsStorable {
-    func saveCredentials(email: String, password: String)
-    func getCredentials() -> (email: String, password: String)?
+    func saveCredentials(password: String)
+    func getCredentials() -> (String)?
     func clearCredentials()
 }
 
@@ -27,22 +27,19 @@ class KeychainService: KeychainServiceProtocol {
     
     private init() {}
 
-    func saveCredentials(email: String, password: String) {
-        keychain["userEmail"] = email
+    func saveCredentials(password: String) {
         keychain["userPassword"] = password
     }
 
-    func getCredentials() -> (email: String, password: String)? {
-        if let email = keychain["userEmail"],
-           let password = keychain["userPassword"] {
-            return (email, password)
+    func getCredentials() -> (String)? {
+           if let password = keychain["userPassword"] {
+            return password
         }
         return nil
     }
     
     func clearCredentials() {
         do {
-            try keychain.remove("userEmail")
             try keychain.remove("userPassword")
         } catch {
             print("Error when deleting credentials: \(error)")
