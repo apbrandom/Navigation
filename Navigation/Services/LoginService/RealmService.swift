@@ -20,12 +20,13 @@ class RealmService {
         } else {
             // Generate a 64-byte encryption key
             key = Data(count: 64)
-            _ = key.withUnsafeMutableBytes { bytes in
-                SecRandomCopyBytes(kSecRandomDefault, 64, bytes)
+            key.withUnsafeMutableBytes { (pointer: UnsafeMutableRawBufferPointer) in
+                guard let bytes = pointer.baseAddress else { return }
+                _ = SecRandomCopyBytes(kSecRandomDefault, 64, bytes)
             }
             
             // Save the key to Keychain
-            _ = KeychainService.shared.saveEncryptionKey(key: key)
+            KeychainService.shared.saveEncryptionKey(key: key)
         }
         
         // Initialize Realm with encryption key
@@ -38,22 +39,21 @@ class RealmService {
         }
     }
     
-    func saveUser(email: String, password: String) {
-        guard let realm = realm else {
-            print("Realm is not initialized.")
-            return
-        }
-
-        let user = RealmUser(email: email, password: password)
-        
-        do {
-            try realm.write {
-                realm.add(user)
+    func saveUser(email: String) {
+            guard let realm = realm else {
+                print("Realm is not initialized.")
+                return
             }
-        } catch {
-            print("RealmService saveUser: \(error.localizedDescription)")
+
+            let user = RealmUser(email: email) 
+            do {
+                try realm.write {
+                    realm.add(user)
+                }
+            } catch {
+                print("RealmService saveUser: \(error.localizedDescription)")
+            }
         }
-    }
 
     func retrieveUser(email: String) -> RealmUser? {
         guard let realm = realm else {

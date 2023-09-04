@@ -17,27 +17,22 @@ protocol LoginViewControllerDelegate: AnyObject {
 class LoginViewController: UIViewController {
     
     private var delegate: LoginViewControllerDelegate?
-    //    var userService: UserService
+    var userService: UserService
     var keyboardManager: KeyboardManager?
     weak var coordinator: ProfileCoordinatable?
     private let biometricAuthService = LocalAuthorizationService()
-    //
-    //    init(userService: UserService, loginInspector: LoginViewControllerDelegate) {
-    //        self.userService = userService
-    //        self.delegate = loginInspector
-    //        super.init(nibName: nil, bundle: nil)
-    //    }
-    
     private var loginManager: LoginManager
     
     init(userService: UserService, loginInspector: LoginViewControllerDelegate) {
-        self.loginManager = LoginManager(
-            checkerService: CheckerService.shared,
-            keychainService: KeychainService.shared,
-            realmService: RealmService.shared
-        )
-        super.init(nibName: nil, bundle: nil)
-    }
+            self.userService = userService
+            self.delegate = loginInspector
+            self.loginManager = LoginManager(
+                checkerService: CheckerService.shared,
+                keychainService: KeychainService.shared,
+                realmService: RealmService.shared
+            )
+            super.init(nibName: nil, bundle: nil)
+        }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -177,12 +172,17 @@ class LoginViewController: UIViewController {
     @objc private func handleBiometricAuthButton() {
         biometricAuthService.authorizeIfPossible { [weak self] (success, error) in
             if success {
-                if let user = RealmService.shared.retrieveUser(email: self?.loginTextField.text ?? "") {
-                    self?.delegate?.checkCredentials(email: user.email, password: user.password) { result in
+                // Здесь мы пытаемся получить учетные данные из Keychain
+                if let savedCredentials = KeychainService.shared.getCredentials() {
+                    let email = savedCredentials.email
+                    let password = savedCredentials.password
+                    
+                    // Теперь используем эти учетные данные для аутентификации
+                    self?.delegate?.checkCredentials(email: email, password: password) { result in
                         switch result {
                         case .success(let authResult):
                             print("User \(authResult.user.uid) signed in successfully with biometrics")
-                            self?.coordinator?.loginWith(user.email, user.password)
+                            self?.coordinator?.loginWith(email, password)
                         case .failure(let error):
                             print("Failed to sign in with saved credentials: ", error.localizedDescription)
                             self?.showAlert(title: "Login Failed", message: "Could not sign in with saved credentials. Please log in manually.")
@@ -197,7 +197,7 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
+
     internal func signUpButtonTapped() {
         let signUpVC = SignUpViewController()
         navigationController?.pushViewController(signUpVC, animated: true)
