@@ -27,7 +27,7 @@ class PostsTableCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(systemName: "quistionmark")
         imageView.tintColor = .label
-        imageView.backgroundColor = .black
+        imageView.backgroundColor = .darkModeBackground
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -36,6 +36,7 @@ class PostsTableCell: UITableViewCell {
         let textView = UITextView()
         textView.font = .systemFont(ofSize: 14)
         textView.textColor = .systemGray
+        textView.backgroundColor = .darkModeBackground
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,6 +66,7 @@ class PostsTableCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        backgroundColor = .darkModeBackground
         setupSubviews()
         setupConstrants()
     }
@@ -90,11 +92,14 @@ class PostsTableCell: UITableViewCell {
             return
         }
         
-        postTitleLabel.text = post.title
+        postTitleLabel.text = post.description
         postAuthorTextView.text = post.author
         
         // Apply a filter to the posts image
-        let originalImage = UIImage(named: post.image) ?? UIImage()
+        guard let originalImage = post.image else {
+            print("No image in post found")
+            return
+        }
         let imageProcessor = ImageProcessor()
         
         let filter = ColorFilter.chrome
@@ -111,10 +116,15 @@ class PostsTableCell: UITableViewCell {
         guard let post = post else {
             return
         }
+        let quest = UIImage(systemName: "questionmark")
         
         postTitleLabel.text = post.title
         postAuthorTextView.text = post.author
-        postImageView.image = UIImage(named: post.image ?? "questionmark") 
+        if let imageData = post.image, let img = UIImage(data: imageData) {
+            postImageView.image = img
+        } else {
+            postImageView.image = quest
+        }
         postLikesLabel.text = "Likes: \(post.likes)"
         postViewsLabel.text = "Views: \(post.views)"
     }

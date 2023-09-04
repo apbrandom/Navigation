@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController {
 
     weak var coordinator: ProfileCoordinatable?
     var viewModel = ProfileViewModel()
+    var postDragAtIndex: Int = 0
     
     //MARK: - Subviews
     
@@ -38,12 +39,13 @@ class ProfileViewController: UIViewController {
         return view
     }()
     
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configView()
+        setupView()
         setupSubviews()
         setupConstrains()
         keyboardSetup()
@@ -70,9 +72,8 @@ class ProfileViewController: UIViewController {
     
     //MARK: - Privte
     
-    private func configView() {
-        view.backgroundColor = .systemBlue
-        view.backgroundColor = .secondarySystemBackground
+    private func setupView() {
+        view.backgroundColor = .darkModeBackground
 
         setupTableView()
         setupHeaderView()

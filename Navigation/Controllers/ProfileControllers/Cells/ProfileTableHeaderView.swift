@@ -56,7 +56,6 @@ class ProfileTableHeaderView: UIView {
     private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 18)
-        label.textColor = .black
         return label
     }()
     
@@ -76,7 +75,8 @@ class ProfileTableHeaderView: UIView {
         textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.cornerRadius = 12
         textField.layer.backgroundColor = UIColor.systemBackground.cgColor
-        textField.placeholder = "Write your status"
+        let text = "ProfileTableHeaderViewStatusTextField".localized
+        textField.placeholder = text
         textField.addTarget(
             self,
             action: #selector(statusTextChanged),
@@ -85,9 +85,10 @@ class ProfileTableHeaderView: UIView {
         return textField
     }()
     
-    lazy var setStatusButton: CustomButton = {
-        let button = CustomButton()
-        button.setTitle("Set Status", for: .normal)
+    lazy var setStatusButton: VKStyleButton = {
+        let button = VKStyleButton()
+        let text = NSLocalizedString("ProfileTableHeaderViewSetStatusButton", comment: "")
+        button.setTitle(text, for: .normal)
         button.addTarget(
             self,
             action: #selector(setButtonPressed),

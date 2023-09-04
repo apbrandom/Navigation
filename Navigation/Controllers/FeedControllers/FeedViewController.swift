@@ -11,23 +11,21 @@ class FeedViewController: UIViewController {
     
     weak var coordinator: FeedCoordinatable?
     private let viewModel = FeedViewModel()
-    private let passwordCracking = PasswordCrack()
-    private var passwordToCrack: String = ""
-    private var timer: Timer?
     
     //MARK: - Subviews
     
     private lazy var feedView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .darkModeBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
+        let text = NSLocalizedString("FeedVCTimerLabel", comment: "")
         label.text = "00:00"
-        label.font = UIFont(name: "Courier", size: 25)
+        label.font = UIFont(name: text, size: 25)
         label.textColor = UIColor.gray.withAlphaComponent(0.9)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +56,8 @@ class FeedViewController: UIViewController {
     
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.text = "test"
+        let text = "FeedVCTextField".localized
+        textField.text = text
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
         textField.backgroundColor = .systemGray5
@@ -66,60 +65,23 @@ class FeedViewController: UIViewController {
     }()
     
     private lazy var checkButton: UIButton = {
-        let button = CustomButton()
-        button.setTitle("Check", for: .normal)
+        let button = VKStyleButton()
+        let text = "FeedVCCheckButton".localized
+        button.setTitle(text, for: .normal)
         return button
     }()
     
-    private lazy var generateAndCrackButton: CustomButton = {
-        let button = CustomButton()
-        button.setTitle("Generate and Crack", for: .normal)
-        button.pressed = { [self] in
-            
-            // Reset timer
-            timer?.invalidate()
-            timerLabel.text = "0"
-            statusPasswordLabel.backgroundColor = .gray
-            
-            // Generate Random Password
-            self.passwordToCrack = self.passwordCracking.generateRandomPassword(length: 4)
-            passwordTextField.isSecureTextEntry = true
-            passwordTextField.text = passwordToCrack
-            activityIndicator.startAnimating()
-            
-            // Start timer
-            var milliSecond = 0
-            var second = 0
-            timer = Timer(timeInterval: 0.01, repeats: true) { timer in
-                milliSecond += 1
-                if milliSecond == 100 {
-                    second += 1
-                    milliSecond = 0
-                }
-                DispatchQueue.main.async {
-                    self.timerLabel.text = String(format: "%02d:%02d", second, milliSecond)
-                }
-            }
-            
-            RunLoop.current.add(timer!, forMode: .common)
-            
-            DispatchQueue.global().async { [weak self] in
-                self?.passwordCracking.bruteForce(passwordToUnlock: self?.passwordToCrack ?? "")
-                DispatchQueue.main.async {
-                    self?.activityIndicator.stopAnimating()
-                    self?.passwordTextField.isSecureTextEntry = false
-                    self?.statusPasswordLabel.backgroundColor = .green
-                    self?.timerLabel.textColor = .red
-                    self?.timer?.invalidate() // Stop timer
-                }
-            }
-        }
+    private lazy var generateAndCrackButton: VKStyleButton = {
+        let button = VKStyleButton()
+        let text = "FeedVCGenerateAndCrackButton".localized
+        button.setTitle(text, for: .normal)
         return button
     }()
     
-    private lazy var postVCButton: CustomButton = {
-        let button = CustomButton()
-        button.setTitle("PostVC", for: .normal)
+    private lazy var postVCButton: VKStyleButton = {
+        let button = VKStyleButton()
+        let text = "FeedVCButtonPost".localized
+        button.setTitle(text, for: .normal)
         button.pressed = { self.coordinator?.navigateToPostVC() }
         return button
     }()
@@ -132,13 +94,45 @@ class FeedViewController: UIViewController {
         setupView()
         addSubviews()
         setupConstrains()
+        bindViewModel()
     }
     
     //MARK: - Private
     
     private func setupView() {
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .darkModeBackground
+        let text = "FeedVCNavigationItemTitle".localized
+        navigationItem.title = text
     }
+    
+    private func bindViewModel() {
+        viewModel.passwordUpdated = { [weak self] password in
+            self?.passwordTextField.isSecureTextEntry = true
+            self?.passwordTextField.text = password
+        }
+        
+        viewModel.activityIndicatorState = { [weak self] isAnimating in
+            if isAnimating {
+                self?.activityIndicator.startAnimating()
+            } else {
+                self?.activityIndicator.stopAnimating()
+            }
+        }
+        
+        viewModel.passwordStatus = { [weak self] isCracked in
+            self?.statusPasswordLabel.backgroundColor = isCracked ? .green : .gray
+        }
+        
+        viewModel.timerUpdated = { [weak self] timeString in
+            self?.timerLabel.text = timeString
+        }
+        
+        generateAndCrackButton.pressed = { [weak self] in
+            self?.viewModel.generateAndCrackPassword()
+        }
+    }
+    
+    //MARK: - Layout
     
     private func addSubviews() {
         view.addSubview(feedView)
@@ -153,9 +147,7 @@ class FeedViewController: UIViewController {
         itemsStackView.addArrangedSubview(postVCButton)
     }
     
-    //MARK: - Layout
-    
-    func setupConstrains() {
+    private func setupConstrains() {
         feedView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -183,4 +175,3 @@ class FeedViewController: UIViewController {
         }
     }
 }
-

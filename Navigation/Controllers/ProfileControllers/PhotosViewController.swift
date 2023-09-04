@@ -56,7 +56,8 @@ class PhotosViewController: UIViewController {
     //MARK: - Private
     
     private func setupView() {
-        navigationItem.title = "Photo Gallery"
+        let text = "PhotosVCNavigationItemTitle".localized
+        navigationItem.title = text
         view.backgroundColor = .systemBackground
     }
     

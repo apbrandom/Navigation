@@ -1,13 +1,5 @@
-//
-//  SignUpViewController.swift
-//  Navigation
-//
-//  Created by Vadim Vinogradov on 20.06.2023.
-//
-
 import UIKit
 import SnapKit
-//import FirebaseAuth
 
 class SignUpViewController: UIViewController {
     
@@ -35,10 +27,12 @@ class SignUpViewController: UIViewController {
         return textField
     }()
     
-    private lazy var signUpButton: CustomButton = {
-        let button = CustomButton()
+    private lazy var signUpButton: VKStyleButton = {
+        let button = VKStyleButton()
         button.setTitle("Sign Up", for: .normal)
-        button.pressed =  { self.registerButtonTapped() }
+        button.pressed = {
+            self.registerButtonTapped()
+        }
         return button
     }()
     
@@ -134,4 +128,3 @@ class SignUpViewController: UIViewController {
         }
     }
 }
-

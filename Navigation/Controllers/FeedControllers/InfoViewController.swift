@@ -2,7 +2,7 @@
 //  InfoViewController.swift
 //  Navigation
 //
-//  Created by Вадим Виноградов on 05.01.2023.
+//  Created by Vadim Vinogradov on 05.01.2023.
 //
 
 import UIKit
@@ -23,20 +23,23 @@ class InfoViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        let text = NSLocalizedString("infoVCFatalError", comment: "")
+        fatalError(text)
     }
     
     //MARK: - Subviews
     
     private lazy var orbitalPeriodLabel: UILabel = {
         let label = UILabel()
-        label.text = "Orbital Period"
+        let text = NSLocalizedString("infoVCOrbitalPeriodLabel", comment: "")
+        label.text = text
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var jsonLabel: UILabel = {
         let label = UILabel()
+        let text = NSLocalizedString("infoVCJsonLabel", comment: "")
         label.text = "Waiting for ID"
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -44,10 +47,13 @@ class InfoViewController: UIViewController {
         return label
     }()
     
-    lazy var alertButton: CustomButton = {
-        let button = CustomButton()
+    lazy var alertButton: VKStyleButton = {
+        let button = VKStyleButton()
+        let text = NSLocalizedString("infoVCAlertButton", comment: "")
         button.setTitle("Click to get a response from the server", for: .normal)
-        button.pressed = { self.buttonAlertPressed() }
+        button.pressed = {
+            self.buttonAlertPressed()
+        }
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -65,7 +71,6 @@ class InfoViewController: UIViewController {
         setupView()
         setupSubviews()
         setupTableView()
-        
         requiestDataOrbitalPeriod()
     }
     

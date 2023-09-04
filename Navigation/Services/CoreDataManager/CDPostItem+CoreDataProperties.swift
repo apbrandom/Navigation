@@ -6,8 +6,8 @@
 //
 //
 
-import Foundation
 import CoreData
+import UIKit
 
 
 extension CDPostItem {
@@ -18,7 +18,7 @@ extension CDPostItem {
 
     @NSManaged public var title: String?
     @NSManaged public var author: String?
-    @NSManaged public var image: String?
+    @NSManaged public var image: Data?
     @NSManaged public var likes: Int32
     @NSManaged public var views: Int32
 

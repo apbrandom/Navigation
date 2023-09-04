@@ -7,9 +7,7 @@
 
 import UIKit
 
-class CustomButton: UIButton {
-    
-    var pressed: (() -> Void)? = nil
+class VKStyleButton: ButtonPressed {
     
     override var isHighlighted: Bool {
         didSet {
@@ -39,12 +37,12 @@ class CustomButton: UIButton {
         super.init(frame: frame)
         
         setupViewButton()
-        addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        
+        setupViewButton()
     }
     
     func setupViewButton() {
@@ -58,9 +56,5 @@ class CustomButton: UIButton {
         layer.shadowOpacity = 0.7
         layer.shadowRadius = 5
         translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    @objc func buttonPressed() {
-        pressed?()
     }
 }

@@ -20,8 +20,9 @@ class LoginViewController: UIViewController {
     var userService: UserService
     var keyboardManager: KeyboardManager?
     weak var coordinator: ProfileCoordinatable?
+    private let biometricAuthService = LocalAuthorizationService()
     
-    init(userService: UserService, loginInspector: LoginInspector) {
+    init(userService: UserService, loginInspector: LoginViewControllerDelegate) {
         self.userService = userService
         self.delegate = loginInspector
         super.init(nibName: nil, bundle: nil)
@@ -35,7 +36,7 @@ class LoginViewController: UIViewController {
     
     private lazy var loginScrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .systemBackground
+        scrollView.backgroundColor = .darkModeBackground
         scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +45,7 @@ class LoginViewController: UIViewController {
     
     private lazy var contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .darkModeBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -73,33 +74,61 @@ class LoginViewController: UIViewController {
     private lazy var loginTextField: CustomTextField = { [unowned self] in
         let textField = CustomTextField()
         textField.text = "user@mail.com"
-        textField.placeholder = "Email or phone"
+        let text = NSLocalizedString("AuthorizationVCLoginTextField", comment: "")
+        textField.placeholder = text
         textField.delegate = self
         return textField
     }()
     
     private lazy var passwordTextField: CustomTextField = { [unowned self] in
         let textField = CustomTextField()
-        textField.placeholder = "Password"
+        let text = NSLocalizedString("AuthorizationVCPasswordTextField", comment: "")
+        textField.placeholder = text
         textField.text = "password"
         textField.isSecureTextEntry = true
         textField.delegate = self
         return textField
     }()
     
-    private lazy var signInButton: CustomButton = {
-        let button = CustomButton()
-        button.setTitle("Sign In", for: .normal)
+    private lazy var buttonsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [signInButton, biometricAuthButton, signUpButton])
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    
+    private lazy var signInButton: VKStyleButton = {
+        let button = VKStyleButton()
+        let text = NSLocalizedString("AuthorizationVCSignInButton", comment: "")
+        button.setTitle(text, for: .normal)
         button.pressed = { self.signInButtonTapped() }
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private lazy var signUpButton: CustomButton = {
-        let button = CustomButton()
+    private lazy var signUpButton: VKStyleButton = {
+        let button = VKStyleButton()
         button.setBackgroundImage(.none, for: .normal)
-        button.setTitle("Sign Up", for: .normal)
+        let text = NSLocalizedString("AuthorizationVCSignUpButton", comment: "")
+        button.setTitle(text, for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.minimumScaleFactor = 0.5
         button.setTitleColor(.systemBlue, for: .normal)
         button.pressed = { self.signUpButtonTapped() }
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var biometricAuthButton: VKStyleButton = {
+        let button = VKStyleButton()
+        let text = NSLocalizedString("BiometricAuthButton", comment: "")
+        button.setTitle(text, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.pressed = { self.handleBiometricAuthButton() }
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -111,23 +140,24 @@ class LoginViewController: UIViewController {
         setupView()
         setupSubview()
         setupConstraints()
+        setupBiometricType()
     }
     
     //MARK: - Actions
     
-    private func signInButtonTapped() {
+    internal func signInButtonTapped() {
         guard let email = loginTextField.text,
               let password = passwordTextField.text else {
             preconditionFailure("Form must not be empty")
         }
-
         delegate?.checkCredentials(email: email, password: password) { [weak self] result in
             switch result {
                 
             case .success(let authResult):
                 print("User \(authResult.user.uid) signed in successfully")
                 self?.coordinator?.loginWith(email, password)
-            
+                KeychainService.shared.save(email: email, password: password)
+                
             case .failure(let error):
                 print("Failed to sign in: ", error.localizedDescription)
                 self?.showAlert(
@@ -137,23 +167,50 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func signUpButtonTapped() {
+    internal func signUpButtonTapped() {
         let signUpVC = SignUpViewController()
         navigationController?.pushViewController(signUpVC, animated: true)
     }
     
+    @objc private func handleBiometricAuthButton() {
+        biometricAuthService.authorizeIfPossible { [weak self] (success, error) in
+            if success {
+                if let email = KeychainService.shared.retrieveEmail(),
+                   let password = KeychainService.shared.retrievePassword() {
+                    self?.delegate?.checkCredentials(email: email, password: password) { result in
+                        switch result {
+                        case .success(let authResult):
+                            print("User \(authResult.user.uid) signed in successfully with biometrics")
+                            self?.coordinator?.loginWith(email, password)
+                        case .failure(let error):
+                            print("Failed to sign in with saved credentials: ", error.localizedDescription)
+                            self?.showAlert(
+                                title: "Login Failed",
+                                message: "Could not sign in with saved credentials. Please log in manually.")
+                        }
+                    }
+                } else {
+                    print("No saved credentials found")
+                    self?.showAlert(
+                        title: "Login Failed",
+                        message: "No saved credentials found. Please log in manually.")
+                }
+                print("Biometric authentication successful")
+            } else if let error = error {
+                self?.showAlert(
+                    title: "Authentication Failed",
+                    message: error.localizedDescription)
+            }
+        }
+    }
+    
+    
     //MARK: - Private
     
     private func setupView() {
-        title = "Profile"
-        view.backgroundColor = .secondarySystemBackground
-        
-        tabBarItem = UITabBarItem(
-            title: "Profile",
-            image: UIImage(systemName: "person"),
-            tag: 0
-        )
-        
+        view.backgroundColor = .darkModeBackground
+        let text = "LoginVCNavigationTitle".localized
+        navigationItem.title = text
         keyboardManager = KeyboardManager(scrollView: loginScrollView)
     }
     
@@ -164,8 +221,36 @@ class LoginViewController: UIViewController {
         contentView.addSubview(loginStackView)
         loginStackView.addArrangedSubview(loginTextField)
         loginStackView.addArrangedSubview(passwordTextField)
-        contentView.addSubview(signInButton)
-        contentView.addSubview(signUpButton)
+        contentView.addSubview(buttonsStackView)
+    }
+    
+    
+    private func setupBiometricType() {
+        guard let email = KeychainService.shared.retrieveEmail(),
+              let _ = KeychainService.shared.retrievePassword() else {
+                print("No saved credentials found")
+                biometricAuthButton.isHidden = true
+                return
+        }
+        
+        print("Saved credentials found for email: \(email)")
+
+        let biometricType = biometricAuthService.availableBiometryType
+        print("Available biometric type: \(biometricType)")
+        switch biometricType {
+        case .faceID:
+            biometricAuthButton.setTitle("Face Id", for: .normal)
+            biometricAuthButton.isHidden = false
+        case .touchID:
+            biometricAuthButton.setTitle("Touch Id", for: .normal)
+            biometricAuthButton.isHidden = false
+        case .none:
+            biometricAuthButton.isHidden = false
+        case .opticID:
+            biometricAuthButton.isHidden = false
+        @unknown default:
+            biometricAuthButton.isEnabled = false
+        }
     }
     
     //MARK: - Layout
@@ -192,18 +277,25 @@ class LoginViewController: UIViewController {
             make.leading.trailing.equalTo(contentView).inset(16)
         }
         
-        signInButton.snp.makeConstraints { make in
+        buttonsStackView.snp.makeConstraints { make in
             make.top.equalTo(loginStackView.snp.bottom).offset(16)
             make.leading.trailing.equalTo(contentView).inset(16)
         }
         
+        signInButton.snp.makeConstraints { make in
+            make.height.lessThanOrEqualTo(50)
+        }
+        
+        biometricAuthButton.snp.makeConstraints { make in
+            make.height.lessThanOrEqualTo(50)
+        }
+        
         signUpButton.snp.makeConstraints { make in
-            make.top.equalTo(signInButton.snp.bottom).offset(16)
-            make.centerX.equalTo(contentView.snp.centerX)
-            make.width.equalTo(100)
+            make.height.lessThanOrEqualTo(50)
             make.bottom.equalTo(contentView.snp.bottom).offset(-16)
         }
     }
+    
 }
 
 //MARK: - Delegate
@@ -214,4 +306,3 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
 }
-
