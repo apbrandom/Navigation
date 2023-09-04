@@ -8,14 +8,25 @@
 import LocalAuthentication
 
 class LocalAuthorizationService {
-
-    let context = LAContext()
+    
+    static let shared = LocalAuthorizationService() // Singleton Instance
+    
+    private var context: LAContext
+    
+    init() {
+        self.context = LAContext()
+    }
     
     var availableBiometryType: LABiometryType {
         return context.biometryType
     }
     
+    func refreshContext() {
+        self.context = LAContext()
+    }
+    
     func authorizeIfPossible(_ authorizationFinished: @escaping (Bool, Error?) -> Void) {
+        self.refreshContext()
         var error: NSError?
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "Log in to your account"
@@ -35,4 +46,5 @@ class LocalAuthorizationService {
         }
     }
 }
+
 

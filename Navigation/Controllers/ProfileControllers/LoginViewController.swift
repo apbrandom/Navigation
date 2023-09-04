@@ -21,12 +21,18 @@ class LoginViewController: UIViewController {
     var keyboardManager: KeyboardManager?
     weak var coordinator: ProfileCoordinatable?
     private let biometricAuthService = LocalAuthorizationService()
+    private var loginManager: LoginManager
     
     init(userService: UserService, loginInspector: LoginViewControllerDelegate) {
-        self.userService = userService
-        self.delegate = loginInspector
-        super.init(nibName: nil, bundle: nil)
-    }
+            self.userService = userService
+            self.delegate = loginInspector
+            self.loginManager = LoginManager(
+                checkerService: CheckerService.shared,
+                keychainService: KeychainService.shared,
+                realmService: RealmService.shared
+            )
+            super.init(nibName: nil, bundle: nil)
+        }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -146,63 +152,61 @@ class LoginViewController: UIViewController {
     //MARK: - Actions
     
     internal func signInButtonTapped() {
-        guard let email = loginTextField.text,
-              let password = passwordTextField.text else {
+        guard let email = loginTextField.text, let password = passwordTextField.text else {
             preconditionFailure("Form must not be empty")
         }
-        delegate?.checkCredentials(email: email, password: password) { [weak self] result in
+        
+        loginManager.handleSignIn(email: email, password: password) { [weak self] result in
             switch result {
-                
             case .success(let authResult):
                 print("User \(authResult.user.uid) signed in successfully")
                 self?.coordinator?.loginWith(email, password)
-                KeychainService.shared.save(email: email, password: password)
-                
             case .failure(let error):
                 print("Failed to sign in: ", error.localizedDescription)
-                self?.showAlert(
-                    title: "Login Failed",
-                    message: "Invalid username or password. Please try again")
+                self?.showAlert(title: "Login Failed", message: "Invalid username or password. Please try again")
             }
         }
-    }
-    
-    internal func signUpButtonTapped() {
-        let signUpVC = SignUpViewController()
-        navigationController?.pushViewController(signUpVC, animated: true)
+        
     }
     
     @objc private func handleBiometricAuthButton() {
         biometricAuthService.authorizeIfPossible { [weak self] (success, error) in
             if success {
-                if let email = KeychainService.shared.retrieveEmail(),
-                   let password = KeychainService.shared.retrievePassword() {
-                    self?.delegate?.checkCredentials(email: email, password: password) { result in
-                        switch result {
-                        case .success(let authResult):
-                            print("User \(authResult.user.uid) signed in successfully with biometrics")
-                            self?.coordinator?.loginWith(email, password)
-                        case .failure(let error):
-                            print("Failed to sign in with saved credentials: ", error.localizedDescription)
-                            self?.showAlert(
-                                title: "Login Failed",
-                                message: "Could not sign in with saved credentials. Please log in manually.")
-                        }
-                    }
-                } else {
-                    print("No saved credentials found")
-                    self?.showAlert(
-                        title: "Login Failed",
-                        message: "No saved credentials found. Please log in manually.")
+                
+                guard let email = RealmService.shared.retrieveFirstUser()?.email else {
+                    print("No saved user found")
+                    self?.showAlert(title: "Login Failed", message: "No saved user found. Please log in manually.")
+                    return
                 }
-                print("Biometric authentication successful")
+                
+                guard let password = KeychainService.shared.getCredentials() else {
+                    print("No saved credentials found")
+                    self?.showAlert(title: "Login Failed", message: "No saved credentials found. Please log in manually.")
+                    return
+                }
+                
+                self?.delegate?.checkCredentials(email: email, password: password) { result in
+                    switch result {
+                    case .success(let authResult):
+                        print("User \(authResult.user.uid) signed in successfully with biometrics")
+                        self?.coordinator?.loginWith(email, password)
+                    case .failure(let error):
+                        print("Failed to sign in with saved credentials: ", error.localizedDescription)
+                        self?.showAlert(title: "Login Failed", message: "Could not sign in with saved credentials. Please log in manually.")
+                    }
+                }
             } else if let error = error {
-                self?.showAlert(
-                    title: "Authentication Failed",
-                    message: error.localizedDescription)
+                self?.showAlert(title: "Authentication Failed", message: error.localizedDescription)
             }
         }
     }
+    
+
+    internal func signUpButtonTapped() {
+        let signUpVC = SignUpViewController()
+        navigationController?.pushViewController(signUpVC, animated: true)
+    }
+    
     
     
     //MARK: - Private
@@ -226,17 +230,27 @@ class LoginViewController: UIViewController {
     
     
     private func setupBiometricType() {
-        guard let email = KeychainService.shared.retrieveEmail(),
-              let _ = KeychainService.shared.retrievePassword() else {
-                print("No saved credentials found")
-                biometricAuthButton.isHidden = true
-                return
+        print("Checking for saved user in Realm...")
+        
+        guard let user = RealmService.shared.retrieveFirstUser() else {
+            print("No saved user found in Realm")
+            biometricAuthButton.isHidden = true
+            return
+        }
+        
+        let email = user.email
+        
+        guard KeychainService.shared.getCredentials() != nil else {
+            print("No saved credentials found in Keychain")
+            biometricAuthButton.isHidden = true
+            return
         }
         
         print("Saved credentials found for email: \(email)")
-
+        
         let biometricType = biometricAuthService.availableBiometryType
         print("Available biometric type: \(biometricType)")
+        
         switch biometricType {
         case .faceID:
             biometricAuthButton.setTitle("Face Id", for: .normal)
@@ -252,6 +266,7 @@ class LoginViewController: UIViewController {
             biometricAuthButton.isEnabled = false
         }
     }
+
     
     //MARK: - Layout
     
