@@ -12,7 +12,7 @@ public struct Post {
     public var author: String
     public var image: UIImage?
     public var likes: Int
-    public var views: Int
+    public let views: Int
 }
 
 extension Post {

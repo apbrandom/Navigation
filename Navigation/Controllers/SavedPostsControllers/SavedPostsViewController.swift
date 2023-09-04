@@ -79,19 +79,19 @@ class SavedPostsViewController: UIViewController {
     
     func filterByAuthor(author: String) {
         let fetchRequest: NSFetchRequest<CDPostItem> = CDPostItem.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "author == %@", author)
+        fetchRequest.predicate = NSPredicate(format: "author CONTAINS %@", author)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-
+        
         updateFetchedResultsController(fetchRequest: fetchRequest)
     }
-
+    
     func clearFilter() {
         let fetchRequest: NSFetchRequest<CDPostItem> = CDPostItem.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-
+        
         updateFetchedResultsController(fetchRequest: fetchRequest)
     }
-
+    
     func updateFetchedResultsController(fetchRequest: NSFetchRequest<CDPostItem>) {
         fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
@@ -100,7 +100,7 @@ class SavedPostsViewController: UIViewController {
             cacheName: nil
         )
         fetchedResultsController.delegate = self
-
+        
         do {
             try fetchedResultsController.performFetch()
             favouriteTableView.reloadData()
@@ -108,20 +108,13 @@ class SavedPostsViewController: UIViewController {
             print("Failed to fetch items: \(error)")
         }
     }
-
+    
     //MARK: - Private
     
     private func setupTableView() {
         favouriteTableView.delegate = self
         favouriteTableView.dataSource = self
         favouriteTableView.register(PostsTableCell.self, forCellReuseIdentifier: PostsTableCell.indentifire)
-    }
-    
-    private func layoutTableView() {
-        view.addSubview(favouriteTableView)
-        favouriteTableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
-        }
     }
     
     private func setupView() {
@@ -148,6 +141,13 @@ class SavedPostsViewController: UIViewController {
             try fetchedResultsController.performFetch()
         } catch {
             print("Failed to fetch items: \(error)")
+        }
+    }
+    
+    private func layoutTableView() {
+        view.addSubview(favouriteTableView)
+        favouriteTableView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
         }
     }
 }
