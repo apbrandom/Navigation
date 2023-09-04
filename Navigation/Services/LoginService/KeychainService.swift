@@ -24,22 +24,28 @@ class KeychainService: KeychainServiceProtocol {
     static let shared = KeychainService()
     
     private let keychain = Keychain(service: "ru.apbrandom.Navigation")
-
+    
     private init() {}
 
-    internal func save(email: String, password: String) {
+    func saveCredentials(email: String, password: String) {
         keychain["userEmail"] = email
         keychain["userPassword"] = password
     }
 
-    func clearCredentials() -> Bool {
+    func getCredentials() -> (email: String, password: String)? {
+        if let email = keychain["userEmail"],
+           let password = keychain["userPassword"] {
+            return (email, password)
+        }
+        return nil
+    }
+    
+    func clearCredentials() {
         do {
             try keychain.remove("userEmail")
             try keychain.remove("userPassword")
-            return true
         } catch {
             print("Error when deleting credentials: \(error)")
-            return false
         }
     }
     
@@ -50,30 +56,4 @@ class KeychainService: KeychainServiceProtocol {
     func retrieveEncryptionKey() -> Data? {
         return keychain[data: "encryptionKey"]
     }
-
 }
-
-extension KeychainService: CredentialsStorable {
-    func saveCredentials(email: String, password: String) {
-        keychain["userEmail"] = email
-        keychain["userPassword"] = password
-    }
-    
-    func getCredentials() -> (email: String, password: String)? {
-        if let email = keychain["userEmail"],
-           let password = keychain["userPassword"] {
-            return (email, password)
-        }
-        return nil
-    }
-
-    func clearCredentials() {
-        do {
-            try keychain.remove("userEmail")
-            try keychain.remove("userPassword")
-        } catch {
-            print("Error when deleting credentials: \(error)")
-        }
-    }
-}
-

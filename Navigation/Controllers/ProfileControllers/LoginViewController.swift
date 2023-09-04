@@ -226,11 +226,13 @@ class LoginViewController: UIViewController {
     
     
     private func setupBiometricType() {
+        print("Checking credentials from KeychainService...")
         guard let credentials = KeychainService.shared.getCredentials() else {
             print("No saved credentials found")
             biometricAuthButton.isHidden = true
             return
         }
+        print("Credentials found!")
         
         let email = credentials.email
         
@@ -252,7 +254,7 @@ class LoginViewController: UIViewController {
             biometricAuthButton.setTitle("Touch Id", for: .normal)
             biometricAuthButton.isHidden = false
         case .none:
-            biometricAuthButton.isHidden = true
+            biometricAuthButton.isHidden = false
         case .opticID:
             biometricAuthButton.isHidden = false
         @unknown default:
